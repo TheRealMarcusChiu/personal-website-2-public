@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>🛠Tinkering on Marcus Chiu</title>
+    <link>http://localhost:1313/tinkering/</link>
+    <description>Recent content in 🛠Tinkering on Marcus Chiu</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Jun 2025 17:36:22 -0500</lastBuildDate>
+    <atom:link href="http://localhost:1313/tinkering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)</title>
+      <link>http://localhost:1313/tinkering/2025-06-08/</link>
+      <pubDate>Sun, 08 Jun 2025 17:36:22 -0500</pubDate>
+      <guid>http://localhost:1313/tinkering/2025-06-08/</guid>
+      <description>&lt;p&gt;Homelab Series:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2024-08-26/&#34;&gt;Homelab #1 - Humble Beginnings&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-04/&#34;&gt;Homelab #2 - Proxmox Cluster&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-05/&#34;&gt;Homelab #3 - Kubernetes Cluster (Initial Setup)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-06/&#34;&gt;Homelab #4 - Kubernetes Cluster (Infrastructure Setup)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-08/&#34;&gt;Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;kubernetes-cluster-app-bonanza&#34;&gt;Kubernetes Cluster (App Bonanza!!!!!!)&lt;/h1&gt;&#xA;&lt;p&gt;Here&amp;rsquo;s a screenshot of my dashboard displaying most of my 50 plus servers :D&lt;/p&gt;&#xA;&lt;p&gt;It&amp;rsquo;s still a work in progress.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;assets/1.jpeg&#34;&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;what-apps-am-i-running&#34;&gt;What Apps am I Running?&lt;/h1&gt;&#xA;&lt;p&gt;Here are some of the apps I&amp;rsquo;m running on Kubernetes:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Homelab #4 - Kubernetes Cluster (Infrastructure Setup)</title>
+      <link>http://localhost:1313/tinkering/2025-06-06/</link>
+      <pubDate>Fri, 06 Jun 2025 17:36:22 -0500</pubDate>
+      <guid>http://localhost:1313/tinkering/2025-06-06/</guid>
+      <description>&lt;p&gt;Homelab Series:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2024-08-26/&#34;&gt;Homelab #1 - Humble Beginnings&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-04/&#34;&gt;Homelab #2 - Proxmox Cluster&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-05/&#34;&gt;Homelab #3 - Kubernetes Cluster (Initial Setup)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-06/&#34;&gt;Homelab #4 - Kubernetes Cluster (Infrastructure Setup)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-08/&#34;&gt;Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;kubernetes-cluster-infrastructure-setup&#34;&gt;Kubernetes Cluster (Infrastructure Setup)&lt;/h1&gt;&#xA;&lt;p&gt;Table of contents:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Helm Installation - a package manager for Kubernetes cluster&lt;/li&gt;&#xA;&lt;li&gt;MetalLB Installation - enables LoadBalancer Service&lt;/li&gt;&#xA;&lt;li&gt;Nginx Ingress Controller Installation - enables Ingress&lt;/li&gt;&#xA;&lt;li&gt;Rook Installation - enables resilient storage&lt;/li&gt;&#xA;&lt;li&gt;Cert-Manager Installation - handles SSL certs with ease&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;helm-installation&#34;&gt;Helm Installation&lt;/h1&gt;&#xA;&lt;p&gt;Helm is like a package manager for Kubernetes. This will help make installation of k8s containers easier.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Homelab #3 - Kubernetes Cluster (Initial Setup)</title>
+      <link>http://localhost:1313/tinkering/2025-06-05/</link>
+      <pubDate>Thu, 05 Jun 2025 17:36:22 -0500</pubDate>
+      <guid>http://localhost:1313/tinkering/2025-06-05/</guid>
+      <description>&lt;p&gt;Homelab Series:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2024-08-26/&#34;&gt;Homelab #1 - Humble Beginnings&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-04/&#34;&gt;Homelab #2 - Proxmox Cluster&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-05/&#34;&gt;Homelab #3 - Kubernetes Cluster (Initial Setup)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-06/&#34;&gt;Homelab #4 - Kubernetes Cluster (Infrastructure Setup)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-08/&#34;&gt;Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;kubernetes-cluster-initial-setup&#34;&gt;Kubernetes Cluster (Initial Setup)&lt;/h1&gt;&#xA;&lt;p&gt;Once the Proxmox Cluster has been configured,&#xA;we will set up a Kubernetes/k8s cluster on top of it.&lt;/p&gt;&#xA;&lt;p&gt;Kubernetes is used to run docker containers.&lt;/p&gt;&#xA;&lt;p&gt;First, we need to know the components of a k8s cluster:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Homelab #2 - Proxmox Cluster</title>
+      <link>http://localhost:1313/tinkering/2025-06-04/</link>
+      <pubDate>Wed, 04 Jun 2025 17:36:22 -0500</pubDate>
+      <guid>http://localhost:1313/tinkering/2025-06-04/</guid>
+      <description>&lt;p&gt;Homelab Series:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2024-08-26/&#34;&gt;Homelab #1 - Humble Beginnings&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-04/&#34;&gt;Homelab #2 - Proxmox Cluster&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-05/&#34;&gt;Homelab #3 - Kubernetes Cluster (Initial Setup)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-06/&#34;&gt;Homelab #4 - Kubernetes Cluster (Infrastructure Setup)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-08/&#34;&gt;Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;proxmox-cluster&#34;&gt;Proxmox Cluster&lt;/h1&gt;&#xA;&lt;p&gt;In this post I will go over setting up a Proxmox Cluster on my 3 Intel NUCs in my &lt;a href=&#34;http://localhost:1313/tinkering/2024-08-26/&#34;&gt;homelab rack&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;This will allow my servers to run in &lt;a href=&#34;https://en.wikipedia.org/wiki/High_availability&#34;&gt;high availability&lt;/a&gt; just in case one NUC goes down.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creating This Website</title>
+      <link>http://localhost:1313/tinkering/2025-06-03/</link>
+      <pubDate>Tue, 03 Jun 2025 17:36:22 -0500</pubDate>
+      <guid>http://localhost:1313/tinkering/2025-06-03/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s been almost 7 years since I&amp;rsquo;ve created this website, and it&amp;rsquo;s time for an upgrade.&lt;/p&gt;&#xA;&lt;p&gt;This is what it used to look like: &lt;a href=&#34;http://2018.www.marcuschiu.com/&#34;&gt;http://2018.www.marcuschiu.com/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;It has nice bouncy animations, but I want more:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;I need a way to write about my journey for each project. Which I could with the old website, however it&amp;rsquo;s just not builtin to the website. It&amp;rsquo;s just pure HTML, CSS, and JavaScript.&lt;/li&gt;&#xA;&lt;li&gt;I also need a way to embed different domains of my life in a single place. Such as art, music, and the occasional rambles.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;For the past 6 months, I&amp;rsquo;ve used WordPress to store my rambles (i.e. &lt;a href=&#34;http://thoughts.marcuschiu.com&#34;&gt;thoughts.marcuschiu.com&lt;/a&gt;). I could use it as my main site and add a tab for &lt;em&gt;tinkerings&lt;/em&gt; and what not - buuuuuuuut NO. I want something else :)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Homelab #1 - Humble Beginnings</title>
+      <link>http://localhost:1313/tinkering/2024-08-26/</link>
+      <pubDate>Mon, 26 Aug 2024 17:36:22 -0500</pubDate>
+      <guid>http://localhost:1313/tinkering/2024-08-26/</guid>
+      <description>&lt;p&gt;Homelab Series:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2024-08-26/&#34;&gt;Homelab #1 - Humble Beginnings&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-04/&#34;&gt;Homelab #2 - Proxmox Cluster&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-05/&#34;&gt;Homelab #3 - Kubernetes Cluster (Initial Setup)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-06/&#34;&gt;Homelab #4 - Kubernetes Cluster (Infrastructure Setup)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/tinkering/2025-06-08/&#34;&gt;Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;humble-beginnings&#34;&gt;Humble Beginnings&lt;/h1&gt;&#xA;&lt;p&gt;Below is a picture of my homelab setup.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;assets/2.png&#34; alt=&#34;overlord homelord&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Yeaaaaaa it&amp;rsquo;s alot. But it used to have its humble beginnings as a Raspberry Pi cluster lol&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;assets/1.png&#34; alt=&#34;humble homelab&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Don&amp;rsquo;t ask me why I&amp;rsquo;ve upgraded this Pi cluster into a behemoth. I just want to learn and tinker okayy. It&amp;rsquo;s makes me happy :)&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCN2D792VE"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GCN2D792VE');
+  </script>
+
+  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5G85VDQT');</script>
+  
+
+  <link href='/favicon.ico' rel='shortcut icon'>
+  <link href='/favicon.ico' rel='apple-touch-icon'>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Homelab #4 - Kubernetes Cluster (Infrastructure Setup) | Marcus Chiu</title>
+
+  
+  <meta property="og:url" content="http://localhost:1313/tinkering/2025-06-06/">
+  <meta property="og:site_name" content="Marcus Chiu">
+  <meta property="og:title" content="Homelab #4 - Kubernetes Cluster (Infrastructure Setup)">
+  <meta property="og:description" content="Homelab Series:
+Homelab #1 - Humble Beginnings Homelab #2 - Proxmox Cluster Homelab #3 - Kubernetes Cluster (Initial Setup) Homelab #4 - Kubernetes Cluster (Infrastructure Setup) Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!) Kubernetes Cluster (Infrastructure Setup) Table of contents:
+Helm Installation - a package manager for Kubernetes cluster MetalLB Installation - enables LoadBalancer Service Nginx Ingress Controller Installation - enables Ingress Rook Installation - enables resilient storage Cert-Manager Installation - handles SSL certs with ease Helm Installation Helm is like a package manager for Kubernetes. This will help make installation of k8s containers easier.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="tinkering">
+    <meta property="article:published_time" content="2025-06-06T17:36:22-05:00">
+    <meta property="article:modified_time" content="2025-06-06T17:36:22-05:00">
+
+
+
+
+
+
+
+
+  
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:url' content='http://www.marcuschiu.com'>
+  <meta name='twitter:title' content='Marcus Chiu - FullStack Developer'>
+  <meta name='twitter:description' content="Marcus Chiu's Website">
+  <meta name='twitter:image' content='http://doc.marcuschiu.com/assets/images/me.png'>
+  <meta name='twitter:site' content='@TheMarcusChiu'>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/carousel.css">
+  
+      <script src="/js/main.js"></script>
+      <script src="/js/main.js"></script>
+</head>
+<body class="text-light dark">
+  
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G85VDQT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  
+  <div class="container pt-5">
+    <header>
+      
+  <div class="row mt-5 pt-5">
+    <nav aria-label="breadcrumb" class="small">
+      <ol class="breadcrumb fw-bold bg-transparent" >
+    <li class="breadcrumb-item">
+      <a href="/">🏠 Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a aria-current="true" class="ancestor" href="/tinkering/">🛠 Tinkering</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/arting/">🎨 Arting</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/rambling/">💭 Rambling</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/traveling/">🌎 Traveling</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about/">🙋 About</a>
+    </li>
+      </ol>
+    </nav>
+  </div>
+
+    </header>
+    <main>
+      
+  <div class="post">
+    <header class="mb-4">
+      <h1 class="text-uppercase">Homelab #4 - Kubernetes Cluster (Infrastructure Setup)</h1>
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+
+          
+          
+          <li class="breadcrumb-item tiny">
+            <time datetime="2025-06-06T17:36:22-05:00">June 6, 2025</time>
+          </li>
+
+          
+          
+          
+
+          <li class="breadcrumb-item tiny">
+            2 minutes
+          </li>
+
+        </ol>
+      </div>
+    </header>
+
+
+
+
+
+
+    <article>
+      <p>Homelab Series:</p>
+<ul>
+<li><a href="/tinkering/2024-08-26/">Homelab #1 - Humble Beginnings</a></li>
+<li><a href="/tinkering/2025-06-04/">Homelab #2 - Proxmox Cluster</a></li>
+<li><a href="/tinkering/2025-06-05/">Homelab #3 - Kubernetes Cluster (Initial Setup)</a></li>
+<li><a href="/tinkering/2025-06-06/">Homelab #4 - Kubernetes Cluster (Infrastructure Setup)</a></li>
+<li><a href="/tinkering/2025-06-08/">Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)</a></li>
+</ul>
+<h1 id="kubernetes-cluster-infrastructure-setup">Kubernetes Cluster (Infrastructure Setup)</h1>
+<p>Table of contents:</p>
+<ul>
+<li>Helm Installation - a package manager for Kubernetes cluster</li>
+<li>MetalLB Installation - enables LoadBalancer Service</li>
+<li>Nginx Ingress Controller Installation - enables Ingress</li>
+<li>Rook Installation - enables resilient storage</li>
+<li>Cert-Manager Installation - handles SSL certs with ease</li>
+</ul>
+<h1 id="helm-installation">Helm Installation</h1>
+<p>Helm is like a package manager for Kubernetes. This will help make installation of k8s containers easier.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">700</span> get_helm.sh
+</span></span><span style="display:flex;"><span>./get_helm.sh
+</span></span></code></pre></div><p>Based on: <a href="https://helm.sh/docs/intro/install/">https://helm.sh/docs/intro/install/</a></p>
+<h1 id="metallb-installation">MetalLB Installation</h1>
+<p>We will install MetalLB to handle <a href="https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer">LoadBalancer Service</a>.</p>
+<p>Based on: <a href="https://metallb.universe.tf/installation/">https://metallb.universe.tf/installation/</a></p>
+<p>I&rsquo;ve opted for the <code>Installation by Manifest</code> method via this command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.15.2/config/manifests/metallb-native.yaml
+</span></span></code></pre></div><p>Next I&rsquo;ve created the YAML file with the following contents</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">metallb.io/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">IPAddressPool</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">my-ip-address-pool-1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">metallb-system</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">addresses</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">192.168.111.100-192.168.111.199</span> <span style="color:#75715e"># CHANGE THIS ACCORDING TO YOUR NETWORK</span>
+</span></span></code></pre></div><p>Next apply this to your k8s cluster</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f my-ip-address-pool-1.yaml
+</span></span></code></pre></div><p>Create another YAML file with the following contents</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">metallb.io/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">L2Advertisement</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">my-l2-advertisement-1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">metallb-system</span>
+</span></span></code></pre></div><p>Apply this as well</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f my-l2-advertisement-1.yaml
+</span></span></code></pre></div><p>You can verify LoadBalancer works by creating one accordingly.</p>
+<h1 id="nginx-ingress-controller-installation">Nginx-Ingress-Controller Installation</h1>
+<p>Inginx Ingress Controller enables <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a></p>
+<p>Based on: <a href="https://kubernetes.github.io/ingress-nginx/deploy/">https://kubernetes.github.io/ingress-nginx/deploy/</a></p>
+<p>I&rsquo;ve once again opted for the <code>Installation by Manifest</code> method via this command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.3/deploy/static/provider/cloud/deploy.yaml
+</span></span></code></pre></div><h1 id="rook-installation">Rook Installation</h1>
+<p>Kubernetes is great for stateless applications. However, deploying stateful applications requires some storage redundancy and Rook greatly simplifies this.</p>
+<p>Rook is essentially <a href="https://ceph.io/en/">Ceph</a> underhood for Kubernetes. Ceph is a resilient storage solution.</p>
+<p>Rook installation is based on: <a href="https://rook.github.io/docs/rook/latest-release/Getting-Started/quickstart/#prerequisites">https://rook.github.io/docs/rook/latest-release/Getting-Started/quickstart/#prerequisites</a></p>
+<p>I&rsquo;ve just followed that and only configured the <code>Shared Filesystem</code> part.</p>
+<h1 id="cert-manager-installation">Cert-Manager Installation</h1>
+<p>Cert Manager helps ease our SSL management.</p>
+<p>Based on: <a href="https://cert-manager.io/docs/installation/">https://cert-manager.io/docs/installation/</a></p>
+<p>Install Cert Manager via</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.17.2/cert-manager.yaml
+</span></span></code></pre></div><p>Next create the following file with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-prod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">acme</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">server</span>: <span style="color:#ae81ff">https://acme-v02.api.letsencrypt.org/directory</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">email</span>: <span style="color:#ae81ff">marcuschiu9@gmail.com</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">privateKeySecretRef</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-prod</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">solvers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">http01</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ingress</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">class</span>: <span style="color:#ae81ff">nginx</span>
+</span></span></code></pre></div><p>Apply it</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f cluster-issuer.yml
+</span></span></code></pre></div><h1 id="conclusion">Conclusion</h1>
+<p>This pretty much sums up the infrastructure needed to run my future applications :)</p>
+
+    </article>
+  </div>
+  
+<div class="row page-prev-next">
+    <div class="col-md">
+        
+            <a href="/tinkering/2025-06-05/">
+                <span>← </span>
+                <span class="title">Homelab #3 - Kubernetes Cluster (Initial Setup)</span>
+            </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+            <a href="/tinkering/2025-06-08/">
+                <span class="title">Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)</span>
+                <span> →</span>
+            </a>
+        
+    </div>
+</div>
+
+  <div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://marcuschiu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </main>
+  </div>
+</body>
+</html>

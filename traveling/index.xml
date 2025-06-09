@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>🌎Traveling on Marcus Chiu</title>
+    <link>http://localhost:1313/traveling/</link>
+    <description>Recent content in 🌎Traveling on Marcus Chiu</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Jun 2025 00:00:00 -0500</lastBuildDate>
+    <atom:link href="http://localhost:1313/traveling/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cousin&#39;s Wedding</title>
+      <link>http://localhost:1313/traveling/2025-06-09/</link>
+      <pubDate>Sun, 08 Jun 2025 00:00:00 -0500</pubDate>
+      <guid>http://localhost:1313/traveling/2025-06-09/</guid>
+      <description>summary</description>
+    </item>
+    <item>
+      <title>2025 Trip #2 – Phil Wickham Concert</title>
+      <link>http://localhost:1313/traveling/2025-01-20/</link>
+      <pubDate>Mon, 20 Jan 2025 17:36:22 -0500</pubDate>
+      <guid>http://localhost:1313/traveling/2025-01-20/</guid>
+      <description>summary</description>
+    </item>
+  </channel>
+</rss>
