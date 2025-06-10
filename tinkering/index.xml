@@ -6,8 +6,15 @@
     <description>Recent content in 🛠Tinkering on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Jun 2025 17:36:22 -0500</lastBuildDate>
+    <lastBuildDate>Tue, 10 Jun 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/tinkering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Homelab #6 - Fixing Homebox Perpetual Logouts</title>
+      <link>http://www.marcu/tinkering/2025-06-10/</link>
+      <pubDate>Tue, 10 Jun 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-06-10/</guid>
+      <description>&lt;p&gt;Homelab Series:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.marcu/tinkering/2024-08-26/&#34;&gt;Homelab #1 - Humble Beginnings&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.marcu/tinkering/2025-06-04/&#34;&gt;Homelab #2 - Proxmox Cluster&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.marcu/tinkering/2025-06-05/&#34;&gt;Homelab #3 - Kubernetes Cluster (Initial Setup)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.marcu/tinkering/2025-06-06/&#34;&gt;Homelab #4 - Kubernetes Cluster (Infrastructure Setup)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.marcu/tinkering/2025-06-08/&#34;&gt;Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;fixing-homebox-perpetual-logouts&#34;&gt;Fixing Homebox Perpetual Logouts&lt;/h1&gt;&#xA;&lt;p&gt;What is &lt;a href=&#34;https://github.com/sysadminsmedia/homebox&#34;&gt;Homebox&lt;/a&gt;? Well it&amp;rsquo;s a simple home item manager.&lt;/p&gt;&#xA;&lt;p&gt;I wanted to try so I&amp;rsquo;ve installed it.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve registered, logged in, created my first item (my desktop), uploaded a picture of it, and clicked (Create).&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)</title>
       <link>http://www.marcu/tinkering/2025-06-08/</link>
