@@ -23,21 +23,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!) | Marcus Chiu</title>
+  <title>Homelab #4 - Kubernetes Cluster (Infrastructure Setup) | Marcus Chiu</title>
 
   
   <meta property="og:url" content="http://www.marcu/tinkering/2025-06-08/">
   <meta property="og:site_name" content="Marcus Chiu">
-  <meta property="og:title" content="Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)">
+  <meta property="og:title" content="Homelab #4 - Kubernetes Cluster (Infrastructure Setup)">
   <meta property="og:description" content="Homelab Series:
-Homelab #1 - Humble Beginnings Homelab #2 - Proxmox Cluster Homelab #3 - Kubernetes Cluster (Initial Setup) Homelab #4 - Kubernetes Cluster (Infrastructure Setup) Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!) Kubernetes Cluster (App Bonanza!!!!!!) Here’s a screenshot of my dashboard displaying most of my 50 plus servers :D
-It’s still a work in progress.
-What Apps am I Running? Here are some of the apps I’m running on Kubernetes:">
+Homelab #1 - Humble Beginnings Homelab #2 - Proxmox Cluster Homelab #3 - Kubernetes Cluster (Initial Setup) Homelab #4 - Kubernetes Cluster (Infrastructure Setup) Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!) Kubernetes Cluster (Infrastructure Setup) Table of contents:
+Helm Installation - a package manager for Kubernetes cluster MetalLB Installation - enables LoadBalancer Service Nginx Ingress Controller Installation - enables Ingress Rook Installation - enables resilient storage Cert-Manager Installation - handles SSL certs with ease Helm Installation Helm is like a package manager for Kubernetes. This will help make installation of k8s containers easier.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="tinkering">
-    <meta property="article:published_time" content="2025-06-08T17:36:22-05:00">
-    <meta property="article:modified_time" content="2025-06-08T17:36:22-05:00">
+    <meta property="article:published_time" content="2025-06-06T17:36:22-05:00">
+    <meta property="article:modified_time" content="2025-06-06T17:36:22-05:00">
 
 
 
@@ -105,14 +104,14 @@ What Apps am I Running? Here are some of the apps I’m running on Kubernetes:">
       
   <div class="post">
     <header class="mb-4">
-      <h1 class="text-uppercase">Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)</h1>
+      <h1 class="text-uppercase">Homelab #4 - Kubernetes Cluster (Infrastructure Setup)</h1>
       <div aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent">
 
           
           
           <li class="breadcrumb-item tiny">
-            <time datetime="2025-06-08T17:36:22-05:00">June 8, 2025</time>
+            <time datetime="2025-06-06T17:36:22-05:00">June 6, 2025</time>
           </li>
 
           
@@ -120,7 +119,7 @@ What Apps am I Running? Here are some of the apps I’m running on Kubernetes:">
           
 
           <li class="breadcrumb-item tiny">
-            3 minutes
+            2 minutes
           </li>
 
         </ol>
@@ -141,152 +140,79 @@ What Apps am I Running? Here are some of the apps I’m running on Kubernetes:">
 <li><a href="/tinkering/2025-06-06/">Homelab #4 - Kubernetes Cluster (Infrastructure Setup)</a></li>
 <li><a href="/tinkering/2025-06-08/">Homelab #5 - Kubernetes Cluster (App Bonanza!!!!!!)</a></li>
 </ul>
-<h1 id="kubernetes-cluster-app-bonanza">Kubernetes Cluster (App Bonanza!!!!!!)</h1>
-<p>Here&rsquo;s a screenshot of my dashboard displaying most of my 50 plus servers :D</p>
-<p>It&rsquo;s still a work in progress.</p>
-<p><a href="assets/1.jpeg"><img src="assets/1.jpeg" alt="alt"></a></p>
-<h1 id="what-apps-am-i-running">What Apps am I Running?</h1>
-<p>Here are some of the apps I&rsquo;m running on Kubernetes:</p>
+<h1 id="kubernetes-cluster-infrastructure-setup">Kubernetes Cluster (Infrastructure Setup)</h1>
+<p>Table of contents:</p>
 <ul>
-<li>13ft - bypass website paywalls</li>
-<li>code-server - VC Code inside web browser</li>
-<li>dashy - a dashboard for homelabs</li>
-<li>k8s-dashboard - a dashboard for the Kubernetes cluster</li>
-<li>librespeed - an internet speeed test</li>
-<li>open-webui - an opensource &ldquo;ChatGPT&rdquo; web interface</li>
-<li>stirling-pdf - a PDF manipulator within browser</li>
-<li>changedetection - monitors website changes</li>
-<li>cyberchef - a SWE toolbox for data manipulation</li>
-<li>homepage - a dashboard for homelabs</li>
-<li>k8s-metrics-service - i forgot</li>
-<li>mealie - a recipe manager</li>
-<li>sockpuppetbrowser - an internal tool for changedetection</li>
-<li>whoogle - a privacy-respecting Google</li>
+<li>Helm Installation - a package manager for Kubernetes cluster</li>
+<li>MetalLB Installation - enables LoadBalancer Service</li>
+<li>Nginx Ingress Controller Installation - enables Ingress</li>
+<li>Rook Installation - enables resilient storage</li>
+<li>Cert-Manager Installation - handles SSL certs with ease</li>
 </ul>
-<h1 id="example-app-installation">Example App Installation</h1>
-<p>Here we will install the homepage app as an example for most of the applications I&rsquo;m running.</p>
-<p>In this case, we will be creating 4 Kubernetes workloads:</p>
-<ol>
-<li><strong>homepage-pvc.yml</strong> - this allocates PersistentVolumeClaims for persistent storage the homepage will be using</li>
-<li><strong>homepage-deployment.yml</strong> - this defines the Deployment details needed to download and run the homepage container</li>
-<li><strong>homepage-svc.yml</strong> - this defines the Service that will act as the gateway to the running homepage container</li>
-<li><strong>homepage-ingress.yml</strong> - this will auto issue an SSL certificate</li>
-</ol>
-<h3 id="1-persistentvolumeclaim">1. PersistentVolumeClaim</h3>
-<p>Create a file with the following contents</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolumeClaim</span>
+<h1 id="helm-installation">Helm Installation</h1>
+<p>Helm is like a package manager for Kubernetes. This will help make installation of k8s containers easier.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">700</span> get_helm.sh
+</span></span><span style="display:flex;"><span>./get_helm.sh
+</span></span></code></pre></div><p>Based on: <a href="https://helm.sh/docs/intro/install/">https://helm.sh/docs/intro/install/</a></p>
+<h1 id="metallb-installation">MetalLB Installation</h1>
+<p>We will install MetalLB to handle <a href="https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer">LoadBalancer Service</a>.</p>
+<p>Based on: <a href="https://metallb.universe.tf/installation/">https://metallb.universe.tf/installation/</a></p>
+<p>I&rsquo;ve opted for the <code>Installation by Manifest</code> method via this command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.15.2/config/manifests/metallb-native.yaml
+</span></span></code></pre></div><p>Next I&rsquo;ve created the YAML file with the following contents</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">metallb.io/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">IPAddressPool</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cephfs-homepage</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">my-ip-address-pool-1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">metallb-system</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">accessModes</span>:
-</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">ReadWriteMany</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">resources</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">requests</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">1Gi</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">storageClassName</span>: <span style="color:#ae81ff">rook-ceph-fs</span>
-</span></span><span style="display:flex;"><span>---
-</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolumeClaim</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">addresses</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">192.168.111.100-192.168.111.199</span> <span style="color:#75715e"># CHANGE THIS ACCORDING TO YOUR NETWORK</span>
+</span></span></code></pre></div><p>Next apply this to your k8s cluster</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f my-ip-address-pool-1.yaml
+</span></span></code></pre></div><p>Create another YAML file with the following contents</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">metallb.io/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">L2Advertisement</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cephfs-homepage-public</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">accessModes</span>:
-</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">ReadWriteMany</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">resources</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">requests</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">1Gi</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">storageClassName</span>: <span style="color:#ae81ff">rook-ceph-fs</span>
-</span></span></code></pre></div><p>Then apply it</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f homepage-pvc.yml
-</span></span></code></pre></div><h3 id="2-deployment">2. Deployment</h3>
-<p>Create a file with the following contents</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">my-l2-advertisement-1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">metallb-system</span>
+</span></span></code></pre></div><p>Apply this as well</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f my-l2-advertisement-1.yaml
+</span></span></code></pre></div><p>You can verify LoadBalancer works by creating one accordingly.</p>
+<h1 id="nginx-ingress-controller-installation">Nginx-Ingress-Controller Installation</h1>
+<p>Inginx Ingress Controller enables <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a></p>
+<p>Based on: <a href="https://kubernetes.github.io/ingress-nginx/deploy/">https://kubernetes.github.io/ingress-nginx/deploy/</a></p>
+<p>I&rsquo;ve once again opted for the <code>Installation by Manifest</code> method via this command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.3/deploy/static/provider/cloud/deploy.yaml
+</span></span></code></pre></div><h1 id="rook-installation">Rook Installation</h1>
+<p>Kubernetes is great for stateless applications. However, deploying stateful applications requires some storage redundancy and Rook greatly simplifies this.</p>
+<p>Rook is essentially <a href="https://ceph.io/en/">Ceph</a> underhood for Kubernetes. Ceph is a resilient storage solution.</p>
+<p>Rook installation is based on: <a href="https://rook.github.io/docs/rook/latest-release/Getting-Started/quickstart/#prerequisites">https://rook.github.io/docs/rook/latest-release/Getting-Started/quickstart/#prerequisites</a></p>
+<p>I&rsquo;ve just followed that and only configured the <code>Shared Filesystem</code> part.</p>
+<h1 id="cert-manager-installation">Cert-Manager Installation</h1>
+<p>Cert Manager helps ease our SSL management.</p>
+<p>Based on: <a href="https://cert-manager.io/docs/installation/">https://cert-manager.io/docs/installation/</a></p>
+<p>Install Cert Manager via</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.17.2/cert-manager.yaml
+</span></span></code></pre></div><p>Next create the following file with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">homepage</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-prod</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">homepage</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">homepage</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">automountServiceAccountToken</span>: <span style="color:#66d9ef">true</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">dnsPolicy</span>: <span style="color:#ae81ff">ClusterFirst</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">enableServiceLinks</span>: <span style="color:#66d9ef">true</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">homepage</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ghcr.io/gethomepage/homepage:latest</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ports</span>:
-</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">3000</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">env</span>:
-</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">HOMEPAGE_ALLOWED_HOSTS</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;homepage.lan&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">volumeMounts</span>:
-</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/app/config</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cephfs-homepage</span>
-</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/app/public/images</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cephfs-homepage-public</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">volumes</span>:
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cephfs-homepage</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">persistentVolumeClaim</span>:
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">claimName</span>: <span style="color:#ae81ff">cephfs-homepage</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">readOnly</span>: <span style="color:#66d9ef">false</span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cephfs-homepage-public</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">persistentVolumeClaim</span>:
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">claimName</span>: <span style="color:#ae81ff">cephfs-homepage-public</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">readOnly</span>: <span style="color:#66d9ef">false</span>
-</span></span></code></pre></div><p>Then apply it</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f homepage-deployment.yml
-</span></span></code></pre></div><h3 id="3-service">3. Service</h3>
-<p>Create a file with the following contents</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">homepage</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ports</span>:
-</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">3000</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">homepage</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">LoadBalancer</span>
-</span></span></code></pre></div><p>Then apply it</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f homepage-svc.yml
-</span></span></code></pre></div><h3 id="4-ingress">4. Ingress</h3>
-<p>Create a file with the following contents</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.k8s.io/v1</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">homepage</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cert-manager.io/cluster-issuer</span>: <span style="color:#e6db74">&#34;letsencrypt-prod&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">nginx.ingress.kubernetes.io/rewrite-target</span>: <span style="color:#ae81ff">/</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ingressClassName</span>: <span style="color:#ae81ff">nginx</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tls</span>:
-</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">hosts</span>:
-</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">homepage.lan</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">tls-homepage</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
-</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">homepage.lan</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">http</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">paths</span>:
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">pathType</span>: <span style="color:#ae81ff">Prefix</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">backend</span>:
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">service</span>:
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">name</span>: <span style="color:#ae81ff">homepage</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">port</span>:
-</span></span><span style="display:flex;"><span>              <span style="color:#f92672">number</span>: <span style="color:#ae81ff">80</span>
-</span></span></code></pre></div><p>Then apply it</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f homepage-ingress.yml
-</span></span></code></pre></div><h1 id="repeat">Repeat</h1>
-<p>The example above is pretty much the template I&rsquo;ve used for deploying the rest of the applications.</p>
-<p>Of course, some may not use PersistentVolumeClaims and other may not use Ingress. So create and apply those manifest files accordingly.</p>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">acme</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">server</span>: <span style="color:#ae81ff">https://acme-v02.api.letsencrypt.org/directory</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">email</span>: <span style="color:#ae81ff">marcuschiu9@gmail.com</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">privateKeySecretRef</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-prod</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">solvers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">http01</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ingress</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">class</span>: <span style="color:#ae81ff">nginx</span>
+</span></span></code></pre></div><p>Apply it</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f cluster-issuer.yml
+</span></span></code></pre></div><h1 id="conclusion">Conclusion</h1>
+<p>This pretty much sums up the infrastructure needed to run my future applications :)</p>
 
     </article>
   </div>
@@ -294,13 +220,18 @@ What Apps am I Running? Here are some of the apps I’m running on Kubernetes:">
 <div class="row page-prev-next">
     <div class="col-md">
         
-            <a href="/tinkering/2025-06-06/">
+            <a href="/tinkering/2025-06-05/">
                 <span>← </span>
-                <span class="title">Homelab #4 - Kubernetes Cluster (Infrastructure Setup)</span>
+                <span class="title">Homelab #3 - Kubernetes Cluster (Initial Setup)</span>
             </a>
         
     </div>
     <div class="col-md text-md-end">
+        
+            <a href="/tinkering/2025-06-06/">
+                <span class="title">Homelab #4 - Kubernetes Cluster (Infrastructure Setup)</span>
+                <span> →</span>
+            </a>
         
     </div>
 </div>
