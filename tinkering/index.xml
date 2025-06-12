@@ -6,8 +6,15 @@
     <description>Recent content in 🛠Tinkering on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Jun 2025 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 11 Jun 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/tinkering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Homelab #7 - Kasm</title>
+      <link>http://www.marcu/tinkering/2025-06-11/</link>
+      <pubDate>Wed, 11 Jun 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-06-11/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;What is Kasm?&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;To me, Kasm is essentially a remote desktop that runs right in your browser.&lt;/p&gt;&#xA;&lt;p&gt;Beyond full desktops, Kasm also lets you launch individual applications - like Discord, Doom, VS Code, and more—directly in the browser.&lt;/p&gt;&#xA;&lt;p&gt;Here’s a look at my Kasm setup:&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;assets/1.jpeg&#34;&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;kasm-setup&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;installation&#34;&gt;Installation&lt;/h1&gt;&#xA;&lt;p&gt;Execute the following commands&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd /tmp&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -O https://kasm-static-content.s3.amazonaws.com/kasm_release_1.17.0.7f020d.tar.gz&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -xf kasm_release_1.17.0.7f020d.tar.gz&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bash kasm_release/install.sh&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;setup&#34;&gt;Setup&lt;/h1&gt;&#xA;&lt;p&gt;Once installed - register your account. After that we can download you choice workspaces under &lt;code&gt;ADMIN&lt;/code&gt; &amp;gt; &lt;code&gt;Workspaces&lt;/code&gt; &amp;gt; &lt;code&gt;Registry&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Homelab #6 - Fixing Homebox Perpetual Logouts</title>
       <link>http://www.marcu/tinkering/2025-06-10/</link>

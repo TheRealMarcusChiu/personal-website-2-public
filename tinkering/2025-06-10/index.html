@@ -154,7 +154,7 @@ I’ve registered, logged in, created my first item (my desktop), uploaded a pic
 <p>I&rsquo;ve refreshed my Homebox several times and it bounces between the login screen and the screen that appears after you logged in&hellip;.</p>
 <p>Weird&hellip; maybe it has to deal with sticky sessions since I have 2 containers running for every app on Kubernetes.</p>
 <p>That worked.</p>
-<p>Here&rsquo;s how to add sticky sessions (assuming you have <a href="/tinkering/2025-06-06/">Nginx Ingress Controller setup</a>)</p>
+<p>Here&rsquo;s how to add sticky sessions (assuming you have <a href="/tinkering/2025-06-06/#nginx-ingress-controller-installation">Nginx Ingress Controller setup</a>)</p>
 <p>These are the following lines to add</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">nginx.ingress.kubernetes.io/affinity</span>: <span style="color:#e6db74">&#34;cookie&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">nginx.ingress.kubernetes.io/session-cookie-name</span>: <span style="color:#e6db74">&#34;hello-cookie&#34;</span>
@@ -211,6 +211,11 @@ I’ve registered, logged in, created my first item (my desktop), uploaded a pic
         
     </div>
     <div class="col-md text-md-end">
+        
+            <a href="/tinkering/2025-06-11/">
+                <span class="title">Homelab #7 - Kasm</span>
+                <span> →</span>
+            </a>
         
     </div>
 </div>
