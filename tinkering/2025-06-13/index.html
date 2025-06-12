@@ -188,6 +188,10 @@ qbittorrent-nox Make note of the username and password in console output as show
 </span></span><span style="display:flex;"><span>sudo systemctl start qbittorrent-nox
 </span></span><span style="display:flex;"><span>sudo systemctl status qbittorrent-nox
 </span></span></code></pre></div><p>Go back to <a href="http://localhost:8080/">http://localhost:8080/</a>. You should be able to login with your new username password.</p>
+<h1 id="why-did-we-do-what-we-did">Why DiD We Do What We Did?</h1>
+<p>Why did we manually start it first instead of having SystemD run qBittorrent first?</p>
+<p>This is because the console output cannot be retrieved in SystemD. Thus, the initial password cannot be found.</p>
+<p>Why not just copy <code>~/.config/qBittorent/qBittorrent.conf</code>&rsquo;s hashed password into another <code>qBittorrent.conf</code>? Well Running SystemD will rewrite over the hashed password.</p>
 
     </article>
   </div>
