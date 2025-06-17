@@ -150,8 +150,14 @@ This will allow my servers to run in high availability just in case one NUC goes
 <h1 id="download-proxmox-iso-and-create-usb-boot-device">Download Proxmox ISO and Create USB Boot Device</h1>
 <p>Download and install: <a href="https://www.proxmox.com/en/downloads/proxmox-virtual-environment">https://www.proxmox.com/en/downloads/proxmox-virtual-environment</a></p>
 <p>I&rsquo;ve downloaded the ISO file and used <a href="https://etcher.balena.io/">BalenaEtcher</a> to create the USB boot medium.</p>
+<h1 id="post-installation-script">Post Installation Script</h1>
+<p>Once Proxmox was installed on each of the three machines, we will run one of the post install scripts.</p>
+<p>This script removes the subscription nag, and among other things.</p>
+<p>Since we are configuring a cluster - we will not disable High Availability.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bash -c <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/tools/pve/post-pve-install.sh<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p><img src="assets/2.jpeg" alt="alt"></p>
 <h1 id="configure-proxmox-cluster">Configure Proxmox Cluster</h1>
-<p>Once Proxmox was installed on each of the three machines, I&rsquo;ve just followed this to setup the cluster:</p>
+<p>After post installation setup, we will follow this video in configuring a Proxmox cluster</p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
       <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Mz-nXlqovLI?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
