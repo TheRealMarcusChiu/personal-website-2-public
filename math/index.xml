@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>🧠 Math on Marcus Chiu</title>
+    <link>http://www.marcu/math/</link>
+    <description>Recent content in 🧠 Math on Marcus Chiu</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Jun 2025 00:00:00 -0500</lastBuildDate>
+    <atom:link href="http://www.marcu/math/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Permutation vs Combination</title>
+      <link>http://www.marcu/math/2025-06-14/</link>
+      <pubDate>Sat, 14 Jun 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/math/2025-06-14/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;permutation&lt;/strong&gt; - refers to the different ways of arranging items from a set of objects, in a sequential order&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;combination&lt;/strong&gt; - refers to the different ways of choosing items from a set of objects, such that their order does not matter&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;a href=&#34;assets/1.jpeg&#34;&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;totality&#34;&gt;Totality&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;assets/2.jpeg&#34;&gt;&lt;img src=&#34;assets/2.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

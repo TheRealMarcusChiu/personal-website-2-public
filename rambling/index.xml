@@ -2,59 +2,59 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>💭Rambling on Marcus Chiu</title>
-    <link>http://www.marcu/rambling/</link>
+    <link>http://localhost:1313/rambling/</link>
     <description>Recent content in 💭Rambling on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 23 Apr 2025 17:36:22 -0500</lastBuildDate>
-    <atom:link href="http://www.marcu/rambling/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/rambling/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reflections</title>
-      <link>http://www.marcu/rambling/2025-04-23/</link>
+      <link>http://localhost:1313/rambling/2025-04-23/</link>
       <pubDate>Wed, 23 Apr 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2025-04-23/</guid>
+      <guid>http://localhost:1313/rambling/2025-04-23/</guid>
       <description>summary</description>
     </item>
     <item>
       <title>Conversation in the Womb – A Parable of Life After Delivery</title>
-      <link>http://www.marcu/rambling/2025-03-17/</link>
+      <link>http://localhost:1313/rambling/2025-03-17/</link>
       <pubDate>Mon, 17 Mar 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2025-03-17/</guid>
+      <guid>http://localhost:1313/rambling/2025-03-17/</guid>
       <description>summary</description>
     </item>
     <item>
       <title>Character of Love</title>
-      <link>http://www.marcu/rambling/2025-03-01/</link>
+      <link>http://localhost:1313/rambling/2025-03-01/</link>
       <pubDate>Sat, 01 Mar 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2025-03-01/</guid>
+      <guid>http://localhost:1313/rambling/2025-03-01/</guid>
       <description>summary</description>
     </item>
     <item>
       <title>Wedding Banquet</title>
-      <link>http://www.marcu/rambling/2025-02-22/</link>
+      <link>http://localhost:1313/rambling/2025-02-22/</link>
       <pubDate>Sat, 22 Feb 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2025-02-22/</guid>
+      <guid>http://localhost:1313/rambling/2025-02-22/</guid>
       <description>summary</description>
     </item>
     <item>
       <title>Prune Your Time Like You Prune a Rose</title>
-      <link>http://www.marcu/rambling/2025-01-27/</link>
+      <link>http://localhost:1313/rambling/2025-01-27/</link>
       <pubDate>Mon, 27 Jan 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2025-01-27/</guid>
+      <guid>http://localhost:1313/rambling/2025-01-27/</guid>
       <description>summary</description>
     </item>
     <item>
       <title>Prayer Mantra #2</title>
-      <link>http://www.marcu/rambling/2025-01-15/</link>
+      <link>http://localhost:1313/rambling/2025-01-15/</link>
       <pubDate>Wed, 15 Jan 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2025-01-15/</guid>
+      <guid>http://localhost:1313/rambling/2025-01-15/</guid>
       <description>“Let us make mankind in our image” – God</description>
     </item>
     <item>
       <title>2024 Reflection – The Year of Openness</title>
-      <link>http://www.marcu/rambling/2024-12-28/</link>
+      <link>http://localhost:1313/rambling/2024-12-28/</link>
       <pubDate>Sat, 28 Dec 2024 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2024-12-28/</guid>
+      <guid>http://localhost:1313/rambling/2024-12-28/</guid>
       <description>summary</description>
     </item>
   </channel>

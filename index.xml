@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Jun 2025 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 14 Jun 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Permutation vs Combination</title>
+      <link>http://www.marcu/math/2025-06-14/</link>
+      <pubDate>Sat, 14 Jun 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/math/2025-06-14/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;permutation&lt;/strong&gt; - refers to the different ways of arranging items from a set of objects, in a sequential order&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;combination&lt;/strong&gt; - refers to the different ways of choosing items from a set of objects, such that their order does not matter&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;a href=&#34;assets/1.jpeg&#34;&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;totality&#34;&gt;Totality&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;assets/2.jpeg&#34;&gt;&lt;img src=&#34;assets/2.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>How to Install qBittorrent on Ubuntu Server 24.04</title>
       <link>http://www.marcu/tinkering/2025-06-13/</link>
@@ -38,16 +45,16 @@
     </item>
     <item>
       <title>Local Cafe - Curpertino</title>
-      <link>http://www.marcu/traveling/2025-06-09-b/</link>
+      <link>http://www.marcu/travel/2025-06-09-b/</link>
       <pubDate>Mon, 09 Jun 2025 01:00:00 -0500</pubDate>
-      <guid>http://www.marcu/traveling/2025-06-09-b/</guid>
+      <guid>http://www.marcu/travel/2025-06-09-b/</guid>
       <description>summary</description>
     </item>
     <item>
       <title>Cousin&#39;s Wedding</title>
-      <link>http://www.marcu/traveling/2025-06-09/</link>
+      <link>http://www.marcu/travel/2025-06-09/</link>
       <pubDate>Mon, 09 Jun 2025 00:00:00 -0500</pubDate>
-      <guid>http://www.marcu/traveling/2025-06-09/</guid>
+      <guid>http://www.marcu/travel/2025-06-09/</guid>
       <description>summary</description>
     </item>
     <item>
@@ -87,58 +94,58 @@
     </item>
     <item>
       <title>Reflections</title>
-      <link>http://www.marcu/rambling/2025-04-23/</link>
+      <link>http://www.marcu/thoughts/2025-04-23/</link>
       <pubDate>Wed, 23 Apr 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2025-04-23/</guid>
+      <guid>http://www.marcu/thoughts/2025-04-23/</guid>
       <description>summary</description>
     </item>
     <item>
       <title>Conversation in the Womb – A Parable of Life After Delivery</title>
-      <link>http://www.marcu/rambling/2025-03-17/</link>
+      <link>http://www.marcu/thoughts/2025-03-17/</link>
       <pubDate>Mon, 17 Mar 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2025-03-17/</guid>
+      <guid>http://www.marcu/thoughts/2025-03-17/</guid>
       <description>summary</description>
     </item>
     <item>
       <title>Character of Love</title>
-      <link>http://www.marcu/rambling/2025-03-01/</link>
+      <link>http://www.marcu/thoughts/2025-03-01/</link>
       <pubDate>Sat, 01 Mar 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2025-03-01/</guid>
+      <guid>http://www.marcu/thoughts/2025-03-01/</guid>
       <description>summary</description>
     </item>
     <item>
       <title>Wedding Banquet</title>
-      <link>http://www.marcu/rambling/2025-02-22/</link>
+      <link>http://www.marcu/thoughts/2025-02-22/</link>
       <pubDate>Sat, 22 Feb 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2025-02-22/</guid>
+      <guid>http://www.marcu/thoughts/2025-02-22/</guid>
       <description>summary</description>
     </item>
     <item>
       <title>Prune Your Time Like You Prune a Rose</title>
-      <link>http://www.marcu/rambling/2025-01-27/</link>
+      <link>http://www.marcu/thoughts/2025-01-27/</link>
       <pubDate>Mon, 27 Jan 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2025-01-27/</guid>
+      <guid>http://www.marcu/thoughts/2025-01-27/</guid>
       <description>summary</description>
     </item>
     <item>
       <title>2025 Trip #2 – Phil Wickham Concert</title>
-      <link>http://www.marcu/traveling/2025-01-20/</link>
+      <link>http://www.marcu/travel/2025-01-20/</link>
       <pubDate>Mon, 20 Jan 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/traveling/2025-01-20/</guid>
+      <guid>http://www.marcu/travel/2025-01-20/</guid>
       <description>summary</description>
     </item>
     <item>
       <title>Prayer Mantra #2</title>
-      <link>http://www.marcu/rambling/2025-01-15/</link>
+      <link>http://www.marcu/thoughts/2025-01-15/</link>
       <pubDate>Wed, 15 Jan 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2025-01-15/</guid>
+      <guid>http://www.marcu/thoughts/2025-01-15/</guid>
       <description>“Let us make mankind in our image” – God</description>
     </item>
     <item>
       <title>2024 Reflection – The Year of Openness</title>
-      <link>http://www.marcu/rambling/2024-12-28/</link>
+      <link>http://www.marcu/thoughts/2024-12-28/</link>
       <pubDate>Sat, 28 Dec 2024 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/rambling/2024-12-28/</guid>
+      <guid>http://www.marcu/thoughts/2024-12-28/</guid>
       <description>summary</description>
     </item>
     <item>
