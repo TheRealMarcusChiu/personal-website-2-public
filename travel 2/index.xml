@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>🌎Travel on Marcus Chiu</title>
+    <link>http://www.marcu/travel/</link>
+    <description>Recent content in 🌎Travel on Marcus Chiu</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Jun 2025 01:00:00 -0500</lastBuildDate>
+    <atom:link href="http://www.marcu/travel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Local Cafe - Curpertino</title>
+      <link>http://www.marcu/travel/2025-06-09-b/</link>
+      <pubDate>Mon, 09 Jun 2025 01:00:00 -0500</pubDate>
+      <guid>http://www.marcu/travel/2025-06-09-b/</guid>
+      <description>summary</description>
+    </item>
+    <item>
+      <title>Cousin&#39;s Wedding</title>
+      <link>http://www.marcu/travel/2025-06-09/</link>
+      <pubDate>Mon, 09 Jun 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/travel/2025-06-09/</guid>
+      <description>summary</description>
+    </item>
+    <item>
+      <title>2025 Trip #2 – Phil Wickham Concert</title>
+      <link>http://www.marcu/travel/2025-01-20/</link>
+      <pubDate>Mon, 20 Jan 2025 17:36:22 -0500</pubDate>
+      <guid>http://www.marcu/travel/2025-01-20/</guid>
+      <description>summary</description>
+    </item>
+  </channel>
+</rss>
