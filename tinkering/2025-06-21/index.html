@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCN2D792VE"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GCN2D792VE');
+  </script>
+
+  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5G85VDQT');</script>
+  
+
+  <link href='/favicon.ico' rel='shortcut icon'>
+  <link href='/favicon.ico' rel='apple-touch-icon'>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Homelab #8 - Wake on LAN (WoL) Proxmox | Marcus Chiu</title>
+
+  
+  <meta property="og:url" content="http://www.marcu/tinkering/2025-06-21/">
+  <meta property="og:site_name" content="Marcus Chiu">
+  <meta property="og:title" content="Homelab #8 - Wake on LAN (WoL) Proxmox">
+  <meta property="og:description" content="It’s been a couple of years since I’ve heard of Wake on LAN (WoL) and today I finally decided to set it up.
+What is WoL? Well it allows you to power on a computer over the network, even when the computer is turned off.
+Table of Contents WoL Setup Proxmox Host Machine WoL Setup Proxmox Guest Machines Verify WoL Setup Proxmox Host Machine First we got to enable it in 2 places">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="tinkering">
+    <meta property="article:published_time" content="2025-06-21T00:00:00-05:00">
+    <meta property="article:modified_time" content="2025-06-21T00:00:00-05:00">
+
+
+
+
+
+
+
+
+  
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:url' content='http://www.marcuschiu.com'>
+  <meta name='twitter:title' content='Marcus Chiu - FullStack Developer'>
+  <meta name='twitter:description' content="Marcus Chiu's Website">
+  <meta name='twitter:image' content='http://doc.marcuschiu.com/assets/images/me.png'>
+  <meta name='twitter:site' content='@TheMarcusChiu'>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  
+      <link rel="stylesheet" href="/css/main.min.46c972fe8da8dbb5f56953ab627ad10ad6a7bc13000775e38b9fd83fac3622e1.css" integrity="sha256-Rsly/o2o27X1aVOrYnrRCtanvBMAB3Xji5/YP6w2IuE=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/carousel.min.547c0f91e09efcb470149124bf3fbe719e6eb173ce327ff87c6a3f9c0e0632fe.css" integrity="sha256-VHwPkeCe/LRwFJEkvz&#43;&#43;cZ5usXPOMn/4fGo/nA4GMv4=" crossorigin="anonymous">
+  
+        <script src="/js/main.6e6c6a5bd91a840db66a2739aeeb445da2883d410eb7daeac09254488ec502c7.js" integrity="sha256-bmxqW9kahA22aic5rutEXaKIPUEOt9rqwJJUSI7FAsc=" crossorigin="anonymous"></script>
+        <script src="/js/main.e53ff96c4fc49d490548db4ff73729267772caa1f7e0af027b12bcd81c45728f.js" integrity="sha256-5T/5bE/EnUkFSNtP9zcpJndyyqH34K8CexK82BxFco8=" crossorigin="anonymous"></script>
+</head>
+<body class="text-light dark">
+  
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G85VDQT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  
+  <div class="container pt-5">
+    <header>
+      
+  <div class="row mt-5 pt-5">
+    <nav aria-label="breadcrumb" class="small">
+      <ol class="breadcrumb fw-bold bg-transparent" >
+    <li class="breadcrumb-item">
+      <a href="/">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a aria-current="true" class="ancestor" href="/tinkering/">Tinkering</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/math/">Math</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/art/">Art</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/thoughts/">Thoughts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/travel/">Travel</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about/">About</a>
+    </li>
+      </ol>
+    </nav>
+  </div>
+
+    </header>
+    <main>
+      
+  <div class="post">
+    <header class="mb-4">
+      <h1 class="text-uppercase">Homelab #8 - Wake on LAN (WoL) Proxmox</h1>
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+
+          
+          
+          <li class="breadcrumb-item tiny">
+            <time datetime="2025-06-21T00:00:00-05:00">June 21, 2025</time>
+          </li>
+
+          
+          
+          
+
+          <li class="breadcrumb-item tiny">
+            4 minutes
+          </li>
+
+        </ol>
+      </div>
+    </header>
+
+
+
+
+
+
+    <article>
+      <p>It&rsquo;s been a couple of years since I&rsquo;ve heard of Wake on LAN (WoL) and today I finally decided to set it up.</p>
+<p>What is WoL? Well it allows you to power on a computer over the network, even when the computer is turned off.</p>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+<li>WoL Setup Proxmox Host Machine</li>
+<li>WoL Setup Proxmox Guest Machines</li>
+<li>Verify</li>
+</ul>
+<h1 id="wol-setup-proxmox-host-machine">WoL Setup Proxmox Host Machine</h1>
+<p>First we got to enable it in 2 places</p>
+<ul>
+<li>in BIOS</li>
+<li>in OS</li>
+</ul>
+<h3 id="in-bios">In BIOS</h3>
+<p>Each computer&rsquo;s BIOS settings are different, so try to enable something like &lsquo;Wake on LAN (WoL)&rsquo;.
+Usually, it should be under the <code>Power Management Tab</code>.</p>
+<h3 id="in-os">In OS</h3>
+<p>Install <code>ethtool</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>apt install ethtool -y
+</span></span></code></pre></div><p>Show network interfaces</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ip addr
+</span></span></code></pre></div><p>Find something that looks like <code>enp114s0</code> and make note of it. In my case it looks like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>root@pve2:~# ip addr
+</span></span><span style="display:flex;"><span>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu <span style="color:#ae81ff">65536</span> qdisc noqueue state UNKNOWN group default qlen <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+</span></span><span style="display:flex;"><span>    inet 127.0.0.1/8 scope host lo
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>    inet6 ::1/128 scope host noprefixroute
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex; background-color:#3c3d38"><span>2: enp114s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span style="color:#ae81ff">1500</span> qdisc mq master vmbr0 state UP group default qlen <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>    link/ether 48:21:0b:5f:e9:05 brd ff:ff:ff:ff:ff:ff
+</span></span><span style="display:flex;"><span>3: wlo1: &lt;BROADCAST,MULTICAST&gt; mtu <span style="color:#ae81ff">1500</span> qdisc noop state DOWN group default qlen <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>    link/ether e4:0d:36:09:a1:cd brd ff:ff:ff:ff:ff:ff
+</span></span><span style="display:flex;"><span>    altname wlp0s20f3
+</span></span></code></pre></div><p>Check if WoL is enabled</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ethtool enp114s0
+</span></span></code></pre></div><p>Ensure output contains <code>Wake-on: g</code>, something like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>...
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    MDI-X: off <span style="color:#f92672">(</span>auto<span style="color:#f92672">)</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    Supports Wake-on: pumbg
+</span></span><span style="display:flex;"><span>    Wake-on: g
+</span></span><span style="display:flex;"><span>        Current message level: 0x00000007 <span style="color:#f92672">(</span>7<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                               drv probe link
+</span></span><span style="display:flex;"><span>    Link detected: yes
+</span></span></code></pre></div><p>If it doesn&rsquo;t contain <code>g</code> then check if it supports it by verifying <code>Supports Wake-on: pumbg</code></p>
+<p>If supported then enable it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ethtool -s enp114s0 wol g
+</span></span></code></pre></div><p>Now WoL is configured on your Proxmox Host Machine!</p>
+<h1 id="wol-setup-proxmox-guest-machines">WoL Setup Proxmox Guest Machines</h1>
+<p>Sometimes you want to WoL your guest machines within the Proxmox Host Machine!</p>
+<p>Based on: <a href="https://github.com/djraw/pve-dosthol">https://github.com/djraw/pve-dosthol</a></p>
+<p>Install dependencies</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>apt install gawk socat xxd
+</span></span></code></pre></div><p>Add the following file into <code>/usr/local/bin/dosthold.sh</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># dosthol - Do something on LAN</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   Skript to do something with remote virtual machines</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   Written primarily for Proxmox VE &gt;=v4.x</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Author: Oliver Jaksch &lt;proxmox-forum@com-in.de&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Daemon changelog:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   v0.7 (2020-12-02) - Fixup dependency check, added Reboot command, changed from GPLv2 to GPLv3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   v0.6 (2020-12-02) - Check for missing dependencies</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   v0.5 (2019-03-17) - Beautify shell execs, limit grep to find only one result (thanks cheffe)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   v0.4 (2017-01-03) - Expanded Resume: Send a key before resume (Windows Standby)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   v0.3 (2016-03-11) - Fixed typo in dosthol.service</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   v0.2 (2016-03-07) - Renamed dosthol to dosthold, created client dostholc, finished more commands, turned to socat</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   v0.1 (2016-03-06) - Initial work; starting virtual machines per wake-on-lan works</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Distributed under the terms of the GNU General Public License v3 (https://www.gnu.org/licenses/gpl)</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> LOG <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    logger -i <span style="color:#e6db74">&#34;dosthol: </span><span style="color:#e6db74">${</span>CMDONLAN<span style="color:#e6db74">}</span><span style="color:#e6db74"> VM </span><span style="color:#e6db74">${</span>VMID<span style="color:#e6db74">}</span><span style="color:#e6db74"> (</span><span style="color:#e6db74">${</span>VMNAME<span style="color:#e6db74">}</span><span style="color:#e6db74">) (</span><span style="color:#e6db74">${</span>WHICHVIRT<span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># check for missing dependencies</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> packages in gawk socat xxd; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    checkbin<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>which <span style="color:#e6db74">${</span>packages<span style="color:#e6db74">}</span> &amp;&gt;/dev/null<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">[[</span> <span style="color:#e6db74">${</span>?<span style="color:#e6db74">}</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> echo <span style="color:#e6db74">&#34;Missing program </span><span style="color:#e6db74">${</span>packages<span style="color:#e6db74">}</span><span style="color:#e6db74">, can&#39;t continue without it. Exiting.&#34;</span> <span style="color:#f92672">&amp;&amp;</span> exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> PID<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>pidof -x dosthold.sh<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>FNAM<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>mktemp<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># socat listens on udp/9, when packet arrives it exits</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># gawk magic thanks to &lt;https://stackoverflow.com/questions/31341924/sed-awk-insert-commas-every-nth-character&gt;</span>
+</span></span><span style="display:flex;"><span>socat -u udp-recv:9,readbytes<span style="color:#f92672">=</span><span style="color:#ae81ff">102</span> - | xxd -u -p -c <span style="color:#ae81ff">102</span> | gawk <span style="color:#e6db74">&#39;{$1=$1}1&#39;</span> FPAT<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;.{2}&#39;</span> OFS<span style="color:#f92672">=</span>: &gt; <span style="color:#e6db74">${</span>FNAM<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># get header (6*FF / 6*EE)</span>
+</span></span><span style="display:flex;"><span>WOLHEADER<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cut -b 1-17 <span style="color:#e6db74">${</span>FNAM<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># valid header?</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>WOLHEADER<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> in
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;FF:FF:FF:FF:FF:FF&#34;</span><span style="color:#f92672">)</span>    CMDONLAN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;start&#34;</span> ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;EE:EE:EE:EE:EE:EE&#34;</span><span style="color:#f92672">)</span>    CMDONLAN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shutdown&#34;</span> ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;DD:DD:DD:DD:DD:DD&#34;</span><span style="color:#f92672">)</span>    CMDONLAN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stop&#34;</span> ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;CC:CC:CC:CC:CC:CC&#34;</span><span style="color:#f92672">)</span>    CMDONLAN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;suspend&#34;</span> ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;BB:BB:BB:BB:BB:BB&#34;</span><span style="color:#f92672">)</span>    CMDONLAN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;resume&#34;</span> ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;AA:AA:AA:AA:AA:AA&#34;</span><span style="color:#f92672">)</span>    CMDONLAN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;reset&#34;</span> ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;AB:AB:AB:AB:AB:AB&#34;</span><span style="color:#f92672">)</span>    CMDONLAN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;reboot&#34;</span> ;;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">esac</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ! <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>CMDONLAN=<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 16*MAC</span>
+</span></span><span style="display:flex;"><span>    WOLMAC<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cut -b 19- <span style="color:#e6db74">${</span>FNAM<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># MAC we&#39;re searching for</span>
+</span></span><span style="display:flex;"><span>    MAC<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cut -b 19-35 <span style="color:#e6db74">${</span>FNAM<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 16*identical MAC = MagicPacket ?</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">${</span>WOLMAC<span style="color:#e6db74">}</span> | grep -o <span style="color:#e6db74">${</span>MAC<span style="color:#e6db74">}</span> | wc -l<span style="color:#66d9ef">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># search pve for MAC addresses</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># gawk magic thanks to &lt;https://stackoverflow.com/questions/245916/best-way-to-extract-mac-address-from-ifconfigs-output&gt;</span>
+</span></span><span style="display:flex;"><span>    PVEMACS<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>grep -r <span style="color:#e6db74">&#34;net[0-9]:&#34;</span> /etc/pve/local/ | grep -ioE <span style="color:#e6db74">&#34;([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}&#34;</span> | grep -io -m1 <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>MAC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># matching MAC?</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PVEMACS<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>MAC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        WHICHVIRT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>grep -r -m1 <span style="color:#e6db74">&#34;net[0-9]:&#34;</span> /etc/pve/local/ | grep -i <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>MAC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> | awk -F <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#e6db74">&#39;{print $5}&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>        WHICHVMID<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>grep -r -m1 <span style="color:#e6db74">&#34;net[0-9]:&#34;</span> /etc/pve/local/ | grep -i <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>MAC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> | awk -F <span style="color:#e6db74">&#39;[/:]&#39;</span> <span style="color:#e6db74">&#39;{print $6}&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>        VMFILE<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>find /etc/pve/local/ -name <span style="color:#e6db74">${</span>WHICHVMID<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>        VMNAME<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>grep -m1 <span style="color:#e6db74">&#34;name: &#34;</span> <span style="color:#e6db74">${</span>VMFILE<span style="color:#e6db74">}</span> | awk <span style="color:#f92672">{</span><span style="color:#e6db74">&#39;print $2&#39;</span><span style="color:#f92672">}</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>        VMID<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">${</span>WHICHVMID%.conf<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>WHICHVIRT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;qemu-server&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        LOG
+</span></span><span style="display:flex;"><span>        qm sendkey <span style="color:#e6db74">${</span>VMID<span style="color:#e6db74">}</span> ctrl-alt &amp;
+</span></span><span style="display:flex;"><span>        qm <span style="color:#e6db74">${</span>CMDONLAN<span style="color:#e6db74">}</span> <span style="color:#e6db74">${</span>VMID<span style="color:#e6db74">}</span> &amp;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>WHICHVIRT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;lxc&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> ! <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>CMDONLAN<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;reset&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        LOG
+</span></span><span style="display:flex;"><span>        pct <span style="color:#e6db74">${</span>CMDONLAN<span style="color:#e6db74">}</span> <span style="color:#e6db74">${</span>VMID<span style="color:#e6db74">}</span> &amp;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># remove obsolete/invalid socat file</span>
+</span></span><span style="display:flex;"><span>rm <span style="color:#e6db74">${</span>FNAM<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><p>Make it executable</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod +x /usr/local/bin/dosthold.sh
+</span></span></code></pre></div><p>Add the following to /etc/systemd/system/dosthol.service</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">Unit</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Description</span>=<span style="color:#a6e22e">dosthol</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">Do</span> <span style="color:#a6e22e">something</span> <span style="color:#a6e22e">on</span> <span style="color:#a6e22e">LAN</span><span style="color:#960050;background-color:#1e0010">)</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">Service</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ExecStart</span>=<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">usr</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">local</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">bin</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">dosthold</span>.<span style="color:#a6e22e">sh</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">RestartSec</span>=<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Restart</span>=<span style="color:#a6e22e">always</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">Install</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">WantedBy</span>=<span style="color:#a6e22e">multi-user</span>.<span style="color:#a6e22e">target</span>
+</span></span></code></pre></div><p>Start, enable, status the service:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl enable dosthol.service
+</span></span><span style="display:flex;"><span>systemctl start dosthol.service
+</span></span><span style="display:flex;"><span>systemctl status dosthol.service
+</span></span></code></pre></div><h1 id="verify">Verify</h1>
+<p>We will use a terminal command to send out a WoL magic packet.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt install wakeonlan
+</span></span><span style="display:flex;"><span>wakeonlan <span style="color:#e6db74">${</span>MAC_ADDRESS<span style="color:#e6db74">}</span>
+</span></span></code></pre></div>
+    </article>
+  </div>
+  
+<div class="row page-prev-next">
+    <div class="col-md">
+        
+            <a href="/tinkering/2025-06-13/">
+                <span>← </span>
+                <span class="title">How to Install qBittorrent on Ubuntu Server 24.04</span>
+            </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+    </div>
+</div>
+
+  <div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://marcuschiu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </main>
+  </div>
+</body>
+</html>

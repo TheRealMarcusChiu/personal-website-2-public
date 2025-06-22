@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Jun 2025 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 21 Jun 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Homelab #8 - Wake on LAN (WoL) Proxmox</title>
+      <link>http://www.marcu/tinkering/2025-06-21/</link>
+      <pubDate>Sat, 21 Jun 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-06-21/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s been a couple of years since I&amp;rsquo;ve heard of Wake on LAN (WoL) and today I finally decided to set it up.&lt;/p&gt;&#xA;&lt;p&gt;What is WoL? Well it allows you to power on a computer over the network, even when the computer is turned off.&lt;/p&gt;&#xA;&lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;WoL Setup Proxmox Host Machine&lt;/li&gt;&#xA;&lt;li&gt;WoL Setup Proxmox Guest Machines&lt;/li&gt;&#xA;&lt;li&gt;Verify&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;wol-setup-proxmox-host-machine&#34;&gt;WoL Setup Proxmox Host Machine&lt;/h1&gt;&#xA;&lt;p&gt;First we got to enable it in 2 places&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Permutation vs Combination</title>
       <link>http://www.marcu/math/2025-06-14/</link>
