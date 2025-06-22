@@ -282,16 +282,16 @@ Usually, it should be under the <code>Power Management Tab</code>.</p>
 </span></span></code></pre></div><p>Make it executable</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod +x /usr/local/bin/dosthold.sh
 </span></span></code></pre></div><p>Add the following to /etc/systemd/system/dosthol.service</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">Unit</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Description</span>=<span style="color:#a6e22e">dosthol</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">Do</span> <span style="color:#a6e22e">something</span> <span style="color:#a6e22e">on</span> <span style="color:#a6e22e">LAN</span><span style="color:#960050;background-color:#1e0010">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#66d9ef">[Unit]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Description</span><span style="color:#f92672">=</span><span style="color:#e6db74">dosthol (Do something on LAN)</span>
 </span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">Service</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ExecStart</span>=<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">usr</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">local</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">bin</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">dosthold</span>.<span style="color:#a6e22e">sh</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">RestartSec</span>=<span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Restart</span>=<span style="color:#a6e22e">always</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[Service]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ExecStart</span><span style="color:#f92672">=</span><span style="color:#e6db74">/usr/local/bin/dosthold.sh</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">RestartSec</span><span style="color:#f92672">=</span><span style="color:#e6db74">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Restart</span><span style="color:#f92672">=</span><span style="color:#e6db74">always</span>
 </span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">Install</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">WantedBy</span>=<span style="color:#a6e22e">multi-user</span>.<span style="color:#a6e22e">target</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[Install]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">WantedBy</span><span style="color:#f92672">=</span><span style="color:#e6db74">multi-user.target</span>
 </span></span></code></pre></div><p>Start, enable, status the service:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl enable dosthol.service
 </span></span><span style="display:flex;"><span>systemctl start dosthol.service
