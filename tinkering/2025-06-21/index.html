@@ -281,7 +281,7 @@ Usually, it should be under the <code>Power Management Tab</code>.</p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
 </span></span></code></pre></div><p>Make it executable</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod +x /usr/local/bin/dosthold.sh
-</span></span></code></pre></div><p>Add the following to /etc/systemd/system/dosthol.service</p>
+</span></span></code></pre></div><p>Create a new file <code>/etc/systemd/system/dosthol.service</code> with the following contents:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#66d9ef">[Unit]</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">Description</span><span style="color:#f92672">=</span><span style="color:#e6db74">dosthol (Do something on LAN)</span>
 </span></span><span style="display:flex;"><span> 
