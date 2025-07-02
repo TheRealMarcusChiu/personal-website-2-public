@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://www.marcu/fitness/2025-07-01/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://www.marcu/thoughts/2025-06-23/</loc>
     <lastmod>2025-06-23T00:00:00-05:00</lastmod>
   </url><url>
@@ -54,6 +57,9 @@
     <lastmod>2025-04-23T17:36:22-05:00</lastmod>
   </url><url>
     <loc>http://www.marcu/</loc>
+    <lastmod>2025-04-23T17:36:22-05:00</lastmod>
+  </url><url>
+    <loc>http://www.marcu/fitness/</loc>
     <lastmod>2025-04-23T17:36:22-05:00</lastmod>
   </url><url>
     <loc>http://www.marcu/thoughts/</loc>
