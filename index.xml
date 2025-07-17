@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Jul 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Network File System (NFS)</title>
+      <link>http://www.marcu/tinkering/2025-07-16/</link>
+      <pubDate>Wed, 16 Jul 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-07-16/</guid>
+      <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I have a problem. I got two linux boxes and I need one of them to access and modify a directory of the other box.&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;Network File Systems (NFS) 🙌&lt;/p&gt;&#xA;&lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Setup NFS Server&lt;/strong&gt; - set this up on the box that contains the directory you want to share&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Setup NFS Client&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;setup-nfs-server&#34;&gt;Setup NFS Server&lt;/h1&gt;&#xA;&lt;p&gt;On Debian or Ubuntu install NFS server via:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get update&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install nfs-kernel-server&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Create directory you want to share&lt;/p&gt;</description>
+    </item>
     <item>
       <title>What I Eat #1</title>
       <link>http://www.marcu/fitness/2025-07-14/</link>
