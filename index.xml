@@ -13,7 +13,7 @@
       <link>http://www.marcu/tinkering/2025-07-30/</link>
       <pubDate>Wed, 30 Jul 2025 00:00:00 -0500</pubDate>
       <guid>http://www.marcu/tinkering/2025-07-30/</guid>
-      <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I wanted to go over the entire Spring Boot material for version 3.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve done this before for Spring Boot version 2, but I haven&amp;rsquo;t done it for version 3.&#xA;So I&amp;rsquo;ve gone back to the site &lt;a href=&#34;https://www.baeldung.com&#34;&gt;www.baeldung.com&lt;/a&gt; but noticed some articles are out of date?&#xA;Also, some had clear mistakes that took me a good minute to figure out&amp;hellip;&#xA;And their code is behind a paywall, and their site is filled with noisy ads.&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I wanted to go over the entire Spring Boot material for version 3.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve done this before for Spring Boot version 2, but I haven&amp;rsquo;t done it for version 3.&#xA;So I&amp;rsquo;ve gone back to the site &lt;a href=&#34;https://www.baeldung.com&#34;&gt;www.baeldung.com&lt;/a&gt; but noticed some articles are out of date?&#xA;Also, some had clear mistakes that took me a good minute to figure out&amp;hellip;&#xA;Their site is filled with noisy ads and their code is behind a paywall.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Network File System (NFS)</title>
