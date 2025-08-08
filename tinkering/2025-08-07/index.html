@@ -178,6 +178,18 @@ to be restarted.</p>
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">intervalId_gameEngineStepCounter</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">keydownEC</span>(<span style="color:#a6e22e">event</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;ArrowDown&#34;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">gameEngineStepCounter_Stop</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// do manual down move
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">keyupEC</span>(<span style="color:#a6e22e">event</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;ArrowDown&#34;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">gameEngineStepCounter_Start</span>(<span style="color:#a6e22e">stepCounter</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Next, I needed to figure out how to visually display the grid. I&rsquo;ve
 opted for canvas as it was easier to manipulate. Since each grid square
 is 40px by 40px, so the canvas size will be 400px by 800px. I&rsquo;ve added
