@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Jul 2025 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 07 Aug 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Learning ReactJS</title>
+      <link>http://www.marcu/tinkering/2025-08-07/</link>
+      <pubDate>Thu, 07 Aug 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-08-07/</guid>
+      <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I wanted to learn a new UI framework. In the past, I&amp;rsquo;ve learned &lt;strong&gt;Angular&lt;/strong&gt;.&#xA;Today I wanted to learn &lt;strong&gt;ReactJS&lt;/strong&gt;. So perhaps the next step is to learn&#xA;&lt;strong&gt;React Ionic&lt;/strong&gt; and/or &lt;strong&gt;React Native&lt;/strong&gt;?&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;So I&amp;rsquo;ve spent 2 working days going through the ReactJS tutorials&#xA;&lt;a href=&#34;https://react.dev/learn/your-first-component&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;After going through them, I&amp;rsquo;ve decided to build a Tetris game using ReactJS.&#xA;Though I&amp;rsquo;ve ended up using a bunch more plain JavaScript lol.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Spring Boot 3.5 Guides</title>
       <link>http://www.marcu/tinkering/2025-07-30/</link>
