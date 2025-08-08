@@ -9,11 +9,11 @@
     <lastBuildDate>Thu, 07 Aug 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/tinkering/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Learning ReactJS</title>
+      <title>Learning R̶e̶a̶c̶t̶J̶S̶ JavaScript</title>
       <link>http://www.marcu/tinkering/2025-08-07/</link>
       <pubDate>Thu, 07 Aug 2025 00:00:00 -0500</pubDate>
       <guid>http://www.marcu/tinkering/2025-08-07/</guid>
-      <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I wanted to learn a new UI framework. In the past, I&amp;rsquo;ve gone through Angular.&#xA;Now it&amp;rsquo;s time to devour ReactJS. Maybe the next logical step is to learn&#xA;React Ionic and/or React Native?&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve spent the past 2 working days going through the ReactJS tutorials&#xA;&lt;a href=&#34;https://react.dev/learn/your-first-component&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Next, I&amp;rsquo;ve decided to build a Tetris game using ReactJS.&#xA;Though I&amp;rsquo;ve ended up using a bunch more plain JavaScript lol.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://tetris.marcuschiu.com&#34;&gt;tetris.marcuschiu.com&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://tetris.marcuschiu.com&#34;&gt;&lt;img src=&#34;assets/tetris.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I wanted to learn a new UI framework. In the past, I&amp;rsquo;ve gone through Angular.&#xA;Now it&amp;rsquo;s time to devour ReactJS. Maybe the next logical step is to learn&#xA;React Ionic and/or React Native?&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve spent the past 2 working days going through the ReactJS tutorials&#xA;&lt;a href=&#34;https://react.dev/learn/your-first-component&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Next, I&amp;rsquo;ve decided to build a Tetris game using ReactJS.&#xA;However, I&amp;rsquo;ve ended up using a bunch more plain JavaScript lol.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://tetris.marcuschiu.com&#34;&gt;tetris.marcuschiu.com&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://tetris.marcuschiu.com&#34;&gt;&lt;img src=&#34;assets/tetris.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Spring Boot 3.5 Guides</title>
