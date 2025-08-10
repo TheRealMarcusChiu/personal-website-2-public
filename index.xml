@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 Aug 2025 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 08 Aug 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Locked out of my Router (OPNsense)</title>
+      <link>http://www.marcu/tinkering/2025-08-08/</link>
+      <pubDate>Fri, 08 Aug 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-08-08/</guid>
+      <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve set up remote access to configure my OPNsense router, so that whenever I need to configure&#xA;it I don&amp;rsquo;t need to be there in person.&#xA;Unfortunately, I&amp;rsquo;ve accidentally messed up a config, and it locked me out of the router :(&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;First, I connected an ethernet cable to the router in an attempt to access the Web console.&lt;/p&gt;&#xA;&lt;p&gt;It didn&amp;rsquo;t work.&lt;/p&gt;&#xA;&lt;p&gt;So this means I have to configure this via terminal (which I&amp;rsquo;ve never done before).&#xA;But after a lot of googling and accidentally breaking some rivets in the process, I&amp;rsquo;ve&#xA;managed to fix it.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Learning R̶e̶a̶c̶t̶J̶S̶ JavaScript</title>
       <link>http://www.marcu/tinkering/2025-08-07/</link>
