@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 Aug 2025 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 11 Aug 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rebuilt Tetris Using Unicode</title>
+      <link>http://www.marcu/tinkering/2025-08-11/</link>
+      <pubDate>Mon, 11 Aug 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-08-11/</guid>
+      <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;A couple of days ago &lt;a href=&#34;http://www.marcu/tinkering/2025-08-07/&#34;&gt;I built Tetris&lt;/a&gt; using canvas as the base visual.&#xA;Something tickled my ADHD and thought if I could do it in Unicode text.&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve googled Unicode tetris emojis but found nothing.&#xA;Then I&amp;rsquo;ve stumbled upon these Unicode characters/symbols?&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;⬛🟫🟧🟪🟥🟦🟨🟩&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;That&amp;rsquo;s exactly what I needed!&lt;/p&gt;&#xA;&lt;p&gt;Because I&amp;rsquo;m a genius - the original code had the game logic and render logic separate.&#xA;Thus, all I need to do is to rewrite the render logic using ⬛🟫🟧🟪🟥🟦🟨🟩.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Locked out of my Router (OPNsense)</title>
       <link>http://www.marcu/tinkering/2025-08-08/</link>
