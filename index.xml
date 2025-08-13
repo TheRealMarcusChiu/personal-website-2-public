@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Aug 2025 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 13 Aug 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Telegraf &#43; InfluxDB &#43; Grafana</title>
+      <link>http://www.marcu/tinkering/2025-08-13/</link>
+      <pubDate>Wed, 13 Aug 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-08-13/</guid>
+      <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;My server keeps shutting down like once every week, and I had no idea why for the past 2 months.&#xA;It was overheating&amp;hellip; so putting it out into a vented place solved that issue.&lt;/p&gt;&#xA;&lt;p&gt;But I wanted to be alerted of this problem before it even happens.&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;Setup a (Telegraf + InfluxDB + Grafana) stack.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;InfluxDB - is a time-series database&lt;/li&gt;&#xA;&lt;li&gt;Telegraf - is a binary running on the server/computer that will send temp data to InfluxDB&lt;/li&gt;&#xA;&lt;li&gt;Grafana - will take data from InfluxDB and display it nicely (and alerts can also be setup here)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;influxdb-setup&#34;&gt;InfluxDB Setup&lt;/h1&gt;&#xA;&lt;p&gt;Since I have a &lt;a href=&#34;http://www.marcu/tinkering/2025-06-04/&#34;&gt;Proxmox Cluster&lt;/a&gt;,&#xA;I will be using &lt;a href=&#34;https://community-scripts.github.io/ProxmoxVE/scripts&#34;&gt;Proxmox Helper Scripts&lt;/a&gt;&#xA;to set up an InfluxDB server.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Rebuilt Tetris Using Unicode</title>
       <link>http://www.marcu/tinkering/2025-08-11/</link>
@@ -35,13 +42,6 @@
       <pubDate>Wed, 30 Jul 2025 00:00:00 -0500</pubDate>
       <guid>http://www.marcu/tinkering/2025-07-30/</guid>
       <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I wanted to go over the entire Spring Boot material for version 3.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve done this before for Spring Boot version 2, but I haven&amp;rsquo;t done it for version 3.&#xA;So I&amp;rsquo;ve gone back to the site &lt;a href=&#34;https://www.baeldung.com&#34;&gt;www.baeldung.com&lt;/a&gt; but noticed some articles are out of date?&#xA;Also, some had clear mistakes that took me a good minute to figure out&amp;hellip;&#xA;Their site is filled with noisy ads and their code is behind a paywall.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Christian Ramblings #1</title>
-      <link>http://www.marcu/thoughts/2025-07-30/</link>
-      <pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://www.marcu/thoughts/2025-07-30/</guid>
-      <description>summary</description>
     </item>
     <item>
       <title>Network File System (NFS)</title>
