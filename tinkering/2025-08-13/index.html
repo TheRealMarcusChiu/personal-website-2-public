@@ -32,7 +32,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta property="og:description" content="Problem My server keeps shutting down like once every week, and I had no idea why for the past 2 months. It was overheating… so putting it out into a vented place solved that issue.
 But I wanted to be alerted of this problem before it even happens.
 Solution Setup a (Telegraf &#43; InfluxDB &#43; Grafana) stack.
-InfluxDB - is a time-series database Telegraf - is a binary running on the server/computer that will send temp data to InfluxDB Grafana - will take data from InfluxDB and display it nicely (and alerts can also be setup here) InfluxDB Setup Since I have a Proxmox Cluster, I will be using Proxmox Helper Scripts to set up an InfluxDB server.">
+InfluxDB - is a time-series database Telegraf - is a binary running on the server/computer that will send temp data to InfluxDB Grafana - will take data from InfluxDB and display it nicely (and alerts can also be setup here) ToC InfluxDB Setup Telegraf Setup Grafana Setup InfluxDB Setup Since I have a Proxmox Cluster, I will be using Proxmox Helper Scripts to set up an InfluxDB server.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="tinkering">
@@ -150,6 +150,12 @@ It was overheating&hellip; so putting it out into a vented place solved that iss
 <li>Telegraf - is a binary running on the server/computer that will send temp data to InfluxDB</li>
 <li>Grafana - will take data from InfluxDB and display it nicely (and alerts can also be setup here)</li>
 </ul>
+<h1 id="toc">ToC</h1>
+<ul>
+<li><a href="#influxdb-setup">InfluxDB Setup</a></li>
+<li><a href="#telegraf-setup">Telegraf Setup</a></li>
+<li><a href="#grafana-setup">Grafana Setup</a></li>
+</ul>
 <h1 id="influxdb-setup">InfluxDB Setup</h1>
 <p>Since I have a <a href="/tinkering/2025-06-04/">Proxmox Cluster</a>,
 I will be using <a href="https://community-scripts.github.io/ProxmoxVE/scripts">Proxmox Helper Scripts</a>
@@ -224,7 +230,7 @@ to set up a Grafana server.</p>
 <p><img src="assets/6.jpeg" alt="alt"></p>
 <p><img src="assets/7.jpeg" alt="alt"></p>
 <p>Click save and test.</p>
-<h1 id="grafana-setup-dashboard">Grafana Setup Dashboard</h1>
+<h1 id="grafana-setup-dashboard-optional">Grafana Setup Dashboard (Optional)</h1>
 <p><img src="assets/8.jpeg" alt="alt"></p>
 <p><img src="assets/9.jpeg" alt="alt"></p>
 <p><img src="assets/10.jpeg" alt="alt"></p>
