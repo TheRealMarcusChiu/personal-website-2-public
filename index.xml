@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 Aug 2025 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 14 Aug 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>I&#39;ve Built Tetris Using ASCII</title>
+      <link>http://www.marcu/tinkering/2025-08-14/</link>
+      <pubDate>Thu, 14 Aug 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-08-14/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve made tetris using &lt;!-- raw HTML omitted --&gt; and also Unicode characters (i.e. 🟧🟪🟥🟦🟨🟩).&lt;/p&gt;&#xA;&lt;p&gt;So late at night, I&amp;rsquo;ve decided to make tetris using ASCII characters.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://tetris-ascii.marcuschiu.com&#34;&gt;tetris-ascii.marcuschiu.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://tetris-ascii.marcuschiu.com&#34;&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Telegraf &#43; InfluxDB &#43; Grafana</title>
       <link>http://www.marcu/tinkering/2025-08-13/</link>
@@ -16,7 +23,7 @@
       <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;My server keeps shutting down like once every week, and I had no idea why for the past 2 months.&#xA;It was overheating&amp;hellip; so putting it out into a vented place solved that issue.&lt;/p&gt;&#xA;&lt;p&gt;But I wanted to be alerted of this problem before it even happens.&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;Setup a (Telegraf + InfluxDB + Grafana) stack.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;InfluxDB - is a time-series database&lt;/li&gt;&#xA;&lt;li&gt;Telegraf - is a binary running on the server/computer that will send temp data to InfluxDB&lt;/li&gt;&#xA;&lt;li&gt;Grafana - will take data from InfluxDB and display it nicely (and also alert me when temp is too high)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;toc&#34;&gt;ToC&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#influxdb-setup&#34;&gt;InfluxDB Setup&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#telegraf-setup&#34;&gt;Telegraf Setup&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#grafana-setup&#34;&gt;Grafana Setup&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;influxdb-setup&#34;&gt;InfluxDB Setup&lt;/h1&gt;&#xA;&lt;p&gt;Since I have a &lt;a href=&#34;http://www.marcu/tinkering/2025-06-04/&#34;&gt;Proxmox Cluster&lt;/a&gt;,&#xA;I will be using &lt;a href=&#34;https://community-scripts.github.io/ProxmoxVE/scripts&#34;&gt;Proxmox Helper Scripts&lt;/a&gt;&#xA;to set up an InfluxDB server.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Rebuilt Tetris Using Unicode</title>
+      <title>I&#39;ve Built Tetris Using Unicode</title>
       <link>http://www.marcu/tinkering/2025-08-11/</link>
       <pubDate>Mon, 11 Aug 2025 00:00:00 -0500</pubDate>
       <guid>http://www.marcu/tinkering/2025-08-11/</guid>
@@ -30,7 +37,7 @@
       <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve set up remote access to configure my OPNsense router, so that whenever I need to configure&#xA;it I don&amp;rsquo;t need to be there in person.&#xA;Unfortunately, I&amp;rsquo;ve accidentally messed up a config, and it locked me out of the router :(&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;First, I connected an ethernet cable to the router in an attempt to access the Web console.&lt;/p&gt;&#xA;&lt;p&gt;It didn&amp;rsquo;t work.&lt;/p&gt;&#xA;&lt;p&gt;So this means I have to configure this via terminal (which I&amp;rsquo;ve never done before).&#xA;But after a lot of googling and accidentally breaking some rivets in the process, I&amp;rsquo;ve&#xA;managed to fix it.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Built Tetris Using ReactJS</title>
+      <title>I&#39;ve Built Tetris Using ReactJS</title>
       <link>http://www.marcu/tinkering/2025-08-07/</link>
       <pubDate>Thu, 07 Aug 2025 00:00:00 -0500</pubDate>
       <guid>http://www.marcu/tinkering/2025-08-07/</guid>
