@@ -13,7 +13,7 @@
       <link>http://www.marcu/tinkering/2025-08-14/</link>
       <pubDate>Thu, 14 Aug 2025 00:00:00 -0500</pubDate>
       <guid>http://www.marcu/tinkering/2025-08-14/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve made tetris using &lt;!-- raw HTML omitted --&gt; and also Unicode characters (i.e. 🟧🟪🟥🟦🟨🟩).&lt;/p&gt;&#xA;&lt;p&gt;So late at night, I&amp;rsquo;ve decided to make tetris using ASCII characters.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://tetris-ascii.marcuschiu.com&#34;&gt;tetris-ascii.marcuschiu.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://tetris-ascii.marcuschiu.com&#34;&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve made tetris using &lt;!-- raw HTML omitted --&gt; and also Unicode characters (i.e. 🟧🟪🟥🟦🟨🟩).&lt;/p&gt;&#xA;&lt;p&gt;So late at night, I&amp;rsquo;ve decided to make tetris again using ASCII characters.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://tetris-ascii.marcuschiu.com&#34;&gt;tetris-ascii.marcuschiu.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://tetris-ascii.marcuschiu.com&#34;&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Telegraf &#43; InfluxDB &#43; Grafana</title>
