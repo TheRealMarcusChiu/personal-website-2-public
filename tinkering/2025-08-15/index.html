@@ -154,7 +154,7 @@ And sometimes knowing the first occurrence of that word helps.</p>
 <h1 id="how-it-was-built">How it was Built</h1>
 <p>First, I needed to download the Bible. There are many versions out there, so I&rsquo;ll start with ESV.
 But I can&rsquo;t just download any Bible, I needed one that delimits the book, chapter, and verses.</p>
-<p>Finding a good source was surprisingly hard. But I&rsquo;ve ended up stumbling on this goldmine:
+<p>Finding a good source was surprisingly hard. But I&rsquo;ve ended up stumbling upon this goldmine:
 <a href="https://github.com/jadenzaleski/BibleTranslations">https://github.com/jadenzaleski/BibleTranslations</a>.</p>
 <p>The JSON format looks something like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
@@ -174,13 +174,13 @@ But I can&rsquo;t just download any Bible, I needed one that delimits the book, 
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Looks perfect!</p>
-<p>Next, I need to write a program to extract the first occurrence of each word and map it to its location.
+<p>Next, I needed to write a program to extract the first occurrence of each word and map it to its location.
 Something like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>holy Genesis 2:3
 </span></span><span style="display:flex;"><span>homage 1 Samuel 24:8
 </span></span><span style="display:flex;"><span>home Gensis 30:25
 </span></span></code></pre></div><p>I chose Python to implement this.</p>
-<p>Once I have the output text file, the next thing is to build a simple website to query this file.
+<p>Once implemented, needed to build a simple website to query this output.
 I&rsquo;ve opted to use ChatGPT 5 to help me prettify this website.</p>
 <p><img src="assets/2.jpeg" alt="chatgpt-prompt"></p>
 <p>Did some minor touch-ups and made it public!</p>
