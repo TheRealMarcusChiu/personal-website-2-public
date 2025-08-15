@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCN2D792VE"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GCN2D792VE');
+  </script>
+
+  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5G85VDQT');</script>
+  
+
+  <link href='/favicon.ico' rel='shortcut icon'>
+  <link href='/favicon.ico' rel='apple-touch-icon'>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Alert Me on Disk Full | Marcus Chiu</title>
+
+  
+  <meta property="og:url" content="http://localhost:1313/tinkering/2025-08-16/">
+  <meta property="og:site_name" content="Marcus Chiu">
+  <meta property="og:title" content="Alert Me on Disk Full">
+  <meta property="og:description" content="Problem I have about 40 linux containers running, and I want to be notified when any of the containers used up a majority of its disk space.
+Solution I’ve decided to use the (Telegraf &#43; Influx &#43; Grafana) stack again. Previously, I’ve used it for monitoring server temperatures.
+So here goes configuring 40 plus linux containers…
+Look how beautiful are my alerts :) of course, I’ve automated to set up.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="tinkering">
+    <meta property="article:published_time" content="2025-08-16T00:00:00-05:00">
+    <meta property="article:modified_time" content="2025-08-16T00:00:00-05:00">
+
+
+
+
+
+
+
+
+  
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:url' content='http://www.marcuschiu.com'>
+  <meta name='twitter:title' content='Marcus Chiu - FullStack Developer'>
+  <meta name='twitter:description' content="Marcus Chiu's Website">
+  <meta name='twitter:image' content='http://doc.marcuschiu.com/assets/images/me.png'>
+  <meta name='twitter:site' content='@TheMarcusChiu'>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/carousel.css">
+  
+      <script src="/js/main.js"></script>
+      <script src="/js/main.js"></script>
+</head>
+<body class="text-light dark">
+  
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G85VDQT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  
+  <div class="container pt-5">
+    <header>
+      
+  <div class="row mt-5 pt-5">
+    <nav aria-label="breadcrumb" class="small">
+      <ol class="breadcrumb fw-bold bg-transparent" >
+    <li class="breadcrumb-item">
+      <a href="/">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a aria-current="true" class="ancestor" href="/tinkering/">Tinkering</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/math/">Math</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/music/">Music</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/art/">Art</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/fitness/">Fitness</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/thoughts/">Thoughts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/travel/">Travel</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about/">About</a>
+    </li>
+      </ol>
+    </nav>
+  </div>
+
+    </header>
+    <main>
+      
+  <div class="post">
+    <header class="mb-4">
+      <h1 class="text-uppercase">Alert Me on Disk Full</h1>
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+
+          
+          
+          <li class="breadcrumb-item tiny">
+            <time datetime="2025-08-16T00:00:00-05:00">August 16, 2025</time>
+          </li>
+
+          
+          
+          
+
+          <li class="breadcrumb-item tiny">
+            5 minutes
+          </li>
+
+        </ol>
+      </div>
+    </header>
+
+
+
+
+
+
+    <article>
+      <h1 id="problem">Problem</h1>
+<p>I have about 40 linux containers running,
+and I want to be notified when any of the containers used up a majority of its disk space.</p>
+<h1 id="solution">Solution</h1>
+<p>I&rsquo;ve decided to use the (Telegraf + Influx + Grafana) stack again.
+Previously, I&rsquo;ve used it for <a href="/tinkering/2025-08-13/">monitoring server temperatures</a>.</p>
+<p>So here goes configuring 40 plus linux containers&hellip;</p>
+<p>Look how beautiful are my alerts :) of course, I&rsquo;ve automated to set up.</p>
+<p><img src="assets/1.jpeg" alt="alt"></p>
+<h1 id="toc">ToC</h1>
+<p>This article assumes you have already set up and are familiar with InfluxDB and Grafana.</p>
+<p>Let&rsquo;s consider setting up just one linux container for each of the following steps:</p>
+<ul>
+<li><a href="#1-influxdb">1. InfluxDB</a></li>
+<li><a href="#2-telegraf">2. Telegraf</a></li>
+<li><a href="#3-grafana">3. Grafana</a></li>
+</ul>
+<p>You can skip the above manual steps and opt an automated route:</p>
+<ul>
+<li><a href="#automate-for-40-linux-containers">Automate for 40 Linux Containers</a></li>
+</ul>
+<h1 id="1-influxdb">1. InfluxDB</h1>
+<p>In the InfluxDB web console, create:</p>
+<ul>
+<li>a new <code>Bucket</code> - see <a href="/tinkering/2025-08-13/#create-a-bucket">here</a></li>
+<li>an <code>All Access API token</code> - see <a href="/tinkering/2025-08-13/#create-an-api-token">here</a></li>
+</ul>
+<h1 id="2-telegraf">2. Telegraf</h1>
+<p>Download the Telegraf binary from their GitHub <a href="https://github.com/influxdata/telegraf/releases">release page</a>.</p>
+<p>The <code>telegraf.conf</code> is simple because we will be just monitoring the root disk (make sure to replace those values below!):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#66d9ef">[global_tags]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[agent]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">interval</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10s&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  round_interval = true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  metric_batch_size = 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  metric_buffer_limit = 10000
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  collection_jitter = &#34;0s&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  flush_interval = &#34;10s&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  flush_jitter = &#34;0s&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  precision = &#34;0s&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[[inputs.disk]]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mount_points</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">[&#34;/&#34;]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[[outputs.influxdb_v2]]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">urls</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">[&#34;$INFLUXDB_URL_HERE&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  organization = &#34;$INFLUXDB_ORG_NAME_HERE&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  bucket = &#34;$INFLUXDB_BUCKET_NAME_HERE&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  token = &#34;$INFLUXDB_API_TOKEN_HERE&#34;</span>
+</span></span></code></pre></div><p>Run telegraf with this configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>telegraf -config telegraf.conf
+</span></span></code></pre></div><p>Verify in InfluxDB Web UI that metrics are being received.</p>
+<h1 id="3-grafana">3. Grafana</h1>
+<p>Here we will be creating an alert for a single linux container.</p>
+<p>Let&rsquo;s create a new rule:</p>
+<p><img src="assets/2.jpeg" alt="alt"></p>
+<p><img src="assets/3.jpeg" alt="alt"></p>
+<p><img src="assets/4.jpeg" alt="alt"></p>
+<p><img src="assets/5.jpeg" alt="alt"></p>
+<h1 id="automate-for-40-linux-containers">Automate for 40 Linux Containers</h1>
+<p>Now doing the same 3 steps above for 40 times is too much. I&rsquo;m lazy.
+So I&rsquo;ve written a script to automate all of this.</p>
+<p>Here it is in Github: <a href="https://github.com/TheRealMarcusChiu/proxmox-scripts">https://github.com/TheRealMarcusChiu/proxmox-scripts</a></p>
+<h3 id="auto-telegraf--influxdb">Auto Telegraf &amp; InfluxDB</h3>
+<p>To install Telegraf on all your Linux containers,
+and auto create buckets on InfluxDB,
+create a file <code>proxmox-server-setup-lxcs.sh</code> in your proxmox server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>INFLUXDB_URL<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;REPLACE_ME&#34;</span>
+</span></span><span style="display:flex;"><span>INFLUXDB_API_TOKEN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;REPLACE_ME&#34;</span>
+</span></span><span style="display:flex;"><span>INFLUXDB_ORG_ID<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;REPLACE_ME&#34;</span>
+</span></span><span style="display:flex;"><span>INFLUXDB_ORG_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;REPLACE_ME&#34;</span>
+</span></span><span style="display:flex;"><span>INFLUXDB_BUCKET_NAME_PREFIX<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;telegraf-lxc-&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pct list | grep running | <span style="color:#66d9ef">while</span> read line; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    ID<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span>$line<span style="color:#e6db74">&#34;</span> | awk <span style="color:#e6db74">&#39;{print $1}&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    NAME<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span>$line<span style="color:#e6db74">&#34;</span> | awk <span style="color:#e6db74">&#39;{print $3}&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    INFLUXDB_BUCKET_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$INFLUXDB_BUCKET_NAME_PREFIX$NAME<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create telegraf bucket</span>
+</span></span><span style="display:flex;"><span>    curl -X POST <span style="color:#e6db74">&#34;</span>$INFLUXDB_URL<span style="color:#e6db74">/api/v2/buckets&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>         -H <span style="color:#e6db74">&#34;Authorization: Token </span>$INFLUXDB_API_TOKEN<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>         -H <span style="color:#e6db74">&#34;Content-type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>         -d <span style="color:#e6db74">&#34;{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">               \&#34;name\&#34;: \&#34;</span>$INFLUXDB_BUCKET_NAME<span style="color:#e6db74">\&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">               \&#34;orgID\&#34;: \&#34;</span>$INFLUXDB_ORG_ID<span style="color:#e6db74">\&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">               \&#34;retentionRules\&#34;: [{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                   \&#34;type\&#34;: \&#34;expire\&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                   \&#34;everySeconds\&#34;: 604800
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">               }]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">             }&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Updating container: </span>$ID<span style="color:#e6db74"> </span>$NAME<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    pct exec $ID -- bash -c <span style="color:#e6db74">&#34;apt update &amp;&amp; apt-get update &amp;&amp; apt install git -y&#34;</span>
+</span></span><span style="display:flex;"><span>    pct exec $ID -- bash -c <span style="color:#e6db74">&#34;git clone https://github.com/TheRealMarcusChiu/proxmox-scripts.git&#34;</span>
+</span></span><span style="display:flex;"><span>    pct exec $ID -- bash -c <span style="color:#e6db74">&#34;cd /root/proxmox-scripts &amp;&amp; git pull&#34;</span>
+</span></span><span style="display:flex;"><span>    pct exec $ID -- bash -c <span style="color:#e6db74">&#34;export INFLUXDB_URL=\&#34;</span>$INFLUXDB_URL<span style="color:#e6db74">\&#34; &amp;&amp; export INFLUXDB_API_TOKEN=\&#34;</span>$INFLUXDB_API_TOKEN<span style="color:#e6db74">\&#34; &amp;&amp; export INFLUXDB_ORG_NAME=\&#34;</span>$INFLUXDB_ORG_NAME<span style="color:#e6db74">\&#34; &amp;&amp; export INFLUXDB_BUCKET_NAME=\&#34;</span>$INFLUXDB_BUCKET_NAME<span style="color:#e6db74">\&#34; &amp;&amp; cd /root/proxmox-scripts/telegraf &amp;&amp; /root/proxmox-scripts/telegraf/setup.sh &gt; /root/proxmox-scripts/telegraf/log.txt&#34;</span>
+</span></span><span style="display:flex;"><span>    pct exec $ID -- bash -c <span style="color:#e6db74">&#34;systemctl show -p SubState,ActiveState,Result telegraf &gt; /root/proxmox-scripts/telegraf/output.txt&#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Finished updating container: </span>$ID<span style="color:#e6db74"> </span>$NAME<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><p>Make it executable, then execute it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod +x proxmox-server-setup-lxcs.sh
+</span></span><span style="display:flex;"><span>./proxmox-server-setup-lxcs.sh
+</span></span></code></pre></div><h3 id="auto-grafana">Auto Grafana</h3>
+<p>To auto create alert rules on Grafana, create the following Python file <code>create-grafana-alert-group.py</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>header <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;apiVersion: 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">groups:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  - orgId: 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    name: evaluation-group-disk-almost-full
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    folder: Disk Almost Full
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    interval: 1m
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    rules:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>alert_rule_template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;      - uid: ALERT_UID_HERE
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        title: BUCKET_NAME_HERE
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        condition: C
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        data:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          - refId: A
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            relativeTimeRange:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              from: 60
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              to: 0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            datasourceUid: deu40om3f7xfkc
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            model:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              intervalMs: 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              maxDataPoints: 43200
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              query: |-
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                from(bucket: &#34;BUCKET_NAME_HERE&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  |&gt; range(start: v.timeRangeStart, stop: v.timeRangeStop)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  |&gt; filter(fn: (r) =&gt; r[&#34;_measurement&#34;] == &#34;disk&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  |&gt; filter(fn: (r) =&gt; r[&#34;_field&#34;] == &#34;used_percent&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  |&gt; aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  |&gt; yield(name: &#34;last&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              refId: A
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          - refId: B
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            datasourceUid: __expr__
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            model:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              conditions:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                - evaluator:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    params: []
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    type: gt
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  operator:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    type: and
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  query:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    params:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                      - B
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  reducer:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    params: []
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    type: last
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  type: query
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              datasource:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                type: __expr__
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                uid: __expr__
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              expression: A
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              intervalMs: 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              maxDataPoints: 43200
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              reducer: last
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              refId: B
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              type: reduce
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          - refId: C
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            datasourceUid: __expr__
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            model:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              conditions:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                - evaluator:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    params:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                      - 90
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    type: gt
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  operator:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    type: and
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  query:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    params:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                      - C
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  reducer:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    params: []
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    type: last
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  type: query
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              datasource:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                type: __expr__
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                uid: __expr__
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              expression: B
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              intervalMs: 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              maxDataPoints: 43200
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              refId: C
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              type: threshold
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        noDataState: NoData
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        execErrState: Error
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        annotations:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          description: optional description
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          summary: optional summary
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        isPaused: false
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        notification_settings:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          receiver: Discord
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bucket_names <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;telegraf-lxc-13ft&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;telegraf-lxc-adguard&#34;</span>    
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;disk-almost-full.yaml&#34;</span>, <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    file<span style="color:#f92672">.</span>write(header)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> bucket_name <span style="color:#f92672">in</span> bucket_names:
+</span></span><span style="display:flex;"><span>        hashed <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha256(bucket_name<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>hexdigest()
+</span></span><span style="display:flex;"><span>        short_hash <span style="color:#f92672">=</span> hashed[:<span style="color:#ae81ff">14</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        new_text <span style="color:#f92672">=</span> alert_rule_template<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;ALERT_UID_HERE&#34;</span>, short_hash, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        new_text <span style="color:#f92672">=</span> new_text<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;BUCKET_NAME_HERE&#34;</span>, bucket_name, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        file<span style="color:#f92672">.</span>write(new_text)
+</span></span></code></pre></div><p>In this file, modify <code>bucket_names</code> accordingly.</p>
+<p>Run this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python create-grafana-alert-group.py
+</span></span></code></pre></div><p>This should output a file <code>disk-almost-full.yaml</code>.</p>
+<p>Now in the Grafana server, put this file under <code>/etc/grafana/provisioning/alerting/disk-almost-full.yaml</code>.</p>
+<p>Then restart the grafana server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl restart grafana-server
+</span></span></code></pre></div><p>This will auto provision the alert rules accordingly. Verify on Grafana console UI.</p>
+<h3 id="optional-delete-the-alert-rules">Optional Delete the Alert Rules</h3>
+<p>Create a python file <code>create-grafana-alert-group-deletion.py</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>header <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;apiVersion: 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deleteRules:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>alert_rule_template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;  - orgId: 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    uid: ALERT_UID_HERE
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bucket_names <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;telegraf-lxc-13ft&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;telegraf-lxc-adguard&#34;</span>
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;disk-almost-full-deletion.yaml&#34;</span>, <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    file<span style="color:#f92672">.</span>write(header)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> bucket_name <span style="color:#f92672">in</span> bucket_names:
+</span></span><span style="display:flex;"><span>        hashed <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha256(bucket_name<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>hexdigest()
+</span></span><span style="display:flex;"><span>        short_hash <span style="color:#f92672">=</span> hashed[:<span style="color:#ae81ff">14</span>]
+</span></span><span style="display:flex;"><span>        new_text <span style="color:#f92672">=</span> alert_rule_template<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;ALERT_UID_HERE&#34;</span>, short_hash, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        file<span style="color:#f92672">.</span>write(new_text)
+</span></span></code></pre></div><p>In this file, modify <code>bucket_names</code> accordingly.</p>
+<p>Run this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python create-grafana-alert-group-deletion.py
+</span></span></code></pre></div><p>This should output a file <code>disk-almost-full-deletion.yaml</code>.</p>
+<p>Now in the Grafana server, put this file under <code>/etc/grafana/provisioning/alerting/disk-almost-full-deletion.yaml</code>
+while removing the other one.</p>
+<p>Then restart the grafana server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl restart grafana-server
+</span></span></code></pre></div><p>This will delete all the auto provisioned alert rules. Verify on Grafana console UI.</p>
+
+    </article>
+  </div>
+  
+<div class="row page-prev-next">
+    <div class="col-md">
+        
+            <a href="/tinkering/2025-08-15/">
+                <span>← </span>
+                <span class="title">The Law of First Mention</span>
+            </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+    </div>
+</div>
+
+  <div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://marcuschiu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </main>
+  </div>
+</body>
+</html>
