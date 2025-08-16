@@ -179,8 +179,15 @@ Something like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>holy Genesis 2:3
 </span></span><span style="display:flex;"><span>homage 1 Samuel 24:8
 </span></span><span style="display:flex;"><span>home Gensis 30:25
-</span></span></code></pre></div><p>I chose Python to implement this.</p>
-<p>Once implemented, needed to build a simple website to query this output.
+</span></span></code></pre></div><p>I chose Python to implement this. Implementing this was quite easy, first we need a key-value map data structure
+i.e. a dictionary in Python to store a word as its key and the first mention location as its value.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>word_first_occurrence <span style="color:#f92672">=</span> {}  <span style="color:#75715e"># word -&gt; &#34;BOOK CHAPTER:VERSE&#34;</span>
+</span></span></code></pre></div><p>Next, we will loop through each of the verses from the beginning of the Bible to the end.
+And for each verse, we will tokenize it into individual words.
+Then for each word, check if it exists in the dictionary.
+If the word exists, do nothing. Otherwise, add it to the dictionary as a key with the location as its value.</p>
+<p>That&rsquo;s pretty much it.</p>
+<p>Next, we need to build a simple website.
 I&rsquo;ve opted to use ChatGPT 5 to help me prettify this website.</p>
 <p><img src="assets/2.jpeg" alt="chatgpt-prompt"></p>
 <p>Did some minor touch-ups and made it public!</p>
