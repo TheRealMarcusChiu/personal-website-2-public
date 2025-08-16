@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Aug 2025 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 16 Aug 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Alert Me on Disk Full  (Telegraf &#43; InfluxDB &#43; Grafana)</title>
+      <link>http://www.marcu/tinkering/2025-08-16/</link>
+      <pubDate>Sat, 16 Aug 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-08-16/</guid>
+      <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I have about 40 linux containers running,&#xA;and I want to be notified when any of my containers are close to maxing out its disk space.&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve decided to use the (Telegraf + Influx + Grafana) stack again.&#xA;Previously, I&amp;rsquo;ve used it for &lt;a href=&#34;http://www.marcu/tinkering/2025-08-13/&#34;&gt;alerting me on high temperatures&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;So here goes configuring another 40 plus linux containers&amp;hellip;&lt;/p&gt;&#xA;&lt;p&gt;Look how beautiful my alerts are :)&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;toc&#34;&gt;ToC&lt;/h1&gt;&#xA;&lt;p&gt;This article assumes you have already set up and are familiar with InfluxDB and Grafana.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Love Suicide</title>
       <link>http://www.marcu/music/2025-08-15/</link>
@@ -21,6 +28,13 @@
       <pubDate>Fri, 15 Aug 2025 00:00:00 -0500</pubDate>
       <guid>http://www.marcu/tinkering/2025-08-15/</guid>
       <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I was going through a word study on &lt;code&gt;holy&lt;/code&gt; in the Bible.&#xA;And sometimes knowing the first occurrence of that word helps.&lt;/p&gt;&#xA;&lt;p&gt;Why not create an app for that?&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;And so I did.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://first-mention.marcuschiu.com&#34;&gt;first-mention.marcuschiu.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://first-mention.marcuschiu.com&#34;&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;how-it-was-built&#34;&gt;How it was Built&lt;/h1&gt;&#xA;&lt;p&gt;First, I needed to download the Bible. There are many versions out there, so I&amp;rsquo;ll start with ESV.&#xA;But I can&amp;rsquo;t just download any ESV, I needed one that delimits the book, chapter, and verses.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Thoughts on Bread (short)</title>
+      <link>http://www.marcu/thoughts/2025-08-15/</link>
+      <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://www.marcu/thoughts/2025-08-15/</guid>
+      <description>summary</description>
     </item>
     <item>
       <title>Elijah Who - Hello</title>
@@ -70,6 +84,13 @@
       <pubDate>Wed, 30 Jul 2025 00:00:00 -0500</pubDate>
       <guid>http://www.marcu/tinkering/2025-07-30/</guid>
       <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I wanted to go over the entire Spring Boot material for version 3.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve done this before for Spring Boot version 2, but I haven&amp;rsquo;t done it for version 3.&#xA;So I&amp;rsquo;ve gone back to the site &lt;a href=&#34;https://www.baeldung.com&#34;&gt;www.baeldung.com&lt;/a&gt; but noticed some articles are out of date?&#xA;Also, some had clear mistakes that took me a good minute to figure out&amp;hellip;&#xA;Their site is filled with noisy ads and their code is behind a paywall.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Christian Ramblings #1</title>
+      <link>http://www.marcu/thoughts/2025-07-30/</link>
+      <pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://www.marcu/thoughts/2025-07-30/</guid>
+      <description>summary</description>
     </item>
     <item>
       <title>Network File System (NFS)</title>

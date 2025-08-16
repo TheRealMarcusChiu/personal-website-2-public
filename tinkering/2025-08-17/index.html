@@ -29,12 +29,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta property="og:url" content="http://localhost:1313/tinkering/2025-08-17/">
   <meta property="og:site_name" content="Marcus Chiu">
   <meta property="og:title" content="Promox Gitea - Change HTTP Port to 80">
-  <meta property="og:description" content="This is guna be a short one.
-Problem The current Proxmox Helper Script for gitea LXC makes it run only in port 3000. Changing it to port 80 is not so simple… until now.
+  <meta property="og:description" content="This-ah short one.
+Problem The current Proxmox Helper Script for gitea LXC runs on port 3000. Changing it to port 80 is not so simple… until now.
 Solution First run Proxmox helper script for Gitea as usual:
 bash -c &#34;$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/gitea.sh)&#34; Once completed, access the shell of the newly created LXC container.
 vim /etc/gitea/app.ini Add the following contents to /etc/gitea/app.ini:
-[server] HTTP_PORT = 80 ROOT_URL = http://gitea.lan/ Next, execute the following command (which will allow /usr/local/bin/gitea access to use port 80):">
+[server] HTTP_PORT = 80 ROOT_URL = http://gitea.lan/ Next, execute the following command (which will allow /usr/local/bin/gitea to access port 80):">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="tinkering">
@@ -144,10 +144,10 @@ vim /etc/gitea/app.ini Add the following contents to /etc/gitea/app.ini:
 
 
     <article>
-      <p>This is guna be a short one.</p>
+      <p>This-ah short one.</p>
 <h1 id="problem">Problem</h1>
 <p>The current <a href="https://community-scripts.github.io/ProxmoxVE/scripts?id=gitea">Proxmox Helper Script for gitea LXC</a>
-makes it run only in port 3000. Changing it to port 80 is not so simple&hellip; until now.</p>
+runs on port 3000. Changing it to port 80 is not so simple&hellip; until now.</p>
 <h1 id="solution">Solution</h1>
 <p>First run Proxmox helper script for Gitea as usual:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bash -c <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/gitea.sh<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
@@ -157,13 +157,13 @@ makes it run only in port 3000. Changing it to port 80 is not so simple&hellip; 
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#66d9ef">[server]</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">HTTP_PORT</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">80</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">ROOT_URL</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">http://gitea.lan/</span>
-</span></span></code></pre></div><p>Next, execute the following command (which will allow <code>/usr/local/bin/gitea</code> access to use port 80):</p>
+</span></span></code></pre></div><p>Next, execute the following command (which will allow <code>/usr/local/bin/gitea</code> to access port 80):</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo setcap <span style="color:#e6db74">&#39;cap_net_bind_service=+ep&#39;</span> /usr/local/bin/gitea
 </span></span></code></pre></div><p>Restart Gitea server:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl restart gitea
 </span></span></code></pre></div><p>Then delete the file <code>/etc/gitea/app.ini</code> as it will collide with the Gitea Console UI setup process.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rm /etc/gitea/app.ini
-</span></span></code></pre></div><p>Go to the Gitea Console UI and follow the setup process.</p>
+</span></span></code></pre></div><p>Go to the Gitea Console UI and proceed as normal.</p>
 
     </article>
   </div>
@@ -173,7 +173,7 @@ makes it run only in port 3000. Changing it to port 80 is not so simple&hellip; 
         
             <a href="/tinkering/2025-08-16/">
                 <span>← </span>
-                <span class="title">Alert Me on Disk Full</span>
+                <span class="title">Alert Me on Disk Full  (Telegraf &#43; InfluxDB &#43; Grafana)</span>
             </a>
         
     </div>
