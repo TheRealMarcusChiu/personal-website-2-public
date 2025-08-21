@@ -6,13 +6,13 @@
     <description>Recent content in 🛠Tinkering on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Aug 2025 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 21 Aug 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/tinkering/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Shazam Theory #1 - FT DTFT DFT FFT STFT</title>
-      <link>http://www.marcu/tinkering/2025-08-19/</link>
-      <pubDate>Tue, 19 Aug 2025 00:00:00 -0500</pubDate>
-      <guid>http://www.marcu/tinkering/2025-08-19/</guid>
+      <link>http://www.marcu/tinkering/2025-08-21/</link>
+      <pubDate>Thu, 21 Aug 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-08-21/</guid>
       <description>&lt;p&gt;In this article, we will take a look at some of the most common signal-processing terms.&lt;/p&gt;&#xA;&lt;h1 id=&#34;fourier-transform-ft&#34;&gt;Fourier Transform (FT)&lt;/h1&gt;&#xA;&lt;p&gt;The &lt;strong&gt;Fourier Transform (FT)&lt;/strong&gt; takes a continuous time signal as input and outputs a&#xA;continuous frequency spectrum.&lt;/p&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s go through some examples:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Example #1&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;top-left is a 3Hz sine wave&lt;/li&gt;&#xA;&lt;li&gt;bottom-left is the FT of a 3Hz sine wave&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Example #2&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;top-middle is a 5Hz sine wave&lt;/li&gt;&#xA;&lt;li&gt;bottom-middle is the FT of a 5Hz sine wave&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Example #3&lt;/p&gt;</description>
     </item>
     <item>
