@@ -16,13 +16,6 @@
       <description>&lt;p&gt;In this article, we will take a look at some of the most common signal-processing terms.&lt;/p&gt;&#xA;&lt;h1 id=&#34;fourier-transform-ft&#34;&gt;Fourier Transform (FT)&lt;/h1&gt;&#xA;&lt;p&gt;The &lt;strong&gt;Fourier Transform (FT)&lt;/strong&gt; takes a continuous time signal as input and outputs a&#xA;continuous frequency spectrum.&lt;/p&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s go through some examples:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Example #1&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;top-left is a 3Hz sine wave&lt;/li&gt;&#xA;&lt;li&gt;bottom-left is the FT of a 3Hz sine wave&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Example #2&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;top-middle is a 5Hz sine wave&lt;/li&gt;&#xA;&lt;li&gt;bottom-middle is the FT of a 5Hz sine wave&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Example #3&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Thoughts on Bread (extended)</title>
-      <link>http://www.marcu/thoughts/2025-08-21/</link>
-      <pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://www.marcu/thoughts/2025-08-21/</guid>
-      <description>summary</description>
-    </item>
-    <item>
       <title>I&#39;ve Recreated Shazaam</title>
       <link>http://www.marcu/tinkering/2025-08-18/</link>
       <pubDate>Mon, 18 Aug 2025 00:00:00 -0500</pubDate>
@@ -56,13 +49,6 @@
       <pubDate>Fri, 15 Aug 2025 00:00:00 -0500</pubDate>
       <guid>http://www.marcu/tinkering/2025-08-15/</guid>
       <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I was going through a word study on &lt;code&gt;holy&lt;/code&gt; in the Bible.&#xA;And sometimes knowing the first occurrence of that word helps.&lt;/p&gt;&#xA;&lt;p&gt;Why not create an app for that?&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;And so I did.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://first-mention.marcuschiu.com&#34;&gt;first-mention.marcuschiu.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://first-mention.marcuschiu.com&#34;&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;how-it-was-built&#34;&gt;How it was Built&lt;/h1&gt;&#xA;&lt;p&gt;First, I needed to download the Bible. There are many versions out there, so I&amp;rsquo;ll start with ESV.&#xA;But I can&amp;rsquo;t just download any ESV, I needed one that delimits the book, chapter, and verses.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Thoughts on Bread (short)</title>
-      <link>http://www.marcu/thoughts/2025-08-15/</link>
-      <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://www.marcu/thoughts/2025-08-15/</guid>
-      <description>summary</description>
     </item>
     <item>
       <title>Elijah Who - Hello</title>
