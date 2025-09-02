@@ -23,23 +23,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Shazam Theory #1 - FT DTFT DFT FFT STFT | Marcus Chiu</title>
+  <title>Vizualizing Neural Networks | Marcus Chiu</title>
 
   
-  <meta property="og:url" content="http://www.marcu/tinkering/2025-08-21/">
+  <meta property="og:url" content="http://www.marcu/tinkering/2025-09-01/">
   <meta property="og:site_name" content="Marcus Chiu">
-  <meta property="og:title" content="Shazam Theory #1 - FT DTFT DFT FFT STFT">
-  <meta property="og:description" content="In this article, we will take a look at some of the most common signal-processing terms.
-Fourier Transform (FT) The Fourier Transform (FT) takes a continuous time signal as input and outputs a continuous frequency spectrum.
-Let’s go through some examples:
-Example #1
-top-left is a 3Hz sine wave bottom-left is the FT of a 3Hz sine wave Example #2
-top-middle is a 5Hz sine wave bottom-middle is the FT of a 5Hz sine wave Example #3">
+  <meta property="og:title" content="Vizualizing Neural Networks">
+  <meta property="og:description" content="Problem I’ve always wanted to create an interactive tool to visualize what’s happening within a neural network.
+Solution And so I did:
+visualizing-neural-networks.marcuschiu.com">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="tinkering">
-    <meta property="article:published_time" content="2025-08-21T00:00:00-05:00">
-    <meta property="article:modified_time" content="2025-08-21T00:00:00-05:00">
+    <meta property="article:published_time" content="2025-09-01T00:00:00-05:00">
+    <meta property="article:modified_time" content="2025-09-01T00:00:00-05:00">
 
 
 
@@ -121,14 +118,14 @@ top-middle is a 5Hz sine wave bottom-middle is the FT of a 5Hz sine wave Example
       
   <div class="post">
     <header class="mb-4">
-      <h1 class="text-uppercase">Shazam Theory #1 - FT DTFT DFT FFT STFT</h1>
+      <h1 class="text-uppercase">Vizualizing Neural Networks</h1>
       <div aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent">
 
           
           
           <li class="breadcrumb-item tiny">
-            <time datetime="2025-08-21T00:00:00-05:00">August 21, 2025</time>
+            <time datetime="2025-09-01T00:00:00-05:00">September 1, 2025</time>
           </li>
 
           
@@ -136,7 +133,7 @@ top-middle is a 5Hz sine wave bottom-middle is the FT of a 5Hz sine wave Example
           
 
           <li class="breadcrumb-item tiny">
-            3 minutes
+            1 minutes
           </li>
 
         </ol>
@@ -149,109 +146,14 @@ top-middle is a 5Hz sine wave bottom-middle is the FT of a 5Hz sine wave Example
 
 
     <article>
-      <p>In this article, we will take a look at some of the most common signal-processing terms.</p>
-<h1 id="fourier-transform-ft">Fourier Transform (FT)</h1>
-<p>The <strong>Fourier Transform (FT)</strong> takes a continuous time signal as input and outputs a
-continuous frequency spectrum.</p>
-<p>Let&rsquo;s go through some examples:</p>
-<p><img src="assets/1.jpeg" alt="alt"></p>
-<p>Example #1</p>
+      <h1 id="problem">Problem</h1>
+<p>I&rsquo;ve always wanted to create an interactive tool to visualize what&rsquo;s happening within a neural network.</p>
+<h1 id="solution">Solution</h1>
+<p>And so I did:</p>
 <ul>
-<li>top-left is a 3Hz sine wave</li>
-<li>bottom-left is the FT of a 3Hz sine wave</li>
+<li><a href="https://visualizing-neural-networks.marcuschiu.com">visualizing-neural-networks.marcuschiu.com</a></li>
 </ul>
-<p>Example #2</p>
-<ul>
-<li>top-middle is a 5Hz sine wave</li>
-<li>bottom-middle is the FT of a 5Hz sine wave</li>
-</ul>
-<p>Example #3</p>
-<ul>
-<li>top-right is a combination of a 3Hz sine wave and a 5Hz sine wave</li>
-<li>bottom-right is its FT</li>
-</ul>
-<p>FT is especially helpful when noise is present. The examples below are the exact same
-as above but with noise added. As you can see, it is hard to interpret the signal in
-the time-domain, but it is easier to interpret the frequency-domain.</p>
-<p><img src="assets/2.jpeg" alt="alt"></p>
-<h1 id="ft-dtft-dft-vs-fft">FT, DTFT, DFT, vs FFT</h1>
-<p>From time-domain to frequency-domain:</p>
-<table>
-  <thead>
-      <tr>
-          <th></th>
-          <th></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Fourier Transform (FT)</strong></td>
-          <td>continuous time → continuous frequency</td>
-      </tr>
-      <tr>
-          <td><strong>Discrete-Time Fourier Transform (DTFT)</strong></td>
-          <td>discrete time → continuous frequency</td>
-      </tr>
-      <tr>
-          <td><strong>Discrete Fourier Transform (DFT)</strong></td>
-          <td>discrete time → discrete frequency</td>
-      </tr>
-  </tbody>
-</table>
-<p>While mathematically powerful, the FT &amp; DTFT is not directly computable on a computer because
-of its continuous nature and infinite summation. Thus, DFT is used to approximate the FT &amp; DTFT.</p>
-<p>Direct computation of DFT is $O(N^2)$. However, by exploiting the symmetries and redundancies of
-its calculation, it can be reduced down to $O(N*log N)$. There are many algorithms that do this,
-and all of them fall under the umbrella term <strong>Fast Fourier Transform (FFT)</strong>.</p>
-<p>Algorithms of FFT:</p>
-<ul>
-<li>Cooley-Tukey FFT - the most common one</li>
-<li>Prime Factor FFT</li>
-<li>Rader&rsquo;s FFT</li>
-</ul>
-<p>So when someone says, &ldquo;take the FT of X&rdquo; they usually mean &ldquo;take the FFT of X&rdquo;.</p>
-<h1 id="stft">STFT</h1>
-<p>Suppose we have a time signal of 3Hz sine wave playing for 2 seconds followed by a 2 second 5Hz sine wave.
-The FT of this signal will show spikes at 3Hz and 5Hz.</p>
-<p><img src="assets/3.jpeg" alt="alt"></p>
-<p>This is fine and dandy - but if we want to know which frequencies are being played over time, we cannot
-take the FT of the entire time-domain at once. We need to chop it up into short time frames.
-This is exactly the idea of <strong>Short-Time Fourier Transform (STFT)</strong> where we take multiple FTs on
-overlapping time frames.</p>
-<p>Let&rsquo;s see an example STFT.</p>
-
-
-
-
-
-
-
-    
-
-
-<img src="/tinkering/2025-08-21/assets/4_hu_214f933ef747812.jpeg" alt="Example image">
-<p></p>
-
-<p>In the example above, we compute 3 FTs of the original signal.</p>
-<ul>
-<li>the first FT is computed at time-step 1s with a frame-width of 2s</li>
-<li>the second FT is computed at time-step 2s with the same frame-width of 2s</li>
-<li>the third FT is computed at time-step 3s with the same frame-width of 2s</li>
-</ul>
-<p>Then we combine all the FTs into a single output diagram as shown above.
-The output of an STFT is called a spectrogram. Here we can know which
-frequencies are being played over time.</p>
-<p>Computing STFT introduces two new variables for you to configure with:</p>
-<ul>
-<li>time-step size</li>
-<li>frame-width size</li>
-</ul>
-<p>Usually time-step is half the size of frame-width, so you&rsquo;ll end up choosing 1.</p>
-<p>The tradeoffs of choosing larger or smaller values:</p>
-<ul>
-<li>larger values - means higher frequency resolution &amp; lower time resolution</li>
-<li>smaller values - means lower frequency resolution &amp; higher time resolution</li>
-</ul>
+<p><a href="https://visualizing-neural-networks.marcuschiu.com"><img src="assets/1.jpeg" alt="alt"></a></p>
 
     </article>
   </div>
@@ -259,18 +161,13 @@ frequencies are being played over time.</p>
 <div class="row page-prev-next">
     <div class="col-md">
         
-            <a href="/tinkering/2025-08-18/">
+            <a href="/tinkering/2025-08-21/">
                 <span>← </span>
-                <span class="title">I&#39;ve Recreated Shazaam</span>
+                <span class="title">Shazam Theory #1 - FT DTFT DFT FFT STFT</span>
             </a>
         
     </div>
     <div class="col-md text-md-end">
-        
-            <a href="/tinkering/2025-09-01/">
-                <span class="title">Vizualizing Neural Networks</span>
-                <span> →</span>
-            </a>
         
     </div>
 </div>

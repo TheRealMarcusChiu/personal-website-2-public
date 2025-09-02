@@ -6,8 +6,15 @@
     <description>Recent content in 🛠Tinkering on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 Aug 2025 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 01 Sep 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/tinkering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vizualizing Neural Networks</title>
+      <link>http://www.marcu/tinkering/2025-09-01/</link>
+      <pubDate>Mon, 01 Sep 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-09-01/</guid>
+      <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve always wanted to create an interactive tool to visualize what&amp;rsquo;s happening within a neural network.&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;And so I did:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://visualizing-neural-networks.marcuschiu.com&#34;&gt;visualizing-neural-networks.marcuschiu.com&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://visualizing-neural-networks.marcuschiu.com&#34;&gt;&lt;img src=&#34;assets/1.jpeg&#34; alt=&#34;alt&#34;&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Shazam Theory #1 - FT DTFT DFT FFT STFT</title>
       <link>http://www.marcu/tinkering/2025-08-21/</link>
