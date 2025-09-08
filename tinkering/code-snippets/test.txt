@@ -1,0 +1,33 @@
+BMP files
+Dr. Halo CUT files
+DDS files
+EXR files
+Raw Fax G3 files
+GIF files
+HDR files
+ICO files
+IFF files
+JBIG files
+JNG files
+JPEG/JIF files
+JPEG-2000 File Format
+JPEG-2000 codestream
+JPEG-XR files
+KOALA files
+Kodak PhotoCD files
+MNG files
+PCX files
+PBM/PGM/PPM files
+PFM files
+PNG files
+Macintosh PICT files
+Photoshop PSD files
+RAW camera files
+Sun RAS files
+SGI files
+TARGA files
+TIFF files
+WBMP files
+WebP files
+XBM files
+XPM files
