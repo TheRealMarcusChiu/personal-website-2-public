@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCN2D792VE"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GCN2D792VE');
+  </script>
+
+  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5G85VDQT');</script>
+  
+
+  <link href='/favicon.ico' rel='shortcut icon'>
+  <link href='/favicon.ico' rel='apple-touch-icon'>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Markov Chain Monte Carlo (MCMC) | Marcus Chiu</title>
+
+  
+  <meta property="og:url" content="http://localhost:1313/tinkering/2025-09-17/">
+  <meta property="og:site_name" content="Marcus Chiu">
+  <meta property="og:title" content="Markov Chain Monte Carlo (MCMC)">
+  <meta property="og:description" content="Metropolis-Hashtings Algorithm is a Markov Chain Monte Carlo (MCMC) method for obtaining a sequence of random samples which converge to being distributed according to a target probability distribution for which direct sampling is difficult.
+Introduction This article assumes the reader understands the following:
+Markov Chains &amp; the ergodic property Monte Carlo Methods Problem: approximate or sample from target distribution 𝜋 Solution: Markov Chain idea: given an ergodic transition matrix 𝑇 there exists a stationary distribution 𝜋 Metropolis Algorithm idea: given a target distribution 𝜋 construct an ergodic transition matrix 𝑇 that will produce 𝜋 the ergodic theorem states that sampling from this Markov chain 𝑇 will approximate the target distribution 𝜋 Metropolis Algorithm: given current state 𝑥, sample next state 𝑥’ from a proposal distribution 𝐐(𝑥 → 𝑥&#39;) accept next state 𝑥’ with acceptance probability 𝐀(𝑥 → 𝑥&#39;) if accepted, move to 𝑥&#39; otherwise stay at 𝑥 repeat 𝑛 number of times From the algorithm, the transition function 𝑇 is defined as:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="tinkering">
+    <meta property="article:published_time" content="2025-09-17T00:00:00-05:00">
+    <meta property="article:modified_time" content="2025-09-17T00:00:00-05:00">
+
+
+
+
+
+
+
+
+  
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:url' content='http://www.marcuschiu.com'>
+  <meta name='twitter:title' content='Marcus Chiu - FullStack Developer'>
+  <meta name='twitter:description' content="Marcus Chiu's Website">
+  <meta name='twitter:image' content='http://doc.marcuschiu.com/assets/images/me.png'>
+  <meta name='twitter:site' content='@TheMarcusChiu'>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/carousel.css">
+  
+      <script src="/js/main.js"></script>
+      <script src="/js/main.js"></script>
+
+<script>
+  window.MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+
+</head>
+<body class="text-light dark">
+  
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G85VDQT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  
+  <div class="container pt-5">
+    <header>
+      
+  <div class="row mt-5 pt-5">
+    <nav aria-label="breadcrumb" class="small">
+      <ol class="breadcrumb fw-bold bg-transparent" >
+    <li class="breadcrumb-item">
+      <a href="/">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a aria-current="true" class="ancestor" href="/tinkering/">Tinkering</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/music-and-arts/">Music &amp; Arts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/fitness/">Fitness</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/thoughts/">Thoughts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/travel/">Travel</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about/">About</a>
+    </li>
+      </ol>
+    </nav>
+  </div>
+
+    </header>
+    <main>
+      
+  <div class="post">
+    <header class="mb-4">
+      <h1 class="text-uppercase">Markov Chain Monte Carlo (MCMC)</h1>
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+
+          
+          
+          <li class="breadcrumb-item tiny">
+            <time datetime="2025-09-17T00:00:00-05:00">September 17, 2025</time>
+          </li>
+
+          
+          
+          
+
+          <li class="breadcrumb-item tiny">
+            3 minutes
+          </li>
+
+        </ol>
+      </div>
+    </header>
+
+
+
+
+
+
+    <article>
+      <p><strong>Metropolis-Hashtings Algorithm</strong> is a Markov Chain Monte Carlo (MCMC) method for obtaining a sequence
+of random samples which converge to being distributed according to a target probability distribution
+for which direct sampling is difficult.</p>
+<h1 id="introduction">Introduction</h1>
+<p>This article assumes the reader understands the following:</p>
+<ul>
+<li>Markov Chains &amp; the ergodic property</li>
+<li>Monte Carlo Methods</li>
+</ul>
+<h2 id="problem">Problem:</h2>
+<ul>
+<li>approximate or sample from target distribution 𝜋</li>
+</ul>
+<h2 id="solution">Solution:</h2>
+<ul>
+<li>Markov Chain idea: given an ergodic transition matrix 𝑇 there exists a stationary distribution 𝜋</li>
+<li>Metropolis Algorithm idea: given a target distribution 𝜋 construct an ergodic transition matrix 𝑇 that will produce 𝜋
+<ul>
+<li>the ergodic theorem states that sampling from this Markov chain 𝑇 will approximate the target distribution 𝜋</li>
+</ul>
+</li>
+</ul>
+<h2 id="metropolis-algorithm">Metropolis Algorithm:</h2>
+<ol>
+<li>given current state 𝑥, sample next state 𝑥&rsquo; from a proposal distribution 𝐐(𝑥 → 𝑥')</li>
+<li>accept next state 𝑥&rsquo; with acceptance probability 𝐀(𝑥 → 𝑥')
+<ul>
+<li>if accepted, move to 𝑥'</li>
+<li>otherwise stay at 𝑥</li>
+</ul>
+</li>
+<li>repeat 𝑛 number of times</li>
+</ol>
+<p>From the algorithm, the transition function 𝑇 is defined as:</p>
+<p>if 𝑥 ≠ 𝑥':</p>
+<ul>
+<li>$𝑇(𝑥 → 𝑥&rsquo;) = 𝐐(𝑥 → 𝑥&rsquo;)𝐀(𝑥 → 𝑥&rsquo;)$</li>
+</ul>
+<p>if 𝑥 = 𝑥':</p>
+<ul>
+<li>$𝑇(𝑥 → 𝑥) = 𝐐(𝑥 → 𝑥) + 𝛴_{𝑥≠𝑥&rsquo;} [𝐐(𝑥 → 𝑥&rsquo;)(1 - 𝐀(𝑥 → 𝑥&rsquo;))]$</li>
+</ul>
+<p>construct acceptance probability 𝐀 such that detailed balance holds for 𝑇
+(detailed balance implies stationary distribution, and thus the ergodic theorem above applies):</p>
+<ol>
+<li>$𝜋(𝑥&rsquo;)𝑇(𝑥&rsquo; → 𝑥) = 𝜋(𝑥)𝑇(𝑥 → 𝑥&rsquo;)$</li>
+<li>$𝜋(𝑥&rsquo;)𝐐(𝑥&rsquo; → 𝑥)𝐀(𝑥&rsquo; → 𝑥) = 𝜋(𝑥)𝐐(𝑥 → 𝑥&rsquo;)𝐀(𝑥 → 𝑥&rsquo;)$</li>
+<li>$\frac{𝐀(𝑥 → 𝑥&rsquo;)}{𝐀(𝑥&rsquo; → 𝑥)} = \frac{𝜋(𝑥&rsquo;)𝐐(𝑥&rsquo; → 𝑥)}{𝜋(𝑥)𝐐(𝑥 → 𝑥&rsquo;)}$</li>
+<li>$𝐀(𝑥 → 𝑥&rsquo;) = 𝑚𝑖𝑛(1, \frac{𝜋(𝑥&rsquo;)𝐐(𝑥&rsquo; → 𝑥)}{𝜋(𝑥)𝐐(𝑥 → 𝑥&rsquo;)})$</li>
+<li>$𝐀(𝑥 → 𝑥&rsquo;) = 𝑚𝑖𝑛(1, \frac{\frac{𝜋&rsquo;(𝑥&rsquo;)}{𝑍} 𝐐(𝑥&rsquo; → 𝑥)}{\frac{𝜋&rsquo;(𝑥)}{𝑍} 𝐐(𝑥 → 𝑥&rsquo;)})$</li>
+<li>$𝐀(𝑥 → 𝑥&rsquo;) = 𝑚𝑖𝑛(1, \frac{𝜋&rsquo;(𝑥&rsquo;) 𝐐(𝑥&rsquo; → 𝑥)}{𝜋&rsquo;(𝑥) 𝐐(𝑥 → 𝑥&rsquo;)})$</li>
+</ol>
+<p>1 by definition of detailed balanced</p>
+<p>5 because 𝜋(𝑥) is assumed to be hard to compute because of its normalizing constant 1/𝑍, we can rewrite it as $𝜋(𝑥) = \frac{𝜋&rsquo;(𝑥)}{𝑍}$</p>
+<p>6 the normalizing constants are cancelled out, rendering 𝐀(𝑥 → 𝑥&rsquo;) to be easy to compute</p>
+<h1 id="choice-of-proposal-distribution-𝐐">Choice of Proposal Distribution 𝐐</h1>
+<p>𝐐 must be reversible:</p>
+<ul>
+<li>𝐐(𝑥&rsquo; → 𝑥) &gt; 0 implies 𝐐(𝑥 → 𝑥&rsquo;) &gt; 0</li>
+</ul>
+<p>opposing forces:</p>
+<ul>
+<li>𝐐 should be spread out to improve mixing</li>
+<li>but then acceptance probability will be low, which in turn slows down mixing</li>
+</ul>
+<h2 id="random-walk-metropolis">Random Walk Metropolis</h2>
+<p>If 𝐐 is chosen to be symmetric (i.e. 𝐐(𝑥 → 𝑥&rsquo;) = 𝐐(𝑥&rsquo; → 𝑥) for all 𝑥&rsquo; and 𝑥), then the acceptance probability 𝐀 becomes:</p>
+<ul>
+<li>$𝐀(𝑥 → 𝑥&rsquo;) = 𝑚𝑖𝑛(1, \frac{𝜋(𝑥&rsquo;)𝐐(𝑥&rsquo;→ 𝑥)}{𝜋(𝑥)𝐐(𝑥 → 𝑥&rsquo;)})$</li>
+<li>$𝐀(𝑥 → 𝑥&rsquo;) = 𝑚𝑖𝑛(1, \frac{𝜋(𝑥&rsquo;)}{𝜋(𝑥)})$</li>
+</ul>
+<p>now:</p>
+<ul>
+<li>if 𝑥&rsquo; has density greater than or equal to 𝑥&rsquo;s density (i.e. 𝜋(𝑥&rsquo;) ≥ 𝜋(𝑥)) then we will always accept 𝑥'</li>
+<li>if 𝑥&rsquo; has density less than 𝑥&rsquo;s density (i.e. 𝜋(𝑥&rsquo;) &lt; 𝜋(𝑥)) then we will always accept 𝑥&rsquo; with probability $\frac{𝜋(𝑥&rsquo;)}{𝜋(𝑥)}$</li>
+</ul>
+<h2 id="independent-metropolis-hastings-proposal">Independent Metropolis-Hastings Proposal</h2>
+<p>If 𝐐 is chosen to be independent (i.e. 𝐐(𝑥 → 𝑥&rsquo;) = 𝐐(𝑥&rsquo;)), then the acceptance probability becomes:</p>
+<ul>
+<li>$𝐀(𝑥 → 𝑥&rsquo;) = 𝑚𝑖𝑛(1, \frac{𝜋(𝑥&rsquo;)𝐐(𝑥&rsquo;→ 𝑥)}{𝜋(𝑥)𝐐(𝑥 → 𝑥&rsquo;)})$</li>
+<li>$𝐀(𝑥 → 𝑥&rsquo;) = 𝑚𝑖𝑛(1, \frac{𝜋(𝑥&rsquo;)𝐐(𝑥)}{𝜋(𝑥)𝐐(𝑥&rsquo;)})$</li>
+</ul>
+<h1 id="resources">Resources</h1>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Jr1GdNI3Vfo">YouTube - Very Normal</a></li>
+<li><a href="https://www.youtube.com/watch?v=gxHe9wAWuGQ">YouTube - mathematicalmonk</a></li>
+<li><a href="https://www.youtube.com/watch?v=VGRVRjr0vyw">YouTube - Jarad Niemi</a></li>
+<li><a href="https://www.youtube.com/watch?v=oX2wIGSn4jY">YouTube - Kapil Sachdeva</a></li>
+<li><a href="https://www.coursera.org/lecture/probabilistic-graphical-models-2-inference/metropolis-hastings-algorithm-UPVWC">Coursera - Probabilistic Graphical Models 2</a></li>
+</ul>
+
+    </article>
+  </div>
+  
+<div class="row page-prev-next">
+    <div class="col-md">
+        
+            <a href="/tinkering/2025-09-01/">
+                <span>← </span>
+                <span class="title">Vizualizing Neural Networks (Interactive Tool)</span>
+            </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+    </div>
+</div>
+
+  <div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://marcuschiu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </main>
+  </div>
+</body>
+</html>
