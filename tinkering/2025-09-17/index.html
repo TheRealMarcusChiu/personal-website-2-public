@@ -31,7 +31,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta property="og:title" content="Markov Chain Monte Carlo (MCMC)">
   <meta property="og:description" content="Metropolis-Hashtings Algorithm is a Markov Chain Monte Carlo (MCMC) method for obtaining a sequence of random samples which converge to being distributed according to a target probability distribution for which direct sampling is difficult.
 Introduction This article assumes the reader understands the following:
-Markov Chains &amp; the ergodic property Monte Carlo Methods Problem: approximate or sample from target distribution 𝜋 Solution: Markov Chain idea: given an ergodic transition matrix 𝑇 there exists a stationary distribution 𝜋 Metropolis Algorithm idea: given a target distribution 𝜋 construct an ergodic transition matrix 𝑇 that will produce 𝜋 the ergodic theorem states that sampling from this Markov chain 𝑇 will approximate the target distribution 𝜋 Metropolis Algorithm: given current state 𝑥, sample next state 𝑥’ from a proposal distribution 𝐐(𝑥 → 𝑥&#39;) accept next state 𝑥’ with acceptance probability 𝐀(𝑥 → 𝑥&#39;) if accepted, move to 𝑥&#39; otherwise stay at 𝑥 repeat 𝑛 number of times From the algorithm, the transition function 𝑇 is defined as:">
+Markov Chains &amp; its properties: ergodic property stationary distribution detailed balanced Monte Carlo Methods Problem: approximate or sample from target distribution 𝜋 Solution: Markov Chain idea: given an ergodic transition matrix 𝑇 there exists a stationary distribution 𝜋 Metropolis Algorithm idea: given a target distribution 𝜋 construct an ergodic transition matrix 𝑇 that will produce 𝜋 the ergodic theorem states that sampling from this Markov chain 𝑇 will approximate the target distribution 𝜋 Metropolis Algorithm: given current state 𝑥, sample next state 𝑥’ from a proposal distribution 𝐐(𝑥 → 𝑥&#39;) accept next state 𝑥’ with acceptance probability 𝐀(𝑥 → 𝑥&#39;) if accepted, move to 𝑥&#39; otherwise stay at 𝑥 repeat 𝑛 number of times From the algorithm, the transition function 𝑇 is defined as:">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="tinkering">
@@ -149,7 +149,13 @@ for which direct sampling is difficult.</p>
 <h1 id="introduction">Introduction</h1>
 <p>This article assumes the reader understands the following:</p>
 <ul>
-<li>Markov Chains &amp; the ergodic property</li>
+<li>Markov Chains &amp; its properties:
+<ul>
+<li>ergodic property</li>
+<li>stationary distribution</li>
+<li>detailed balanced</li>
+</ul>
+</li>
 <li>Monte Carlo Methods</li>
 </ul>
 <h2 id="problem">Problem:</h2>
@@ -247,6 +253,11 @@ for which direct sampling is difficult.</p>
         
     </div>
     <div class="col-md text-md-end">
+        
+            <a href="/tinkering/2025-09-18/">
+                <span class="title">I&#39;ve 3D Scanned my Room (3D Gaussian Splatting)</span>
+                <span> →</span>
+            </a>
         
     </div>
 </div>
