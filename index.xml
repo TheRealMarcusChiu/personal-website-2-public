@@ -23,6 +23,13 @@
       <description>&lt;p&gt;&lt;strong&gt;Metropolis-Hashtings Algorithm&lt;/strong&gt; is a Markov Chain Monte Carlo (MCMC) method for obtaining a sequence&#xA;of random samples which converge to being distributed according to a target probability distribution&#xA;for which direct sampling is difficult.&lt;/p&gt;&#xA;&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;&#xA;&lt;p&gt;This article assumes the reader understands the following:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Markov Chains &amp;amp; its properties:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ergodic property&lt;/li&gt;&#xA;&lt;li&gt;stationary distribution&lt;/li&gt;&#xA;&lt;li&gt;detailed balanced&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Monte Carlo Methods&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;problem&#34;&gt;Problem:&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;approximate or sample from target distribution 𝜋&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;solution&#34;&gt;Solution:&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Markov Chain idea: given an ergodic transition matrix 𝑇 there exists a stationary distribution 𝜋&lt;/li&gt;&#xA;&lt;li&gt;Metropolis Algorithm idea: given a target distribution 𝜋 construct an ergodic transition matrix 𝑇 that will produce 𝜋&#xA;&lt;ul&gt;&#xA;&lt;li&gt;the ergodic theorem states that sampling from this Markov chain 𝑇 will approximate the target distribution 𝜋&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;metropolis-algorithm&#34;&gt;Metropolis Algorithm:&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;given current state 𝑥, sample next state 𝑥&amp;rsquo; from a proposal distribution 𝐐(𝑥 → 𝑥&#39;)&lt;/li&gt;&#xA;&lt;li&gt;accept next state 𝑥&amp;rsquo; with acceptance probability 𝐀(𝑥 → 𝑥&#39;)&#xA;&lt;ul&gt;&#xA;&lt;li&gt;if accepted, move to 𝑥&#39;&lt;/li&gt;&#xA;&lt;li&gt;otherwise stay at 𝑥&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;repeat 𝑛 number of times&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;From the algorithm, the transition function 𝑇 is defined as:&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Front Lever</title>
+      <link>http://www.marcu/fitness/2025-09-17/</link>
+      <pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://www.marcu/fitness/2025-09-17/</guid>
+      <description>&lt;p&gt;Just did a 10s hold front-lever&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>4yo Wisdom</title>
       <link>http://www.marcu/thoughts/2025-09-07/</link>
       <pubDate>Sun, 07 Sep 2025 00:00:00 +0000</pubDate>
