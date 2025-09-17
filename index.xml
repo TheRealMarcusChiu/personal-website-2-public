@@ -6,8 +6,22 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Sep 2025 00:00:00 -0500</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Guitar #1</title>
+      <link>http://www.marcu/music-and-arts/2025-09-17/</link>
+      <pubDate>Wed, 17 Sep 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/music-and-arts/2025-09-17/</guid>
+      <description>&lt;p&gt;ignore mistakes at time 18s and elsewhere&lt;/p&gt;&#xA;&lt;video controls preload=&#34;auto&#34; width=&#34;100%&#34;  playsinline class=&#34;html-video&#34;&gt;&#xA;    &lt;source src=&#34;http://www.marcu/music-and-arts/2025-09-17/assets/guitar.mp4&#34; type=&#34;video/mp4&#34;&gt;&#xA;  &lt;span&gt;&lt;/span&gt;&#xA;&lt;/video&gt;</description>
+    </item>
+    <item>
+      <title>Markov Chain Monte Carlo (MCMC)</title>
+      <link>http://www.marcu/tinkering/2025-09-17/</link>
+      <pubDate>Wed, 17 Sep 2025 00:00:00 -0500</pubDate>
+      <guid>http://www.marcu/tinkering/2025-09-17/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Metropolis-Hashtings Algorithm&lt;/strong&gt; is a Markov Chain Monte Carlo (MCMC) method for obtaining a sequence&#xA;of random samples which converge to being distributed according to a target probability distribution&#xA;for which direct sampling is difficult.&lt;/p&gt;&#xA;&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;&#xA;&lt;p&gt;This article assumes the reader understands the following:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Markov Chains &amp;amp; its properties:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ergodic property&lt;/li&gt;&#xA;&lt;li&gt;stationary distribution&lt;/li&gt;&#xA;&lt;li&gt;detailed balanced&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Monte Carlo Methods&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;problem&#34;&gt;Problem:&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;approximate or sample from target distribution 𝜋&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;solution&#34;&gt;Solution:&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Markov Chain idea: given an ergodic transition matrix 𝑇 there exists a stationary distribution 𝜋&lt;/li&gt;&#xA;&lt;li&gt;Metropolis Algorithm idea: given a target distribution 𝜋 construct an ergodic transition matrix 𝑇 that will produce 𝜋&#xA;&lt;ul&gt;&#xA;&lt;li&gt;the ergodic theorem states that sampling from this Markov chain 𝑇 will approximate the target distribution 𝜋&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;metropolis-algorithm&#34;&gt;Metropolis Algorithm:&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;given current state 𝑥, sample next state 𝑥&amp;rsquo; from a proposal distribution 𝐐(𝑥 → 𝑥&#39;)&lt;/li&gt;&#xA;&lt;li&gt;accept next state 𝑥&amp;rsquo; with acceptance probability 𝐀(𝑥 → 𝑥&#39;)&#xA;&lt;ul&gt;&#xA;&lt;li&gt;if accepted, move to 𝑥&#39;&lt;/li&gt;&#xA;&lt;li&gt;otherwise stay at 𝑥&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;repeat 𝑛 number of times&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;From the algorithm, the transition function 𝑇 is defined as:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>4yo Wisdom</title>
       <link>http://www.marcu/thoughts/2025-09-07/</link>
