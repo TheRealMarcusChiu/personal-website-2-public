@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Sep 2025 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 17 Sep 2025 00:00:00 -0600</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>I&#39;ve 3D Scanned my Room (3D Gaussian Splatting)</title>
+      <link>http://www.marcu/tinkering/2025-09-18/</link>
+      <pubDate>Wed, 17 Sep 2025 00:00:00 -0600</pubDate>
+      <guid>http://www.marcu/tinkering/2025-09-18/</guid>
+      <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;Sometime ago - I&amp;rsquo;ve watched a &lt;a href=&#34;https://www.youtube.com/watch?v=gXug7Kb3p4I&#34;&gt;video&lt;/a&gt; on Hidden 3D Inside Google Maps,&#xA;where it displayed the interior of restaurants in 3D&lt;/p&gt;&#xA;&lt;p&gt;Quite naturally, my curious self wanted a dab at it.&lt;/p&gt;&#xA;&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;&#xA;&lt;p&gt;After a couple of days of head scratching,&#xA;I&amp;rsquo;ve created a 3D model of my room: &lt;a href=&#34;https://my-room.marcuschiu.com&#34;&gt;my-room.marcuschiu.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://my-room.marcuschiu.com&#34;&gt;&lt;img src=&#34;assets/my-room.png&#34; alt=&#34;My 3DGS Room&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;how-its-done&#34;&gt;How it&amp;rsquo;s Done&lt;/h1&gt;&#xA;&lt;p&gt;This article shows how to convert a bundle of 2D images into a 3D SOG file.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Guitar #1</title>
       <link>http://www.marcu/music-and-arts/2025-09-17/</link>
