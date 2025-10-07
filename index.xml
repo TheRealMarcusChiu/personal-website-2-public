@@ -142,7 +142,7 @@
       <description>&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;&#xA;&lt;p&gt;I wanted to go over the entire Spring Boot material for version 3.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve done this before for Spring Boot version 2, but I haven&amp;rsquo;t done it for version 3.&#xA;So I&amp;rsquo;ve gone back to the site &lt;a href=&#34;https://www.baeldung.com&#34;&gt;www.baeldung.com&lt;/a&gt; but noticed some articles are out of date?&#xA;Also, some had clear mistakes that took me a good minute to figure out&amp;hellip;&#xA;Their site is filled with noisy ads and their code is behind a paywall.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Christian Ramblings #1</title>
+      <title>Christian Ramblings #2</title>
       <link>http://www.marcu/thoughts/2025-07-30/</link>
       <pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://www.marcu/thoughts/2025-07-30/</guid>
@@ -275,7 +275,7 @@
       <description>&lt;p&gt;It&amp;rsquo;s been almost 7 years since I&amp;rsquo;ve created this website, and it&amp;rsquo;s time for an upgrade.&lt;/p&gt;&#xA;&lt;p&gt;This is what it used to look like: &lt;a href=&#34;http://2018.www.marcuschiu.com/&#34;&gt;http://2018.www.marcuschiu.com/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;It has nice bouncy animations, but I want more:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;I need a way to write about my journey for each project. Which I could with the old website, however it&amp;rsquo;s just not builtin to the website. It&amp;rsquo;s just pure HTML, CSS, and JavaScript.&lt;/li&gt;&#xA;&lt;li&gt;I also need a way to embed different domains of my life in a single place. Such as art, music, and the occasional rambles.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;For the past 6 months, I&amp;rsquo;ve used WordPress to store my rambles (i.e. &lt;a href=&#34;http://thoughts.marcuschiu.com&#34;&gt;thoughts.marcuschiu.com&lt;/a&gt;). I could use it as my main site and add a tab for &lt;em&gt;tinkerings&lt;/em&gt; and what not - buuuuuuuut NO. I want something else :)&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Christian Reflections</title>
+      <title>Christian Ramblings #1</title>
       <link>http://www.marcu/thoughts/2025-04-23/</link>
       <pubDate>Wed, 23 Apr 2025 17:36:22 -0500</pubDate>
       <guid>http://www.marcu/thoughts/2025-04-23/</guid>
@@ -293,13 +293,6 @@
       <link>http://www.marcu/thoughts/2025-03-01/</link>
       <pubDate>Sat, 01 Mar 2025 17:36:22 -0500</pubDate>
       <guid>http://www.marcu/thoughts/2025-03-01/</guid>
-      <description>summary</description>
-    </item>
-    <item>
-      <title>Wedding Banquet</title>
-      <link>http://www.marcu/thoughts/2025-02-22/</link>
-      <pubDate>Sat, 22 Feb 2025 17:36:22 -0500</pubDate>
-      <guid>http://www.marcu/thoughts/2025-02-22/</guid>
       <description>summary</description>
     </item>
     <item>
