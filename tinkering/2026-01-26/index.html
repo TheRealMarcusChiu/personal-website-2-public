@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCN2D792VE"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GCN2D792VE');
+  </script>
+
+  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5G85VDQT');</script>
+  
+
+  <link href='/favicon.ico' rel='shortcut icon'>
+  <link href='/favicon.ico' rel='apple-touch-icon'>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Simulating 100,000 Celestial Bodies | Marcus Chiu</title>
+
+  
+  <meta property="og:url" content="http://www.marcu/tinkering/2026-01-26/">
+  <meta property="og:site_name" content="Marcus Chiu">
+  <meta property="og:title" content="Simulating 100,000 Celestial Bodies">
+  <meta property="og:description" content="barnes-hut.marcuschiu.com
+Simulating gravitational interactions between many bodies can get very slow. If you calculate the force between every pair of bodies, the number of computations grows quadratically as you add more bodies. That’s where the Barnes-Hut algorithm comes in—a clever way to speed things up.
+The Big Idea Instead of looking at each body individually, the Barnes-Hut algorithm groups nearby bodies together. If a group is far enough away, you can approximate all its bodies as a single body located at the group’s center of mass.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="tinkering">
+    <meta property="article:published_time" content="2026-01-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-01-26T00:00:00+00:00">
+
+
+
+
+
+
+
+
+  
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:url' content='http://www.marcuschiu.com'>
+  <meta name='twitter:title' content='Marcus Chiu - FullStack Developer'>
+  <meta name='twitter:description' content="Marcus Chiu's Website">
+  <meta name='twitter:image' content='http://doc.marcuschiu.com/assets/images/me.png'>
+  <meta name='twitter:site' content='@TheMarcusChiu'>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  
+      <link rel="stylesheet" href="/css/main.min.76af129a40bd08c9c6011005f6ffea987af21ae44be29c23657109feb25a5115.css" integrity="sha256-dq8SmkC9CMnGARAF9v/qmHryGuRL4pwjZXEJ/rJaURU=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/carousel.min.547c0f91e09efcb470149124bf3fbe719e6eb173ce327ff87c6a3f9c0e0632fe.css" integrity="sha256-VHwPkeCe/LRwFJEkvz&#43;&#43;cZ5usXPOMn/4fGo/nA4GMv4=" crossorigin="anonymous">
+  
+        <script src="/js/main.6e6c6a5bd91a840db66a2739aeeb445da2883d410eb7daeac09254488ec502c7.js" integrity="sha256-bmxqW9kahA22aic5rutEXaKIPUEOt9rqwJJUSI7FAsc=" crossorigin="anonymous"></script>
+        <script src="/js/main.e53ff96c4fc49d490548db4ff73729267772caa1f7e0af027b12bcd81c45728f.js" integrity="sha256-5T/5bE/EnUkFSNtP9zcpJndyyqH34K8CexK82BxFco8=" crossorigin="anonymous"></script>
+
+<script>
+  window.MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+
+</head>
+<body class="text-light dark">
+  
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G85VDQT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  
+  <div class="container pt-5">
+    <header>
+      
+  <div class="row mt-5 pt-5">
+    <nav aria-label="breadcrumb" class="small">
+      <ol class="breadcrumb fw-bold bg-transparent" >
+    <li class="breadcrumb-item">
+      <a href="/">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a aria-current="true" class="ancestor" href="/tinkering/">Tinkering</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/music-and-arts/">Music &amp; Arts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/fitness/">Fitness</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/thoughts/">Thoughts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/travel/">Travel</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about/">About</a>
+    </li>
+      </ol>
+    </nav>
+  </div>
+
+    </header>
+    <main>
+      
+  <div class="post">
+    <header class="mb-4">
+      <h1 class="text-uppercase">Simulating 100,000 Celestial Bodies</h1>
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+
+          
+          
+          <li class="breadcrumb-item tiny">
+            <time datetime="2026-01-26T00:00:00&#43;00:00">January 26, 2026</time>
+          </li>
+
+          
+          
+          
+
+          <li class="breadcrumb-item tiny">
+            3 minutes
+          </li>
+
+        </ol>
+      </div>
+    </header>
+
+
+
+
+
+
+    <article>
+      <p><a href="https://barnes-hut.marcuschiu.com/">barnes-hut.marcuschiu.com</a></p>
+<p><a href="https://barnes-hut.marcuschiu.com"><img src="assets/simulator.png" alt="barnes-hut-simulator"></a></p>
+<p>Simulating gravitational interactions between many bodies can get very slow. If you calculate the force between every pair of bodies, the number of computations grows quadratically as you add more bodies. That’s where the Barnes-Hut algorithm comes in—a clever way to speed things up.</p>
+<h1 id="the-big-idea">The Big Idea</h1>
+<p>Instead of looking at each body individually, the Barnes-Hut algorithm groups nearby bodies together. If a group is far enough away, you can approximate all its bodies as a single body located at the group’s center of mass.</p>
+<p>The center of mass is like the average position of the bodies, weighted by their masses. For two bodies with positions <code>(x1, y1)</code> and <code>(x2, y2)</code> and masses <code>m1</code> and <code>m2</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mathematica" data-lang="mathematica"><span style="display:flex;"><span>Total mass <span style="color:#f92672">=</span> m1 <span style="color:#f92672">+</span> m2
+</span></span><span style="display:flex;"><span>Center of mass x <span style="color:#f92672">=</span> (x1<span style="color:#f92672">*</span>m1 <span style="color:#f92672">+</span> x2<span style="color:#f92672">*</span>m2) <span style="color:#f92672">/</span> Total mass
+</span></span><span style="display:flex;"><span>Center of mass y <span style="color:#f92672">=</span> (y1<span style="color:#f92672">*</span>m1 <span style="color:#f92672">+</span> y2<span style="color:#f92672">*</span>m2) <span style="color:#f92672">/</span> Total mass
+</span></span></code></pre></div><h1 id="organizing-space-with-a-quad-tree">Organizing Space with a Quad-Tree</h1>
+<p>The algorithm uses a <a href="https://en.wikipedia.org/wiki/Quadtree"><strong>quad-tree</strong></a>, a tree structure where each node has up to 4 children, representing quadrants of 2D space:</p>
+<ul>
+<li>The root node covers the entire space.</li>
+<li>Each child node represents one quadrant of its parent.</li>
+<li>Subdivide until each leaf node contains at most one body.</li>
+</ul>
+<p>Leaves represent single bodies, while internal nodes store the center of mass and total mass of all bodies beneath them.</p>
+<p>This lets you quickly find which groups of bodies are far enough to approximate as one.</p>
+<h1 id="how-to-build-the-tree">How to Build the Tree</h1>
+<p>To insert a new body into the tree:</p>
+<ol>
+<li><strong>Empty node:</strong> Place the body here.</li>
+<li><strong>Internal node:</strong> Update its center of mass and total mass, then insert recursively into the correct quadrant.</li>
+<li><strong>External node with a body:</strong> Subdivide the region into four quadrants, and insert both the existing and new bodies recursively.</li>
+</ol>
+<p>Repeat until all bodies are in the tree.</p>
+<h1 id="calculating-forces">Calculating Forces</h1>
+<p>To find the net force on a body:</p>
+<ol>
+<li>Start at the root.</li>
+<li>For each node:
+<ul>
+<li>If it’s a leaf node (a single body that’s not the target), compute the force directly.</li>
+<li>If it’s an internal node, calculate the ratio:
+<pre tabindex="0"><code>s / d
+</code></pre><ul>
+<li><code>s</code> = width of the node’s region</li>
+<li><code>d</code> = distance from the body to the node’s center of mass</li>
+</ul>
+</li>
+<li>If <code>s / d &lt; θ</code> (a threshold, often 0.5), treat the node as a single body and compute the force.</li>
+<li>Otherwise, recurse into the children of the node.</li>
+</ul>
+</li>
+</ol>
+<p>By grouping distant bodies, the algorithm avoids many pairwise calculations, making it much faster than brute force.</p>
+<h1 id="example-intuition">Example Intuition</h1>
+<p>Imagine calculating forces on body <code>A</code>:</p>
+<ol>
+<li>The root node represents all bodies. If it’s too close, recurse into its children.</li>
+<li>Some children are far enough that you can treat groups like <code>B+C+D</code> as a single body.</li>
+<li>Other nearby bodies, like <code>E</code> and <code>F</code>, are handled individually.</li>
+</ol>
+<p>This way, each body only calculates forces from important neighbors and distant approximations, drastically reducing computation.</p>
+<h1 id="why-it-works">Why It Works</h1>
+<p>The Barnes-Hut algorithm trades a little accuracy for a huge gain in speed. By adjusting the threshold <code>θ</code>, you can balance:</p>
+<ul>
+<li><strong>Smaller θ:</strong> more accurate but slower (closer to brute force).</li>
+<li><strong>Larger θ:</strong> faster but less accurate.</li>
+</ul>
+<p>For most simulations, <code>θ = 0.5</code> gives excellent results.</p>
+
+    </article>
+  </div>
+  
+<div class="row page-prev-next">
+    <div class="col-md">
+        
+            <a href="/tinkering/2025-12-03/">
+                <span>← </span>
+                <span class="title">How to Setup a Bitcoin Pruned Node Over TOR on Ubuntu</span>
+            </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+    </div>
+</div>
+
+  <div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://marcuschiu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </main>
+  </div>
+</body>
+</html>

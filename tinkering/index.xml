@@ -6,8 +6,15 @@
     <description>Recent content in 🛠Tinkering on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://www.marcu/tinkering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Simulating 100,000 Celestial Bodies</title>
+      <link>http://www.marcu/tinkering/2026-01-26/</link>
+      <pubDate>Mon, 26 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://www.marcu/tinkering/2026-01-26/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://barnes-hut.marcuschiu.com/&#34;&gt;barnes-hut.marcuschiu.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://barnes-hut.marcuschiu.com&#34;&gt;&lt;img src=&#34;assets/simulator.png&#34; alt=&#34;barnes-hut-simulator&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Simulating gravitational interactions between many bodies can get very slow. If you calculate the force between every pair of bodies, the number of computations grows quadratically as you add more bodies. That’s where the Barnes-Hut algorithm comes in—a clever way to speed things up.&lt;/p&gt;&#xA;&lt;h1 id=&#34;the-big-idea&#34;&gt;The Big Idea&lt;/h1&gt;&#xA;&lt;p&gt;Instead of looking at each body individually, the Barnes-Hut algorithm groups nearby bodies together. If a group is far enough away, you can approximate all its bodies as a single body located at the group’s center of mass.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>How to Setup a Bitcoin Pruned Node Over TOR on Ubuntu</title>
       <link>http://www.marcu/tinkering/2025-12-03/</link>
