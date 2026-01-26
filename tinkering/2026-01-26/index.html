@@ -176,9 +176,8 @@ The Big Idea Instead of looking at each body individually, the Barnes-Hut algori
 <li>For each node:
 <ul>
 <li>If it’s a leaf node (a single body that’s not the target), compute the force directly.</li>
-<li>If it’s an internal node, calculate the ratio:
-<pre tabindex="0"><code>s / d
-</code></pre><ul>
+<li>If it’s an internal node, calculate the ratio: <code>s / d</code>
+<ul>
 <li><code>s</code> = width of the node’s region</li>
 <li><code>d</code> = distance from the body to the node’s center of mass</li>
 </ul>
