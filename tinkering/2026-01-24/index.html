@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCN2D792VE"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GCN2D792VE');
+  </script>
+
+  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5G85VDQT');</script>
+  
+
+  <link href='/favicon.ico' rel='shortcut icon'>
+  <link href='/favicon.ico' rel='apple-touch-icon'>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Coding AI Coding Agent | Marcus Chiu</title>
+
+  
+  <meta property="og:url" content="http://www.marcu/tinkering/2026-01-24/">
+  <meta property="og:site_name" content="Marcus Chiu">
+  <meta property="og:title" content="Coding AI Coding Agent">
+  <meta property="og:description" content="AI/LLM is not just for answering questions or generating text - it can also be a powerful coding assistant, capable of reading files, running commands, editing code, and even searching codebases. In this post, we explore the evolution of a coding AI agent using the Anthropic Claude API, showing six stages of building a progressively smarter coding assistant.
+1. Basic Conversational Agent We start with a simple conversational AI that interacts with the user using Claude.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="tinkering">
+    <meta property="article:published_time" content="2026-01-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-01-24T00:00:00+00:00">
+
+
+
+
+
+
+
+
+  
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:url' content='http://www.marcuschiu.com'>
+  <meta name='twitter:title' content='Marcus Chiu - FullStack Developer'>
+  <meta name='twitter:description' content="Marcus Chiu's Website">
+  <meta name='twitter:image' content='http://doc.marcuschiu.com/assets/images/me.png'>
+  <meta name='twitter:site' content='@TheMarcusChiu'>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  
+      <link rel="stylesheet" href="/css/main.min.76af129a40bd08c9c6011005f6ffea987af21ae44be29c23657109feb25a5115.css" integrity="sha256-dq8SmkC9CMnGARAF9v/qmHryGuRL4pwjZXEJ/rJaURU=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/carousel.min.547c0f91e09efcb470149124bf3fbe719e6eb173ce327ff87c6a3f9c0e0632fe.css" integrity="sha256-VHwPkeCe/LRwFJEkvz&#43;&#43;cZ5usXPOMn/4fGo/nA4GMv4=" crossorigin="anonymous">
+  
+        <script src="/js/main.6e6c6a5bd91a840db66a2739aeeb445da2883d410eb7daeac09254488ec502c7.js" integrity="sha256-bmxqW9kahA22aic5rutEXaKIPUEOt9rqwJJUSI7FAsc=" crossorigin="anonymous"></script>
+        <script src="/js/main.e53ff96c4fc49d490548db4ff73729267772caa1f7e0af027b12bcd81c45728f.js" integrity="sha256-5T/5bE/EnUkFSNtP9zcpJndyyqH34K8CexK82BxFco8=" crossorigin="anonymous"></script>
+
+<script>
+  window.MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+
+</head>
+<body class="text-light dark">
+  
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G85VDQT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  
+  <div class="container pt-5">
+    <header>
+      
+  <div class="row mt-5 pt-5">
+    <nav aria-label="breadcrumb" class="small">
+      <ol class="breadcrumb fw-bold bg-transparent" >
+    <li class="breadcrumb-item">
+      <a href="/">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a aria-current="true" class="ancestor" href="/tinkering/">Tinkering</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/music-and-arts/">Music &amp; Arts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/fitness/">Fitness</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/thoughts/">Thoughts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/travel/">Travel</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about/">About</a>
+    </li>
+      </ol>
+    </nav>
+  </div>
+
+    </header>
+    <main>
+      
+  <div class="post">
+    <header class="mb-4">
+      <h1 class="text-uppercase">Coding AI Coding Agent</h1>
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+
+          
+          
+          <li class="breadcrumb-item tiny">
+            <time datetime="2026-01-24T00:00:00&#43;00:00">January 24, 2026</time>
+          </li>
+
+          
+          
+          
+
+          <li class="breadcrumb-item tiny">
+            5 minutes
+          </li>
+
+        </ol>
+      </div>
+    </header>
+
+
+
+
+
+
+    <article>
+      <p>AI/LLM is not just for answering questions or generating text - it can also be a powerful <strong>coding assistant</strong>, capable of reading files, running commands, editing code, and even searching codebases. In this post, we explore the evolution of a <strong>coding AI agent</strong> using the Anthropic Claude API, showing six stages of building a progressively smarter coding assistant.</p>
+<h1 id="1-basic-conversational-agent">1. Basic Conversational Agent</h1>
+<p>We start with a simple conversational AI that interacts with the user using Claude.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> anthropic
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>API_KEY <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;ANTHROPIC_API_KEY&#34;</span>)
+</span></span><span style="display:flex;"><span>CLAUDE_MODEL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;claude-sonnet-4-20250514&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>    client <span style="color:#f92672">=</span> anthropic<span style="color:#f92672">.</span>Anthropic(api_key<span style="color:#f92672">=</span>API_KEY)
+</span></span><span style="display:flex;"><span>    conversation_history <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        user_input <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;You: &#34;</span>)<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>        conversation_history<span style="color:#f92672">.</span>append({<span style="color:#e6db74">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;user&#34;</span>, <span style="color:#e6db74">&#34;content&#34;</span>: user_input})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        response <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>messages<span style="color:#f92672">.</span>create(model<span style="color:#f92672">=</span>CLAUDE_MODEL, max_tokens<span style="color:#f92672">=</span><span style="color:#ae81ff">1024</span>, messages<span style="color:#f92672">=</span>conversation_history) 
+</span></span><span style="display:flex;"><span>        conversation_history<span style="color:#f92672">.</span>append({<span style="color:#e6db74">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;assistant&#34;</span>, <span style="color:#e6db74">&#34;content&#34;</span>: response<span style="color:#f92672">.</span>content})
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Claude: </span><span style="color:#e6db74">{</span>response<span style="color:#f92672">.</span>content[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>text<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    main()
+</span></span></code></pre></div><p>This simple version can carry on a conversation, but it cannot interact with your local environment or files.</p>
+<h1 id="2-adding-file-reading-tools">2. Adding File Reading Tools</h1>
+<p>Next, we give Claude the ability to <strong>read files</strong> from your system.</p>
+<div class="highlight numberLines"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> anthropic
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>API_KEY <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;ANTHROPIC_API_KEY&#34;</span>)
+</span></span><span style="display:flex;"><span>CLAUDE_MODEL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;claude-sonnet-4-20250514&#34;</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>TOOLS <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    {
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;read_file&#34;</span>,
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Read the contents of a file&#34;</span>,
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#e6db74">&#34;input_schema&#34;</span>: {
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;object&#34;</span>,
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            <span style="color:#e6db74">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex; background-color:#3c3d38"><span>                <span style="color:#e6db74">&#34;filepath&#34;</span>: {
+</span></span><span style="display:flex; background-color:#3c3d38"><span>                    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+</span></span><span style="display:flex; background-color:#3c3d38"><span>                    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Path to the file to read&#34;</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>                }
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            },
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            <span style="color:#e6db74">&#34;required&#34;</span>: [<span style="color:#e6db74">&#34;filepath&#34;</span>]
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        }
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    },
+</span></span><span style="display:flex; background-color:#3c3d38"><span>]
+</span></span><span style="display:flex; background-color:#3c3d38"><span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tool_read_file</span>(filepath):
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Read contents of a file&#34;&#34;&#34;</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#66d9ef">with</span> open(filepath, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">True</span>, <span style="color:#e6db74">&#34;content&#34;</span>: f<span style="color:#f92672">.</span>read()}
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">False</span>, <span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
+</span></span><span style="display:flex; background-color:#3c3d38"><span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute_tool</span>(tool_name, arguments):
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Execute a tool function with given arguments&#34;&#34;&#34;</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    tools_map <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#e6db74">&#34;read_file&#34;</span>: tool_read_file
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    }
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    <span style="color:#66d9ef">if</span> tool_name <span style="color:#f92672">in</span> tools_map:
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#66d9ef">return</span> tools_map[tool_name](<span style="color:#f92672">**</span>arguments)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">False</span>, <span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Unknown tool: </span><span style="color:#e6db74">{</span>tool_name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>    client <span style="color:#f92672">=</span> anthropic<span style="color:#f92672">.</span>Anthropic(api_key<span style="color:#f92672">=</span>API_KEY)
+</span></span><span style="display:flex;"><span>    conversation_history <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        user_input <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;You: &#34;</span>)<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>        conversation_history<span style="color:#f92672">.</span>append({<span style="color:#e6db74">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;user&#34;</span>, <span style="color:#e6db74">&#34;content&#34;</span>: user_input})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        response <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>messages<span style="color:#f92672">.</span>create(model<span style="color:#f92672">=</span>CLAUDE_MODEL, max_tokens<span style="color:#f92672">=</span><span style="color:#ae81ff">4096</span>, tools<span style="color:#f92672">=</span>TOOLS, messages<span style="color:#f92672">=</span>conversation_history)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#75715e"># TOOLS START - execute tools if any</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#66d9ef">while</span> response<span style="color:#f92672">.</span>stop_reason <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;tool_use&#34;</span>:
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            conversation_history<span style="color:#f92672">.</span>append({<span style="color:#e6db74">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;assistant&#34;</span>, <span style="color:#e6db74">&#34;content&#34;</span>: response<span style="color:#f92672">.</span>content})
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Claude (Using tools):&#34;</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            tool_results <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            <span style="color:#66d9ef">for</span> block <span style="color:#f92672">in</span> response<span style="color:#f92672">.</span>content:
+</span></span><span style="display:flex; background-color:#3c3d38"><span>                <span style="color:#66d9ef">if</span> block<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;tool_use&#34;</span>:
+</span></span><span style="display:flex; background-color:#3c3d38"><span>                    tool_name <span style="color:#f92672">=</span> block<span style="color:#f92672">.</span>name
+</span></span><span style="display:flex; background-color:#3c3d38"><span>                    tool_input <span style="color:#f92672">=</span> block<span style="color:#f92672">.</span>input
+</span></span><span style="display:flex; background-color:#3c3d38"><span>                    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;[Calling </span><span style="color:#e6db74">{</span>tool_name<span style="color:#e6db74">}</span><span style="color:#e6db74"> with </span><span style="color:#e6db74">{</span>tool_input<span style="color:#e6db74">}</span><span style="color:#e6db74">]&#34;</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>                    tool_result <span style="color:#f92672">=</span> execute_tool(tool_name, tool_input)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>                    tool_results<span style="color:#f92672">.</span>append({<span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;tool_result&#34;</span>, <span style="color:#e6db74">&#34;tool_use_id&#34;</span>: block<span style="color:#f92672">.</span>id, <span style="color:#e6db74">&#34;content&#34;</span>: json<span style="color:#f92672">.</span>dumps(tool_result)})
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            conversation_history<span style="color:#f92672">.</span>append({<span style="color:#e6db74">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;user&#34;</span>, <span style="color:#e6db74">&#34;content&#34;</span>: tool_results})
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            <span style="color:#75715e"># send TOOL results back to Claude and get new response</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            response <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>messages<span style="color:#f92672">.</span>create(model<span style="color:#f92672">=</span>CLAUDE_MODEL, max_tokens<span style="color:#f92672">=</span><span style="color:#ae81ff">4096</span>, tools<span style="color:#f92672">=</span>TOOLS, messages<span style="color:#f92672">=</span>conversation_history)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#75715e"># TOOLS END</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        conversation_history<span style="color:#f92672">.</span>append({<span style="color:#e6db74">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;assistant&#34;</span>, <span style="color:#e6db74">&#34;content&#34;</span>: response<span style="color:#f92672">.</span>content})
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Claude: </span><span style="color:#e6db74">{</span>response<span style="color:#f92672">.</span>content[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>text<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    main()
+</span></span></code></pre></div><p>Now the agent can <strong>read file contents</strong> and use that data in its responses.</p>
+<h1 id="3-listing-files-in-directories">3. Listing Files in Directories</h1>
+<p>We expand the AI&rsquo;s abilities with a <strong>directory listing tool</strong>, so Claude can inspect your filesystem.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>TOOLS <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;read_file&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Read the contents of a file&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;input_schema&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;object&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;filepath&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Path to the file to read&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;required&#34;</span>: [<span style="color:#e6db74">&#34;filepath&#34;</span>]
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;list_files&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;List files and directories in a given path&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;input_schema&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;object&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;directory&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Directory path to list (default: current directory)&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;required&#34;</span>: []
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tool_list_files</span>(directory<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.&#34;</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;List files in a directory&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        path <span style="color:#f92672">=</span> Path(directory)
+</span></span><span style="display:flex;"><span>        files <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> path<span style="color:#f92672">.</span>iterdir():
+</span></span><span style="display:flex;"><span>            files<span style="color:#f92672">.</span>append({
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;name&#34;</span>: item<span style="color:#f92672">.</span>name,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;directory&#34;</span> <span style="color:#66d9ef">if</span> item<span style="color:#f92672">.</span>is_dir() <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#34;file&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;path&#34;</span>: str(item)
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">True</span>, <span style="color:#e6db74">&#34;files&#34;</span>: files}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">False</span>, <span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute_tool</span>(tool_name, arguments):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Execute a tool function with given arguments&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    tools_map <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;read_file&#34;</span>: tool_read_file,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;list_files&#34;</span>: tool_list_files
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span></code></pre></div><p>With this addition, Claude can now <strong>see which files exist</strong> in a directory and respond based on that information.</p>
+<h1 id="4-executing-bash-commands">4. Executing Bash Commands</h1>
+<p>To make our agent more powerful, we add a tool to <strong>execute Bash commands</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> subprocess
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;execute_bash&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Execute a bash command and return the output&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;input_schema&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;object&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;command&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;The bash command to execute&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;required&#34;</span>: [<span style="color:#e6db74">&#34;command&#34;</span>]
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tool_execute_bash</span>(command):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Execute a bash command&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>run(
+</span></span><span style="display:flex;"><span>            command,
+</span></span><span style="display:flex;"><span>            shell<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>            capture_output<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>            text<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>            timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;stdout&#34;</span>: result<span style="color:#f92672">.</span>stdout,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;stderr&#34;</span>: result<span style="color:#f92672">.</span>stderr,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;returncode&#34;</span>: result<span style="color:#f92672">.</span>returncode
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> subprocess<span style="color:#f92672">.</span>TimeoutExpired:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">False</span>, <span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Command timed out&#34;</span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">False</span>, <span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute_tool</span>(tool_name, arguments):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Execute a tool function with given arguments&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    tools_map <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;read_file&#34;</span>: tool_read_file,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;list_files&#34;</span>: tool_list_files,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;execute_bash&#34;</span>: tool_execute_bash,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span></code></pre></div><p>Now Claude can <strong>run commands on your machine</strong>, such as compiling code, checking Git status, or inspecting logs.</p>
+<h1 id="5-editing-files">5. Editing Files</h1>
+<p>The agent becomes a full coding assistant by allowing it to <strong>write or edit files</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;edit_file&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Write or edit a file with new content&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;input_schema&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;object&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;filepath&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Path to the file to write&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;content&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Content to write to the file&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;required&#34;</span>: [<span style="color:#e6db74">&#34;filepath&#34;</span>, <span style="color:#e6db74">&#34;content&#34;</span>]
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tool_edit_file</span>(filepath, content):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Write/edit a file with new content&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">with</span> open(filepath, <span style="color:#e6db74">&#39;w&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>            f<span style="color:#f92672">.</span>write(content)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">True</span>, <span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;File </span><span style="color:#e6db74">{</span>filepath<span style="color:#e6db74">}</span><span style="color:#e6db74"> written successfully&#34;</span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">False</span>, <span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute_tool</span>(tool_name, arguments):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Execute a tool function with given arguments&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    tools_map <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;read_file&#34;</span>: tool_read_file,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;list_files&#34;</span>: tool_list_files,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;execute_bash&#34;</span>: tool_execute_bash,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;edit_file&#34;</span>: tool_edit_file,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span></code></pre></div><p>This enables Claude to <strong>modify code or configuration files directly</strong>, turning it into an active coding partner.</p>
+<h1 id="6-searching-codebases-with-ripgrep">6. Searching Codebases with Ripgrep</h1>
+<p>Finally, we add a tool for <strong>searching code patterns</strong> using <code>ripgrep</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;ripgrep_search&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Search for code patterns using ripgrep&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;input_schema&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;object&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;pattern&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Search pattern (regex supported)&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;path&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Path to search in (default: current directory)&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;options&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Additional ripgrep options (e.g., &#39;-i&#39; for case-insensitive)&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;required&#34;</span>: [<span style="color:#e6db74">&#34;pattern&#34;</span>]
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tool_ripgrep_search</span>(pattern, path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.&#34;</span>, options<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Search code using ripgrep&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        command <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;rg </span><span style="color:#e6db74">{</span>options<span style="color:#e6db74">}</span><span style="color:#e6db74"> &#39;</span><span style="color:#e6db74">{</span>pattern<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39; </span><span style="color:#e6db74">{</span>path<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>run(
+</span></span><span style="display:flex;"><span>            command,
+</span></span><span style="display:flex;"><span>            shell<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>            capture_output<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>            text<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>            timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;matches&#34;</span>: result<span style="color:#f92672">.</span>stdout,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;stderr&#34;</span>: result<span style="color:#f92672">.</span>stderr
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> subprocess<span style="color:#f92672">.</span>TimeoutExpired:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">False</span>, <span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Search timed out&#34;</span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;success&#34;</span>: <span style="color:#66d9ef">False</span>, <span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute_tool</span>(tool_name, arguments):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Execute a tool function with given arguments&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    tools_map <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;read_file&#34;</span>: tool_read_file,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;list_files&#34;</span>: tool_list_files,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;execute_bash&#34;</span>: tool_execute_bash,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;edit_file&#34;</span>: tool_edit_file,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;ripgrep_search&#34;</span>: tool_ripgrep_search,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span></code></pre></div><p>With this feature, Claude can <strong>search through large codebases</strong> efficiently, making it a versatile AI coding agent.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>By progressively adding tools—file reading, listing, executing commands, editing, and searching—we can build a fully functional AI assistant capable of <strong>coding, exploring, and interacting with projects</strong>. Each stage adds more autonomy and practical utility for real-world development workflows.</p>
+
+    </article>
+  </div>
+  
+<div class="row page-prev-next">
+    <div class="col-md">
+        
+            <a href="/tinkering/2025-12-03/">
+                <span>← </span>
+                <span class="title">How to Setup a Bitcoin Pruned Node Over TOR on Ubuntu</span>
+            </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+            <a href="/tinkering/2026-01-26/">
+                <span class="title">Simulating 100,000 Celestial Bodies</span>
+                <span> →</span>
+            </a>
+        
+    </div>
+</div>
+
+  <div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://marcuschiu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </main>
+  </div>
+</body>
+</html>

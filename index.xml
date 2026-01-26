@@ -16,6 +16,13 @@
       <description>&lt;p&gt;&lt;a href=&#34;https://barnes-hut.marcuschiu.com/&#34;&gt;barnes-hut.marcuschiu.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://barnes-hut.marcuschiu.com&#34;&gt;&lt;img src=&#34;assets/simulator.png&#34; alt=&#34;barnes-hut-simulator&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Simulating gravitational interactions between many bodies can get very slow. If you calculate the force between every pair of bodies, the number of computations grows quadratically as you add more bodies. That’s where the Barnes-Hut algorithm comes in—a clever way to speed things up.&lt;/p&gt;&#xA;&lt;h1 id=&#34;the-big-idea&#34;&gt;The Big Idea&lt;/h1&gt;&#xA;&lt;p&gt;Instead of looking at each body individually, the Barnes-Hut algorithm groups nearby bodies together. If a group is far enough away, you can approximate all its bodies as a single body located at the group’s center of mass.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Coding AI Coding Agent</title>
+      <link>http://www.marcu/tinkering/2026-01-24/</link>
+      <pubDate>Sat, 24 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://www.marcu/tinkering/2026-01-24/</guid>
+      <description>&lt;p&gt;AI/LLM is not just for answering questions or generating text - it can also be a powerful &lt;strong&gt;coding assistant&lt;/strong&gt;, capable of reading files, running commands, editing code, and even searching codebases. In this post, we explore the evolution of a &lt;strong&gt;coding AI agent&lt;/strong&gt; using the Anthropic Claude API, showing six stages of building a progressively smarter coding assistant.&lt;/p&gt;&#xA;&lt;h1 id=&#34;1-basic-conversational-agent&#34;&gt;1. Basic Conversational Agent&lt;/h1&gt;&#xA;&lt;p&gt;We start with a simple conversational AI that interacts with the user using Claude.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>How to Setup a Bitcoin Pruned Node Over TOR on Ubuntu</title>
       <link>http://www.marcu/tinkering/2025-12-03/</link>
       <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
