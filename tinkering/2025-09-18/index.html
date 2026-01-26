@@ -62,7 +62,7 @@ How it’s Done This article shows how to convert a bundle of 2D images into a 3
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 
   
-      <link rel="stylesheet" href="/css/main.min.f99951d349fe0400bc37819870e61dfa29479c366e13e172fd6fd225e2acbb86.css" integrity="sha256-&#43;ZlR00n&#43;BAC8N4GYcOYd&#43;ilHnDZuE&#43;Fy/W/SJeKsu4Y=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.76af129a40bd08c9c6011005f6ffea987af21ae44be29c23657109feb25a5115.css" integrity="sha256-dq8SmkC9CMnGARAF9v/qmHryGuRL4pwjZXEJ/rJaURU=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/carousel.min.547c0f91e09efcb470149124bf3fbe719e6eb173ce327ff87c6a3f9c0e0632fe.css" integrity="sha256-VHwPkeCe/LRwFJEkvz&#43;&#43;cZ5usXPOMn/4fGo/nA4GMv4=" crossorigin="anonymous">
   
         <script src="/js/main.6e6c6a5bd91a840db66a2739aeeb445da2883d410eb7daeac09254488ec502c7.js" integrity="sha256-bmxqW9kahA22aic5rutEXaKIPUEOt9rqwJJUSI7FAsc=" crossorigin="anonymous"></script>
@@ -178,10 +178,10 @@ I&rsquo;ve ended up using.</p>
 </span></span><span style="display:flex;"><span>colmap mapper --database_path colmap_output/database.db --image_path ./images --output_path colmap_output/sparse
 </span></span><span style="display:flex;"><span>mkdir -p colmap_output/dense
 </span></span><span style="display:flex;"><span>colmap image_undistorter <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --image_path ./images <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --input_path colmap_output/sparse/0 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --output_path colmap_output/dense <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --output_type COLMAP
+</span></span></span><span style="display:flex;"><span>  --image_path ./images <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --input_path colmap_output/sparse/0 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --output_path colmap_output/dense <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --output_type COLMAP
 </span></span><span style="display:flex;"><span>mkdir -p colmap_output/dense/sparse/0
 </span></span><span style="display:flex;"><span>mv colmap_output/dense/sparse/*.bin colmap_output/dense/sparse/0
 </span></span></code></pre></div><p>The data in <code>./colmap_output/dense</code> will be used in the next tool.</p>
@@ -259,6 +259,11 @@ I&rsquo;ve ended up using.</p>
         
     </div>
     <div class="col-md text-md-end">
+        
+            <a href="/tinkering/2025-12-01/">
+                <span class="title">How to Enable IOMMU on ASROCK ROMED8-2T</span>
+                <span> →</span>
+            </a>
         
     </div>
 </div>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCN2D792VE"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GCN2D792VE');
+  </script>
+
+  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5G85VDQT');</script>
+  
+
+  <link href='/favicon.ico' rel='shortcut icon'>
+  <link href='/favicon.ico' rel='apple-touch-icon'>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>NFS Client on Proxmox LXC | Marcus Chiu</title>
+
+  
+  <meta property="og:url" content="http://www.marcu/tinkering/2025-12-02/">
+  <meta property="og:site_name" content="Marcus Chiu">
+  <meta property="og:title" content="NFS Client on Proxmox LXC">
+  <meta property="og:description" content="Problem I have an NFS share that needs to be mounted on a Proxmox LXC container.
+I used the following command to mount:
+sudo mount -t nfs 192.168.0.222:/mnt/hello /mnt/client -vvv But I’ve been getting the following errors:
+mount.nfs: timeout set for Mon Dec 29 16:10:50 2025 mount.nfs: trying text-based options &#39;vers=4.2,addr=192.168.0.222,clientaddr=192.168.0.199&#39; mount.nfs: mount(2): Operation not permitted mount.nfs: trying text-based options &#39;addr=192.168.0.222&#39; mount.nfs: prog 100003, trying vers=3, prot=6 mount.nfs: trying 192.168.0.222 prog 100003 vers 3 prot TCP port 2049 mount.nfs: prog 100005, trying vers=3, prot=17 mount.nfs: trying 192.168.0.222 prog 100005 vers 3 prot UDP port 44006 mount.nfs: mount(2): Operation not permitted mount.nfs: Operation not permitted for 192.168.0.222:/mnt/hello on /mnt/client Solution I got it to work by creating the LXC container in privileged mode.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="tinkering">
+    <meta property="article:published_time" content="2025-12-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-02T00:00:00+00:00">
+
+
+
+
+
+
+
+
+  
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:url' content='http://www.marcuschiu.com'>
+  <meta name='twitter:title' content='Marcus Chiu - FullStack Developer'>
+  <meta name='twitter:description' content="Marcus Chiu's Website">
+  <meta name='twitter:image' content='http://doc.marcuschiu.com/assets/images/me.png'>
+  <meta name='twitter:site' content='@TheMarcusChiu'>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  
+      <link rel="stylesheet" href="/css/main.min.76af129a40bd08c9c6011005f6ffea987af21ae44be29c23657109feb25a5115.css" integrity="sha256-dq8SmkC9CMnGARAF9v/qmHryGuRL4pwjZXEJ/rJaURU=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/carousel.min.547c0f91e09efcb470149124bf3fbe719e6eb173ce327ff87c6a3f9c0e0632fe.css" integrity="sha256-VHwPkeCe/LRwFJEkvz&#43;&#43;cZ5usXPOMn/4fGo/nA4GMv4=" crossorigin="anonymous">
+  
+        <script src="/js/main.6e6c6a5bd91a840db66a2739aeeb445da2883d410eb7daeac09254488ec502c7.js" integrity="sha256-bmxqW9kahA22aic5rutEXaKIPUEOt9rqwJJUSI7FAsc=" crossorigin="anonymous"></script>
+        <script src="/js/main.e53ff96c4fc49d490548db4ff73729267772caa1f7e0af027b12bcd81c45728f.js" integrity="sha256-5T/5bE/EnUkFSNtP9zcpJndyyqH34K8CexK82BxFco8=" crossorigin="anonymous"></script>
+
+<script>
+  window.MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+
+</head>
+<body class="text-light dark">
+  
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G85VDQT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  
+  <div class="container pt-5">
+    <header>
+      
+  <div class="row mt-5 pt-5">
+    <nav aria-label="breadcrumb" class="small">
+      <ol class="breadcrumb fw-bold bg-transparent" >
+    <li class="breadcrumb-item">
+      <a href="/">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a aria-current="true" class="ancestor" href="/tinkering/">Tinkering</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/music-and-arts/">Music &amp; Arts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/fitness/">Fitness</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/thoughts/">Thoughts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/travel/">Travel</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about/">About</a>
+    </li>
+      </ol>
+    </nav>
+  </div>
+
+    </header>
+    <main>
+      
+  <div class="post">
+    <header class="mb-4">
+      <h1 class="text-uppercase">NFS Client on Proxmox LXC</h1>
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+
+          
+          
+          <li class="breadcrumb-item tiny">
+            <time datetime="2025-12-02T00:00:00&#43;00:00">December 2, 2025</time>
+          </li>
+
+          
+          
+          
+
+          <li class="breadcrumb-item tiny">
+            2 minutes
+          </li>
+
+        </ol>
+      </div>
+    </header>
+
+
+
+
+
+
+    <article>
+      <h1 id="problem">Problem</h1>
+<p>I have an NFS share that needs to be mounted on a Proxmox LXC container.</p>
+<p>I used the following command to mount:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo mount -t nfs 192.168.0.222:/mnt/hello /mnt/client -vvv
+</span></span></code></pre></div><p>But I&rsquo;ve been getting the following errors:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mount.nfs: timeout set <span style="color:#66d9ef">for</span> Mon Dec <span style="color:#ae81ff">29</span> 16:10:50 <span style="color:#ae81ff">2025</span>
+</span></span><span style="display:flex;"><span>mount.nfs: trying text-based options <span style="color:#e6db74">&#39;vers=4.2,addr=192.168.0.222,clientaddr=192.168.0.199&#39;</span>
+</span></span><span style="display:flex;"><span>mount.nfs: mount<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span>: Operation not permitted
+</span></span><span style="display:flex;"><span>mount.nfs: trying text-based options <span style="color:#e6db74">&#39;addr=192.168.0.222&#39;</span>
+</span></span><span style="display:flex;"><span>mount.nfs: prog 100003, trying vers<span style="color:#f92672">=</span>3, prot<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>mount.nfs: trying 192.168.0.222 prog <span style="color:#ae81ff">100003</span> vers <span style="color:#ae81ff">3</span> prot TCP port <span style="color:#ae81ff">2049</span>
+</span></span><span style="display:flex;"><span>mount.nfs: prog 100005, trying vers<span style="color:#f92672">=</span>3, prot<span style="color:#f92672">=</span><span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>mount.nfs: trying 192.168.0.222 prog <span style="color:#ae81ff">100005</span> vers <span style="color:#ae81ff">3</span> prot UDP port <span style="color:#ae81ff">44006</span>
+</span></span><span style="display:flex;"><span>mount.nfs: mount<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span>: Operation not permitted
+</span></span><span style="display:flex;"><span>mount.nfs: Operation not permitted <span style="color:#66d9ef">for</span> 192.168.0.222:/mnt/hello on /mnt/client
+</span></span></code></pre></div><h1 id="solution">Solution</h1>
+<p>I got it to work by creating the LXC container in privileged mode.</p>
+<p>In Proxmox host, you&rsquo;ll need to modify the LXC&rsquo;s conf file <code>/etc/pve/lxc/LXC_ID_HERE.conf</code>.
+Then add the following contents into the file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">unprivileged</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">lxc.apparmor.profile</span>: <span style="color:#ae81ff">unconfined</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">lxc.cap.drop</span>:
+</span></span></code></pre></div><p>Reboot LXC container.</p>
+<p>Verify NFS share is up by executing within the LXC container:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>showmount -e 192.168.0.222
+</span></span></code></pre></div><h1 id="temporary-mount-goes-away-after-lxc-reboot">Temporary mount (goes away after LXC reboot)</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo mount -t nfs 192.168.0.222:/mnt/hello /mnt/client -vvv
+</span></span></code></pre></div><h1 id="permanent-mount-remounts-after-lxc-reboot">Permanent mount (remounts after LXC reboot)</h1>
+<p>Modify <code>/etc/fstab</code> and add the following line:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>192.168.0.222:/mnt/hello /mnt/client nfs defaults <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>The structure is as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">{</span>IP of NFS server<span style="color:#f92672">}</span>:<span style="color:#f92672">{</span>folder path on server<span style="color:#f92672">}</span> /var/locally-mounted nfs defaults <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>Then mount changes in <code>/etc/fstab</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo mount -a
+</span></span></code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl daemon-reload
+</span></span></code></pre></div>
+    </article>
+  </div>
+  
+<div class="row page-prev-next">
+    <div class="col-md">
+        
+            <a href="/tinkering/2025-12-01/">
+                <span>← </span>
+                <span class="title">How to Enable IOMMU on ASROCK ROMED8-2T</span>
+            </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+            <a href="/tinkering/2025-12-03/">
+                <span class="title">How to Setup a Bitcoin Pruned Node Over TOR on Ubuntu</span>
+                <span> →</span>
+            </a>
+        
+    </div>
+</div>
+
+  <div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://marcuschiu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </main>
+  </div>
+</body>
+</html>

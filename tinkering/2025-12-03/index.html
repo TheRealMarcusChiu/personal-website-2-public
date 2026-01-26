@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCN2D792VE"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GCN2D792VE');
+  </script>
+
+  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5G85VDQT');</script>
+  
+
+  <link href='/favicon.ico' rel='shortcut icon'>
+  <link href='/favicon.ico' rel='apple-touch-icon'>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>How to Setup a Bitcoin Pruned Node Over TOR on Ubuntu | Marcus Chiu</title>
+
+  
+  <meta property="og:url" content="http://www.marcu/tinkering/2025-12-03/">
+  <meta property="og:site_name" content="Marcus Chiu">
+  <meta property="og:title" content="How to Setup a Bitcoin Pruned Node Over TOR on Ubuntu">
+  <meta property="og:description" content="Setup TOR Install TOR via apt:
+sudo apt update sudo apt install tor Enable and start TOR:
+sudo systemctl enable tor sudo systemctl start tor sudo systemctl status tor Setup Pruned Node Go to https://bitcoincore.org/en/download/ and copy link of latest version
+wget https://bitcoincore.org/bin/bitcoin-core-29.2/bitcoin-29.2-x86_64-linux-gnu.tar.gz tar -xvf bitcoin-29.2-x86_64-linux-gnu.tar.gz sudo install -m 0755 -o root -g root -t /usr/local/bin bitcoin-29.2/bin/* Create Bitcoin core config
+mkdir -p ~/.bitcoin vim ~/.bitcoin/bitcoin.conf Add the following into the file
+### PRUNED NODE ### prune=550 # ~5.5 GB (minimum) txindex=0 ### RPC ### server=1 rpcbind=127.0.0.1 rpcallowip=127.0.0.1 ### TOR-ONLY NETWORKING ### proxy=127.0.0.1:9050 onlynet=onion listen=1 dnsseed=0 ### TOR CONTROL (optional but recommended) ### torcontrol=127.0.0.1:9051 torpassword=your_tor_control_password ### PRIVACY ### listenonion=1 discover=0 upnp=0 natpmp=0 ### PERFORMANCE ### dbcache=300 maxconnections=12 Start the node:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="tinkering">
+    <meta property="article:published_time" content="2025-12-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-03T00:00:00+00:00">
+
+
+
+
+
+
+
+
+  
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:url' content='http://www.marcuschiu.com'>
+  <meta name='twitter:title' content='Marcus Chiu - FullStack Developer'>
+  <meta name='twitter:description' content="Marcus Chiu's Website">
+  <meta name='twitter:image' content='http://doc.marcuschiu.com/assets/images/me.png'>
+  <meta name='twitter:site' content='@TheMarcusChiu'>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  
+      <link rel="stylesheet" href="/css/main.min.76af129a40bd08c9c6011005f6ffea987af21ae44be29c23657109feb25a5115.css" integrity="sha256-dq8SmkC9CMnGARAF9v/qmHryGuRL4pwjZXEJ/rJaURU=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/carousel.min.547c0f91e09efcb470149124bf3fbe719e6eb173ce327ff87c6a3f9c0e0632fe.css" integrity="sha256-VHwPkeCe/LRwFJEkvz&#43;&#43;cZ5usXPOMn/4fGo/nA4GMv4=" crossorigin="anonymous">
+  
+        <script src="/js/main.6e6c6a5bd91a840db66a2739aeeb445da2883d410eb7daeac09254488ec502c7.js" integrity="sha256-bmxqW9kahA22aic5rutEXaKIPUEOt9rqwJJUSI7FAsc=" crossorigin="anonymous"></script>
+        <script src="/js/main.e53ff96c4fc49d490548db4ff73729267772caa1f7e0af027b12bcd81c45728f.js" integrity="sha256-5T/5bE/EnUkFSNtP9zcpJndyyqH34K8CexK82BxFco8=" crossorigin="anonymous"></script>
+
+<script>
+  window.MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+
+</head>
+<body class="text-light dark">
+  
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G85VDQT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  
+  <div class="container pt-5">
+    <header>
+      
+  <div class="row mt-5 pt-5">
+    <nav aria-label="breadcrumb" class="small">
+      <ol class="breadcrumb fw-bold bg-transparent" >
+    <li class="breadcrumb-item">
+      <a href="/">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a aria-current="true" class="ancestor" href="/tinkering/">Tinkering</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/music-and-arts/">Music &amp; Arts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/fitness/">Fitness</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/thoughts/">Thoughts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/travel/">Travel</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about/">About</a>
+    </li>
+      </ol>
+    </nav>
+  </div>
+
+    </header>
+    <main>
+      
+  <div class="post">
+    <header class="mb-4">
+      <h1 class="text-uppercase">How to Setup a Bitcoin Pruned Node Over TOR on Ubuntu</h1>
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+
+          
+          
+          <li class="breadcrumb-item tiny">
+            <time datetime="2025-12-03T00:00:00&#43;00:00">December 3, 2025</time>
+          </li>
+
+          
+          
+          
+
+          <li class="breadcrumb-item tiny">
+            2 minutes
+          </li>
+
+        </ol>
+      </div>
+    </header>
+
+
+
+
+
+
+    <article>
+      <h1 id="setup-tor">Setup TOR</h1>
+<p>Install TOR via apt:</p>
+<pre tabindex="0"><code>sudo apt update
+sudo apt install tor
+</code></pre><p>Enable and start TOR:</p>
+<pre tabindex="0"><code>sudo systemctl enable tor
+sudo systemctl start tor
+sudo systemctl status tor
+</code></pre><h1 id="setup-pruned-node">Setup Pruned Node</h1>
+<p>Go to <a href="https://bitcoincore.org/en/download/">https://bitcoincore.org/en/download/</a> and copy link of latest version</p>
+<pre tabindex="0"><code>wget https://bitcoincore.org/bin/bitcoin-core-29.2/bitcoin-29.2-x86_64-linux-gnu.tar.gz
+tar -xvf bitcoin-29.2-x86_64-linux-gnu.tar.gz
+sudo install -m 0755 -o root -g root -t /usr/local/bin bitcoin-29.2/bin/*
+</code></pre><p>Create Bitcoin core config</p>
+<pre tabindex="0"><code>mkdir -p ~/.bitcoin
+vim ~/.bitcoin/bitcoin.conf
+</code></pre><p>Add the following into the file</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#75715e">### PRUNED NODE ###</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">prune</span><span style="color:#f92672">=</span><span style="color:#e6db74">550           # ~5.5 GB (minimum)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">txindex</span><span style="color:#f92672">=</span><span style="color:#e6db74">0</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### RPC ###</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">server</span><span style="color:#f92672">=</span><span style="color:#e6db74">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">rpcbind</span><span style="color:#f92672">=</span><span style="color:#e6db74">127.0.0.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">rpcallowip</span><span style="color:#f92672">=</span><span style="color:#e6db74">127.0.0.1</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### TOR-ONLY NETWORKING ###</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">proxy</span><span style="color:#f92672">=</span><span style="color:#e6db74">127.0.0.1:9050</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">onlynet</span><span style="color:#f92672">=</span><span style="color:#e6db74">onion</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">listen</span><span style="color:#f92672">=</span><span style="color:#e6db74">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dnsseed</span><span style="color:#f92672">=</span><span style="color:#e6db74">0</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### TOR CONTROL (optional but recommended) ###</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">torcontrol</span><span style="color:#f92672">=</span><span style="color:#e6db74">127.0.0.1:9051</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">torpassword</span><span style="color:#f92672">=</span><span style="color:#e6db74">your_tor_control_password</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### PRIVACY ###</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">listenonion</span><span style="color:#f92672">=</span><span style="color:#e6db74">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">discover</span><span style="color:#f92672">=</span><span style="color:#e6db74">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">upnp</span><span style="color:#f92672">=</span><span style="color:#e6db74">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">natpmp</span><span style="color:#f92672">=</span><span style="color:#e6db74">0</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### PERFORMANCE ###</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dbcache</span><span style="color:#f92672">=</span><span style="color:#e6db74">300</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">maxconnections</span><span style="color:#f92672">=</span><span style="color:#e6db74">12</span>
+</span></span></code></pre></div><p>Start the node:</p>
+<pre tabindex="0"><code>bitcoind -daemon
+</code></pre><p>Check status:</p>
+<pre tabindex="0"><code>bitcoin-cli getblockchaininfo
+</code></pre><p>you should see:</p>
+<pre tabindex="0"><code>&#34;pruned&#34;: true
+</code></pre><p>Check Tor usage:</p>
+<pre tabindex="0"><code>bitcoin-cli getnetworkinfo
+</code></pre><p>Look for:</p>
+<pre tabindex="0"><code>&#34;network&#34;: &#34;onion&#34;
+</code></pre><h1 id="run-at-boot-with-systemd">Run at Boot with Systemd</h1>
+<p>stop manually running bitcoind</p>
+<pre tabindex="0"><code>bitcoin-cli stop
+</code></pre><p>Create new systemd file:</p>
+<pre tabindex="0"><code>sudo vim /etc/systemd/system/bitcoind.service
+</code></pre><p>add the following</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#66d9ef">[Unit]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Description</span><span style="color:#f92672">=</span><span style="color:#e6db74">Bitcoin Daemon</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">After</span><span style="color:#f92672">=</span><span style="color:#e6db74">network.target</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[Service]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ExecStart</span><span style="color:#f92672">=</span><span style="color:#e6db74">/usr/local/bin/bitcoind -daemon -conf=/root/.bitcoin/bitcoin.conf</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ExecStop</span><span style="color:#f92672">=</span><span style="color:#e6db74">/usr/local/bin/bitcoin-cli stop</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">User</span><span style="color:#f92672">=</span><span style="color:#e6db74">root</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Type</span><span style="color:#f92672">=</span><span style="color:#e6db74">forking</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Restart</span><span style="color:#f92672">=</span><span style="color:#e6db74">always</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[Install]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">WantedBy</span><span style="color:#f92672">=</span><span style="color:#e6db74">multi-user.target</span>
+</span></span></code></pre></div><p>Reload</p>
+<pre tabindex="0"><code>sudo systemctl daemon-reload
+sudo systemctl enable bitcoind
+sudo systemctl start bitcoind
+</code></pre><p>Verify Everything is Working</p>
+<pre tabindex="0"><code>bitcoin-cli getnetworkinfo
+bitcoin-cli getpeerinfo
+bitcoin-cli getmempoolinfo
+</code></pre><h1 id="create-wallet">Create Wallet</h1>
+<p>Create Wallet</p>
+<pre tabindex="0"><code>bitcoin-cli createwallet &#34;marcus-chiu-wallet&#34;
+</code></pre><p>Check if wallet is loaded:</p>
+<pre tabindex="0"><code>bitcoin-cli getwalletinfo
+</code></pre><p>Backup Wallet</p>
+<pre tabindex="0"><code>bitcoin-cli backupwallet ~/wallet-backup.dat
+</code></pre><p>Load an Existing Wallet</p>
+<pre tabindex="0"><code>bitcoin-cli loadwallet ~/wallet-backup.dat
+</code></pre><p>List Wallets</p>
+<pre tabindex="0"><code>bitcoin-cli listwallets
+</code></pre>
+    </article>
+  </div>
+  
+<div class="row page-prev-next">
+    <div class="col-md">
+        
+            <a href="/tinkering/2025-12-02/">
+                <span>← </span>
+                <span class="title">NFS Client on Proxmox LXC</span>
+            </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+    </div>
+</div>
+
+  <div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://marcuschiu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </main>
+  </div>
+</body>
+</html>

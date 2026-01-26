@@ -62,7 +62,7 @@ tetris.marcuschiu.com">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 
   
-      <link rel="stylesheet" href="/css/main.min.f99951d349fe0400bc37819870e61dfa29479c366e13e172fd6fd225e2acbb86.css" integrity="sha256-&#43;ZlR00n&#43;BAC8N4GYcOYd&#43;ilHnDZuE&#43;Fy/W/SJeKsu4Y=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.76af129a40bd08c9c6011005f6ffea987af21ae44be29c23657109feb25a5115.css" integrity="sha256-dq8SmkC9CMnGARAF9v/qmHryGuRL4pwjZXEJ/rJaURU=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/carousel.min.547c0f91e09efcb470149124bf3fbe719e6eb173ce327ff87c6a3f9c0e0632fe.css" integrity="sha256-VHwPkeCe/LRwFJEkvz&#43;&#43;cZ5usXPOMn/4fGo/nA4GMv4=" crossorigin="anonymous">
   
         <script src="/js/main.6e6c6a5bd91a840db66a2739aeeb445da2883d410eb7daeac09254488ec502c7.js" integrity="sha256-bmxqW9kahA22aic5rutEXaKIPUEOt9rqwJJUSI7FAsc=" crossorigin="anonymous"></script>
@@ -170,7 +170,7 @@ whenever the down key is lifted. This allows the auto setInterval
 to be restarted.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">stepCounter</span>() {
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// auto move active pieve down
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">intervalId_gameEngineStepCounter</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">gameEngineStepCounter_Start</span>(<span style="color:#a6e22e">stepCounter</span>) {
@@ -188,7 +188,7 @@ to be restarted.</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;ArrowDown&#34;</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">gameEngineStepCounter_Stop</span>();
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// do manual down move
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">keyupEC</span>(<span style="color:#a6e22e">event</span>) {
@@ -261,11 +261,11 @@ ahead of time and if there are any overlaps, collisions, or out of bounds.</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">curPieceMap</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span>] <span style="color:#f92672">!==</span> <span style="color:#ae81ff">0</span>) {
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">y</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">19</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">9</span>) { <span style="color:#75715e">// check for out of bounds
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
 </span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">y</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) { <span style="color:#75715e">// if above the grid that&#39;s fine
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                        <span style="color:#75715e">// do nothing
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">gridState</span>[<span style="color:#a6e22e">y</span>][<span style="color:#a6e22e">x</span>] <span style="color:#f92672">!==</span> <span style="color:#ae81ff">0</span>) {
+</span></span></span><span style="display:flex;"><span>                        <span style="color:#75715e">// do nothing
+</span></span></span><span style="display:flex;"><span>                    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">gridState</span>[<span style="color:#a6e22e">y</span>][<span style="color:#a6e22e">x</span>] <span style="color:#f92672">!==</span> <span style="color:#ae81ff">0</span>) {
 </span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
 </span></span><span style="display:flex;"><span>                    }
 </span></span><span style="display:flex;"><span>                }
@@ -281,28 +281,28 @@ that would be simple for canvas rendering.</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">fillColorShade</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;blue&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Fill Color
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fillStyle</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fillColor</span>;
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fillStyle</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fillColor</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fillRect</span>((<span style="color:#a6e22e">x</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">40</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">x_shift</span>, (<span style="color:#a6e22e">y</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">40</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">y_shift</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">40</span>); <span style="color:#75715e">// x, y, width, height
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fill</span>();
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fill</span>();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Fill Color Shade
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fillStyle</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fillColorShade</span>;
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fillStyle</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fillColorShade</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fillRect</span>((<span style="color:#a6e22e">x</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">40</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">x_shift</span>, (<span style="color:#a6e22e">y</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">40</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">y_shift</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">40</span>); <span style="color:#75715e">// x, y, width, height
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fill</span>();
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fill</span>();
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fillStyle</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fillColorShade</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fillRect</span>((<span style="color:#a6e22e">x</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">40</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">x_shift</span>, (<span style="color:#a6e22e">y</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">40</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">25</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">y_shift</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">15</span>); <span style="color:#75715e">// x, y, width, height
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fill</span>();
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">fill</span>();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Outline
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">strokeStyle</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rgb(41,39,39)&#39;</span>; <span style="color:#75715e">// Set the stroke color
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineWidth</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// Set the line width
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">strokeRect</span>((<span style="color:#a6e22e">x</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">40</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">x_shift</span>, (<span style="color:#a6e22e">y</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">40</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">y_shift</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">40</span>); <span style="color:#75715e">// Draw an outlined red rectangle
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">strokeStyle</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rgb(41,39,39)&#39;</span>; <span style="color:#75715e">// Set the stroke color
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineWidth</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// Set the line width
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">strokeRect</span>((<span style="color:#a6e22e">x</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">40</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">x_shift</span>, (<span style="color:#a6e22e">y</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">40</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">y_shift</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">40</span>); <span style="color:#75715e">// Draw an outlined red rectangle
+</span></span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Next, we need to color map based on the piece value</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">gridStateValue</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Code to execute if expression === value1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">fillColor</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rgb(251,219,15)&#39;</span>;
+</span></span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fillColor</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rgb(251,219,15)&#39;</span>;
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fillColorShade</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rgb(255,193,0)&#39;</span>;
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span>
@@ -331,7 +331,7 @@ that would be simple for canvas rendering.</p>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Code to execute if no case matches
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>And that&rsquo;s pretty much it&hellip; the rest is just fleshing out the game logic.</p>
 
     </article>
