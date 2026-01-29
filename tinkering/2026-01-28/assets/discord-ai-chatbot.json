@@ -1,0 +1,296 @@
+{
+  "name": "Discord AI chatbot",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## .env for Discord bot\n```md\nTOKEN=your-bot-token-here\nWEBHOOK_URL=https://your-domain.tld/webhook/getmessage\n```",
+        "width": 953.4544277976706
+      },
+      "id": "8dab1d16-0d0d-47fe-9675-017827a0188c",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        368,
+        240
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## requirements.txt,txt\ndiscord\npython-dotenv",
+        "height": 100,
+        "width": 949
+      },
+      "id": "b83c3a70-fe5e-4f90-8177-e6fbefc1af2a",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        368,
+        1424
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Discord Bot Code\n\n```py\nimport discord\nimport requests\nimport json\nimport os\nfrom dotenv import load_dotenv\n\n# Load environment variables from .env file\nload_dotenv()\nTOKEN = os.getenv(\"TOKEN\")\nWEBHOOK_URL = os.getenv(\"WEBHOOK_URL\")\n\n# Bot Configuration\nLISTEN_CHANNELS = [123456789012345678]  # Replace with your target channel IDs\n\n# Intents setup\nintents = discord.Intents.default()\nintents.messages = True  # Enable message event\nintents.guilds = True\nintents.message_content = True  # Required to read messages\n\nclient = discord.Client(intents=intents)\n\n@client.event\nasync def on_ready():\n    print(f'Logged in as {client.user}')\n\n@client.event\nasync def on_message(message):\n    if message.author == client.user:\n        return  # Ignore bot's own messages\n    \n    if message.channel.id in LISTEN_CHANNELS:\n        try:\n            fetched_message = await message.channel.fetch_message(message.id)  # Ensure correct fetching\n            payload = {\n                \"channel_id\": str(fetched_message.channel.id),  # Ensure it's string\n                \"chat_message\": fetched_message.content,\n                \"timestamp\": str(fetched_message.created_at),  # Ensure proper formatting\n                \"message_id\": str(fetched_message.id),  # Ensure ID is a string\n                \"user_id\": str(fetched_message.author.id)  # Ensure user ID is also string\n            }\n            \n            headers = {'Content-Type': 'application/json'}\n            response = requests.post(WEBHOOK_URL, data=json.dumps(payload), headers=headers)\n            \n            if response.status_code == 200:\n                print(f\"Message sent successfully: {payload}\")\n            else:\n                print(f\"Failed to send message: {response.status_code}, Response: {response.text}\")\n        except Exception as e:\n            print(f\"Error fetching message: {e}\")\n\nclient.run(TOKEN)\n\n```",
+        "height": 974.8320906053484,
+        "width": 953.7499545009089
+      },
+      "id": "8c4b3445-005e-4418-9ad0-e89c53b077b4",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        368,
+        432
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1377002337616527462",
+          "mode": "list",
+          "cachedResultName": "marcus chiu's server",
+          "cachedResultUrl": "https://discord.com/channels/1377002337616527462"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1465958965824192625",
+          "mode": "list",
+          "cachedResultName": "n8n-ai-agent",
+          "cachedResultUrl": "https://discord.com/channels/1377002337616527462/1465958965824192625"
+        },
+        "content": "={{ $json.output }}",
+        "options": {
+          "message_reference": "={{ $('Get Discord Messages').item.json.body.message_id }}"
+        }
+      },
+      "id": "1187dd59-d4d9-4916-8b91-49e5e0756cc1",
+      "name": "Response fromAI",
+      "type": "n8n-nodes-base.discord",
+      "position": [
+        2240,
+        432
+      ],
+      "webhookId": "735bc71f-14ae-48ff-b145-f2620466a3d0",
+      "typeVersion": 2,
+      "credentials": {
+        "discordBotApi": {
+          "id": "sSznxnMY0FWJ0VoR",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "getmessage",
+        "options": {}
+      },
+      "id": "6c2cc2e2-0123-45ac-ae8c-2f6f2d294c14",
+      "name": "Get Discord Messages",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        1488,
+        432
+      ],
+      "webhookId": "4c80241d-69ca-4394-8e09-d1f72cd0878f",
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.chat_message }} \n\nKeep the Reply Max and under 1000 characters.",
+        "options": {}
+      },
+      "id": "b2dd03bf-e52e-4046-a94b-1020ccc3709d",
+      "name": "Chat Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        1776,
+        432
+      ],
+      "typeVersion": 1.6
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.channel_id }}",
+        "contextWindowLength": 3
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1872,
+        640
+      ],
+      "id": "6061179e-e0f0-43fd-b466-b0cf42eebf2b",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "model": "llama3.2:latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        1728,
+        640
+      ],
+      "id": "af689b4d-9a0f-4cd6-9822-c31657860b30",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "TK16ptC7HvyyJKjJ",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "numResults": 10,
+          "pageNumber": 1,
+          "language": "en",
+          "safesearch": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolSearXng",
+      "typeVersion": 1,
+      "position": [
+        2016,
+        640
+      ],
+      "id": "a1d0b0cc-a446-4b44-8f75-eb17b13b3980",
+      "name": "SearXNG",
+      "credentials": {
+        "searXngApi": {
+          "id": "hVVOrot2EPW9sHKs",
+          "name": "SearXNG account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        2112,
+        640
+      ],
+      "id": "52df5843-c7ff-4811-8883-81ac3199c9a1",
+      "name": "Calculator"
+    }
+  ],
+  "pinData": {
+    "Get Discord Messages": [
+      {
+        "json": {
+          "headers": {
+            "host": "localhost:5678",
+            "user-agent": "python-requests/2.32.5",
+            "accept-encoding": "gzip, deflate",
+            "accept": "*/*",
+            "connection": "keep-alive",
+            "content-type": "application/json",
+            "content-length": "181"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "channel_id": "1465958965824192625",
+            "chat_message": "what are some boba places near plano texas?",
+            "timestamp": "2026-01-28 23:03:32.891000+00:00",
+            "message_id": "1466207097652777021",
+            "user_id": "620661857958625291"
+          },
+          "webhookUrl": "https://n8n.lan/webhook-test/getmessage",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Chat Agent": {
+      "main": [
+        [
+          {
+            "node": "Response fromAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Discord Messages": {
+      "main": [
+        [
+          {
+            "node": "Chat Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Chat Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Chat Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SearXNG": {
+      "ai_tool": [
+        [
+          {
+            "node": "Chat Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "Chat Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "availableInMCP": false
+  },
+  "versionId": "32d99c97-c32c-4518-8194-dc4127fd7400",
+  "meta": {
+    "templateId": "5816",
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b6dec14ab8986d3a98a26cfe8005b4737483396f5303d71bcf3d5a4770fa25dd"
+  },
+  "id": "iygpVDn73U4bTmwQ",
+  "tags": []
+}

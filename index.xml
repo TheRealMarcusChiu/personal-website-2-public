@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 26 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 28 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating a Discord AI Agen with n8n</title>
+      <link>http://www.marcu/tinkering/2026-01-28/</link>
+      <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://www.marcu/tinkering/2026-01-28/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;assets/discord-n8n-ai-chatbot.png&#34;&gt;&lt;img src=&#34;assets/discord-n8n-ai-chatbot.png&#34; alt=&#34;discord-n8n-ai-chatbot&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;This guide summarizes an n8n workflow that powers a Discord AI chatbot. The bot listens to messages in selected Discord channels, forwards them to n8n, generates AI replies, and posts responses as threads under the original messages.&lt;/p&gt;&#xA;&lt;h1 id=&#34;architecture-flow-diagram&#34;&gt;Architecture Flow Diagram&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;assets/architecture-flow.png&#34;&gt;&lt;img src=&#34;assets/architecture-flow.png&#34; alt=&#34;architecture-flow&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;On New Discord Message Event&lt;/li&gt;&#xA;&lt;li&gt;Discord Bot Event Listener (Python) - captures messages and sends them to the n8n webhook&lt;/li&gt;&#xA;&lt;li&gt;n8n Workflow&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Webhook (to receive events from #2)&lt;/li&gt;&#xA;&lt;li&gt;AI Agent Node&lt;/li&gt;&#xA;&lt;li&gt;Discord Send Message Response&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;ol start=&#34;4&#34;&gt;&#xA;&lt;li&gt;Discord Receives Message Response&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Install n8n - &lt;a href=&#34;https://docs.n8n.io/hosting/&#34;&gt;https://docs.n8n.io/hosting/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;1-create-a-discord-bot&#34;&gt;1) Create a Discord Bot&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Create an application in the &lt;a href=&#34;https://discord.com/developers/applications&#34;&gt;Discord Developer Portal&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Reset and save the &lt;strong&gt;Bot Token&lt;/strong&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Enable privileged intents (Presence, Server Members, Message Content).&lt;/li&gt;&#xA;&lt;li&gt;Invite the bot to your server with required permissions.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;2-deploy-the-discord-bot-event-listener-python&#34;&gt;2) Deploy the Discord Bot Event Listener (Python)&lt;/h1&gt;&#xA;&lt;p&gt;Clone &lt;a href=&#34;https://github.com/TheRealMarcusChiu/discord-ai-chatbot&#34;&gt;https://github.com/TheRealMarcusChiu/discord-ai-chatbot&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Simulating 100,000 Celestial Bodies</title>
       <link>http://www.marcu/tinkering/2026-01-26/</link>
