@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCN2D792VE"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GCN2D792VE');
+  </script>
+
+  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5G85VDQT');</script>
+  
+
+  <link href='/favicon.ico' rel='shortcut icon'>
+  <link href='/favicon.ico' rel='apple-touch-icon'>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Adding Firewall to Proxmox LXC Containers | Marcus Chiu</title>
+
+  
+  <meta property="og:url" content="http://192.168.111.152:1313/tinkering/2026-01-29-copy/">
+  <meta property="og:site_name" content="Marcus Chiu">
+  <meta property="og:title" content="Adding Firewall to Proxmox LXC Containers">
+  <meta property="og:description" content="To use the Proxmox firewall at the LXC container level, it must be enabled at multiple layers of the Proxmox stack. Firewall rules are evaluated top-down, so every required scope must be active for LXC-level rules to take effect.
+Required Firewall Configuration 1. Data Center Level The Data Center firewall must be enabled. ⚠️ Before enabling it, ensure inbound traffic is ACCEPTed at this level, or you may lock yourself out of the host. You can either: Add a broad ACCEPT rule for incoming traffic, or Define more fine-grained rules if you don’t want to allow all inbound connections by default. 2. Node Level The firewall must be enabled on the Proxmox node hosting the LXC container. This activates firewall processing for workloads running on that node. 3. LXC Container Level The firewall must be enabled explicitly on the LXC container itself. Without this, container-specific rules will be ignored even if higher levels are enabled. 4. LXC Network Interface The firewall must also be enabled on the LXC network interface (e.g. net0). This is where traffic filtering actually occurs for the container’s network traffic. Reiterate Only when all four layers are enabled will firewall rules applied to an LXC container function as expected.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="tinkering">
+    <meta property="article:published_time" content="2026-01-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-01-29T00:00:00+00:00">
+
+
+
+
+
+
+
+
+  
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:url' content='http://www.marcuschiu.com'>
+  <meta name='twitter:title' content='Marcus Chiu - FullStack Developer'>
+  <meta name='twitter:description' content="Marcus Chiu's Website">
+  <meta name='twitter:image' content='http://doc.marcuschiu.com/assets/images/me.png'>
+  <meta name='twitter:site' content='@TheMarcusChiu'>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/carousel.css">
+  
+      <script src="/js/main.js"></script>
+      <script src="/js/main.js"></script>
+
+<script>
+  window.MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+
+</head>
+<body class="text-light dark">
+  
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G85VDQT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  
+  <div class="container pt-5">
+    <header>
+      
+  <div class="row mt-5 pt-5">
+    <nav aria-label="breadcrumb" class="small">
+      <ol class="breadcrumb fw-bold bg-transparent" >
+    <li class="breadcrumb-item">
+      <a href="/">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a aria-current="true" class="ancestor" href="/tinkering/">Tinkering</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/music-and-arts/">Music &amp; Arts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/fitness/">Fitness</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/thoughts/">Thoughts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/travel/">Travel</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about/">About</a>
+    </li>
+      </ol>
+    </nav>
+  </div>
+
+    </header>
+    <main>
+      
+  <div class="post">
+    <header class="mb-4">
+      <h1 class="text-uppercase">Adding Firewall to Proxmox LXC Containers</h1>
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+
+          
+          
+          <li class="breadcrumb-item tiny">
+            <time datetime="2026-01-29T00:00:00&#43;00:00">January 29, 2026</time>
+          </li>
+
+          
+          
+          
+
+          <li class="breadcrumb-item tiny">
+            1 minutes
+          </li>
+
+        </ol>
+      </div>
+    </header>
+
+
+
+
+
+
+    <article>
+      <p>To use the Proxmox firewall at the <strong>LXC container level</strong>, it must be enabled at multiple layers of the Proxmox stack. Firewall rules are evaluated top-down, so every required scope must be active for LXC-level rules to take effect.</p>
+<h1 id="required-firewall-configuration">Required Firewall Configuration</h1>
+<h2 id="1-data-center-level">1. Data Center Level</h2>
+<ul>
+<li>The Data Center firewall <strong>must be enabled</strong>.</li>
+<li>⚠️ Before enabling it, ensure <strong>inbound traffic is ACCEPTed</strong> at this level, or you may lock yourself out of the host.</li>
+<li>You can either:
+<ul>
+<li>Add a broad <code>ACCEPT</code> rule for incoming traffic, or</li>
+<li>Define more fine-grained rules if you don’t want to allow all inbound connections by default.</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-node-level">2. Node Level</h2>
+<ul>
+<li>The firewall must be enabled on the Proxmox <strong>node</strong> hosting the LXC container.</li>
+<li>This activates firewall processing for workloads running on that node.</li>
+</ul>
+<h2 id="3-lxc-container-level">3. LXC Container Level</h2>
+<ul>
+<li>The firewall must be enabled explicitly on the <strong>LXC container</strong> itself.</li>
+<li>Without this, container-specific rules will be ignored even if higher levels are enabled.</li>
+</ul>
+<h2 id="4-lxc-network-interface">4. LXC Network Interface</h2>
+<ul>
+<li>The firewall must also be enabled on the <strong>LXC network interface</strong> (e.g. <code>net0</code>).</li>
+<li>This is where traffic filtering actually occurs for the container’s network traffic.</li>
+</ul>
+<h1 id="reiterate">Reiterate</h1>
+<p>Only when <strong>all four layers</strong> are enabled will firewall rules applied to an LXC container function as expected.</p>
+
+    </article>
+  </div>
+  
+<div class="row page-prev-next">
+    <div class="col-md">
+        
+            <a href="/tinkering/2026-01-29/">
+                <span>← </span>
+                <span class="title">Adding Firewall to Proxmox LXC Containers</span>
+            </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+    </div>
+</div>
+
+  <div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://marcuschiu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </main>
+  </div>
+</body>
+</html>
