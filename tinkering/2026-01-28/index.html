@@ -30,7 +30,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta property="og:site_name" content="Marcus Chiu">
   <meta property="og:title" content="Creating a Discord AI Agent with n8n">
   <meta property="og:description" content="This guide summarizes an n8n workflow that powers a Discord AI chatbot. The bot listens to messages in selected Discord channels, forwards them to n8n, generates AI replies, and posts responses as threads under the original messages.
-Architecture Flow Diagram On New Discord Message Event Discord Bot Event Listener (Python) - captures messages and sends them to the n8n webhook n8n Workflow Webhook (to receive events from #2) AI Agent Node Discord Send Message Response Discord Receives Message Response Prerequisites Install n8n - https://docs.n8n.io/hosting/ 1) Create a Discord Bot Create an application in the Discord Developer Portal. Reset and save the Bot Token. Enable privileged intents (Presence, Server Members, Message Content). Invite the bot to your server with required permissions. 2) Deploy the Discord Bot Event Listener (Python) Clone https://github.com/TheRealMarcusChiu/discord-ai-chatbot">
+Architecture Flow Diagram On New Discord Message Event Discord Bot Event Listener (Python) - captures messages and sends them to the n8n webhook n8n Workflow Webhook (to receive events from #2) AI Agent Node Discord Send Message Response Discord Receives Message Response Prerequisites Install n8n - https://docs.n8n.io/hosting/ 1. Create a Discord Bot Create an application in the Discord Developer Portal. Reset and save the Bot Token. Enable privileged intents (Presence, Server Members, Message Content). Invite the bot to your server with required permissions. 2. Deploy the Discord Bot Event Listener (Python) Clone https://github.com/TheRealMarcusChiu/discord-ai-chatbot">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="tinkering">
@@ -149,28 +149,27 @@ Architecture Flow Diagram On New Discord Message Event Discord Bot Event Listene
 <ol>
 <li>On New Discord Message Event</li>
 <li>Discord Bot Event Listener (Python) - captures messages and sends them to the n8n webhook</li>
-<li>n8n Workflow</li>
-</ol>
+<li>n8n Workflow
 <ul>
 <li>Webhook (to receive events from #2)</li>
 <li>AI Agent Node</li>
 <li>Discord Send Message Response</li>
 </ul>
-<ol start="4">
+</li>
 <li>Discord Receives Message Response</li>
 </ol>
 <h1 id="prerequisites">Prerequisites</h1>
 <ul>
 <li>Install n8n - <a href="https://docs.n8n.io/hosting/">https://docs.n8n.io/hosting/</a></li>
 </ul>
-<h1 id="1-create-a-discord-bot">1) Create a Discord Bot</h1>
+<h1 id="1-create-a-discord-bot">1. Create a Discord Bot</h1>
 <ul>
 <li>Create an application in the <a href="https://discord.com/developers/applications">Discord Developer Portal</a>.</li>
 <li>Reset and save the <strong>Bot Token</strong>.</li>
 <li>Enable privileged intents (Presence, Server Members, Message Content).</li>
 <li>Invite the bot to your server with required permissions.</li>
 </ul>
-<h1 id="2-deploy-the-discord-bot-event-listener-python">2) Deploy the Discord Bot Event Listener (Python)</h1>
+<h1 id="2-deploy-the-discord-bot-event-listener-python">2. Deploy the Discord Bot Event Listener (Python)</h1>
 <p>Clone <a href="https://github.com/TheRealMarcusChiu/discord-ai-chatbot">https://github.com/TheRealMarcusChiu/discord-ai-chatbot</a></p>
 <p>Install python dependencies (<code>discord</code>, <code>python-dotenv</code>):</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pip install -r requirements.txt
@@ -181,7 +180,7 @@ Architecture Flow Diagram On New Discord Message Event Discord Bot Event Listene
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>LISTEN_CHANNELS <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1465958965824192625</span>, <span style="color:#ae81ff">1465958965824192625</span>]  <span style="color:#75715e"># Replace with your target channel IDs</span>
 </span></span></code></pre></div><p>Run the <code>Discord Bot Event Listener</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>python main.py
-</span></span></code></pre></div><h1 id="3-run-discord-bot-event-listener-247">3) Run Discord Bot Event Listener 24/7</h1>
+</span></span></code></pre></div><h1 id="3-run-discord-bot-event-listener-247">3. Run Discord Bot Event Listener 24/7</h1>
 <p>Exit out of <code>python main.py</code>.</p>
 <p>Copy SystemD <code>discord-bot.service</code> file to /etc/systemd/system directory:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo cp discord-bot.service /etc/systemd/system/
@@ -192,7 +191,7 @@ Architecture Flow Diagram On New Discord Message Event Discord Bot Event Listene
 </span></span></code></pre></div><p>Verify:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo systemctl status discord-bot.service
 </span></span><span style="display:flex;"><span>sudo journalctl -u discord-bot.service -f
-</span></span></code></pre></div><h1 id="n8n-workflow">n8n Workflow</h1>
+</span></span></code></pre></div><h1 id="3-n8n-workflow">3. n8n Workflow</h1>
 <p><a href="assets/discord-ai-chatbot-workflow.png"><img src="assets/discord-ai-chatbot-workflow.png" alt="discord-ai-chatbot-workflow"></a></p>
 <p>You may import this <a href="assets/discord-ai-chatbot.json">JSON file</a> into your n8n server</p>
 <ul>
@@ -204,7 +203,7 @@ Architecture Flow Diagram On New Discord Message Event Discord Bot Event Listene
 <li><strong>Discord Response</strong>: Posts AI replies as threads linked to the original message.</li>
 </ul>
 <p>Once, configured <code>SAVE</code> and <code>PUBLISH</code> the workflow!</p>
-<h1 id="testing">Testing</h1>
+<h1 id="4-testing">4. Testing</h1>
 <ol>
 <li>Start the Discord bot.</li>
 <li>Activate the n8n workflow.</li>

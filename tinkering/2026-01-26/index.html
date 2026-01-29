@@ -153,7 +153,7 @@ The Big Idea Instead of looking at each body individually, the Barnes-Hut algori
 </span></span><span style="display:flex;"><span>Center of mass x <span style="color:#f92672">=</span> (x1<span style="color:#f92672">*</span>m1 <span style="color:#f92672">+</span> x2<span style="color:#f92672">*</span>m2) <span style="color:#f92672">/</span> Total mass
 </span></span><span style="display:flex;"><span>Center of mass y <span style="color:#f92672">=</span> (y1<span style="color:#f92672">*</span>m1 <span style="color:#f92672">+</span> y2<span style="color:#f92672">*</span>m2) <span style="color:#f92672">/</span> Total mass
 </span></span></code></pre></div><h1 id="organizing-space-with-a-quad-tree">Organizing Space with a Quad-Tree</h1>
-<p>The algorithm uses a <a href="https://en.wikipedia.org/wiki/Quadtree"><strong>quad-tree</strong></a>, a tree structure where each node has up to 4 children, representing quadrants of 2D space:</p>
+<p>The algorithm uses a <a href="https://en.wikipedia.org/wiki/Quadtree">quad-tree</a>, a tree structure where each node has up to 4 children, representing quadrants of 2D space:</p>
 <ul>
 <li>The root node covers the entire space.</li>
 <li>Each child node represents one quadrant of its parent.</li>
@@ -164,30 +164,22 @@ The Big Idea Instead of looking at each body individually, the Barnes-Hut algori
 <h1 id="how-to-build-the-tree">How to Build the Tree</h1>
 <p>To insert a new body into the tree:</p>
 <ol>
-<li><strong>Empty node:</strong> Place the body here.</li>
-<li><strong>Internal node:</strong> Update its center of mass and total mass, then insert recursively into the correct quadrant.</li>
-<li><strong>External node with a body:</strong> Subdivide the region into four quadrants, and insert both the existing and new bodies recursively.</li>
+<li>empty node - place the body here</li>
+<li>internal node - update its center of mass and total mass, then insert recursively into the correct quadrant</li>
+<li>external node with a body - subdivide the region into four quadrants, and insert both the existing and new bodies recursively</li>
 </ol>
 <p>Repeat until all bodies are in the tree.</p>
 <h1 id="calculating-forces">Calculating Forces</h1>
 <p>To find the net force on a body:</p>
-<ol>
-<li>Start at the root.</li>
-<li>For each node:
-<ul>
-<li>If it’s a leaf node (a single body that’s not the target), compute the force directly.</li>
-<li>If it’s an internal node, calculate the ratio: <code>s / d</code>
-<ul>
-<li><code>s</code> = width of the node’s region</li>
-<li><code>d</code> = distance from the body to the node’s center of mass</li>
-</ul>
-</li>
-<li>If <code>s / d &lt; θ</code> (a threshold, often 0.5), treat the node as a single body and compute the force.</li>
-<li>Otherwise, recurse into the children of the node.</li>
-</ul>
-</li>
-</ol>
-<p>By grouping distant bodies, the algorithm avoids many pairwise calculations, making it much faster than brute force.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1. Start at the root
+</span></span><span style="display:flex;"><span>2. For each node:
+</span></span><span style="display:flex;"><span>   - If it’s a leaf node (a single body that’s not the target), compute the force directly
+</span></span><span style="display:flex;"><span>   - If it’s an internal node, calculate the ratio: `s/d`
+</span></span><span style="display:flex;"><span>     - `s` = width of the node’s region
+</span></span><span style="display:flex;"><span>     - `d` = distance from the body to the node’s center of mass
+</span></span><span style="display:flex;"><span>   - If `s / d &lt; θ` (a threshold, often 0.5), treat the node as a single body and compute the force
+</span></span><span style="display:flex;"><span>   - Otherwise, recurse into the children of the node
+</span></span></code></pre></div><p>By grouping distant bodies, the algorithm avoids many pairwise calculations, making it much faster than brute force.</p>
 <h1 id="example-intuition">Example Intuition</h1>
 <p>Imagine calculating forces on body <code>A</code>:</p>
 <ol>
@@ -197,12 +189,12 @@ The Big Idea Instead of looking at each body individually, the Barnes-Hut algori
 </ol>
 <p>This way, each body only calculates forces from important neighbors and distant approximations, drastically reducing computation.</p>
 <h1 id="why-it-works">Why It Works</h1>
-<p>The Barnes-Hut algorithm trades a little accuracy for a huge gain in speed. By adjusting the threshold <code>θ</code>, you can balance:</p>
+<p>The Barnes-Hut algorithm trades a little accuracy for a huge gain in speed. By adjusting the threshold θ, you can balance:</p>
 <ul>
-<li><strong>Smaller θ:</strong> more accurate but slower (closer to brute force).</li>
-<li><strong>Larger θ:</strong> faster but less accurate.</li>
+<li>Smaller θ - more accurate but slower (closer to brute force)</li>
+<li>Larger θ - faster but less accurate</li>
 </ul>
-<p>For most simulations, <code>θ = 0.5</code> gives excellent results.</p>
+<p>For most simulations, θ=0.5 gives excellent results.</p>
 <h1 id="resources">Resources</h1>
 <ul>
 <li><a href="https://arborjs.org/docs/barnes-hut">https://arborjs.org/docs/barnes-hut</a></li>

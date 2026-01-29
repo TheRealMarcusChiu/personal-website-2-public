@@ -23,16 +23,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Securing Proxmox LXC Containers by Disabling SSH Password Login | Marcus Chiu</title>
+  <title>Disable SSH Password Login in Proxmox LXC Containers | Marcus Chiu</title>
 
   
   <meta property="og:url" content="http://192.168.111.152:1313/tinkering/2026-01-31/">
   <meta property="og:site_name" content="Marcus Chiu">
-  <meta property="og:title" content="Securing Proxmox LXC Containers by Disabling SSH Password Login">
+  <meta property="og:title" content="Disable SSH Password Login in Proxmox LXC Containers">
   <meta property="og:description" content="When running LXC containers on Proxmox, one of the simplest and most effective security improvements you can make is disabling SSH password authentication and enforcing SSH key–only access.
-This post covers a small utility script from my repository:
-GitHub Link 🤔 Why Disable SSH Password Authentication? SSH password login is one of the most common attack targets:
-Vulnerable to brute-force attacks Weak or reused passwords are easy to guess Often accidentally enabled in containers SSH keys are:">
+Update Manually Modify the SSH daemon configuration file inside the container:
+vim /etc/ssh/sshd_config Add the following lines below to the end of the file and save:
+# Marcus Chiu Changes - START PasswordAuthentication no ChallengeResponseAuthentication no UsePAM no PermitRootLogin prohibit-password PubkeyAuthentication yes # Marcus Chiu Changes - END Reload and restart the SSH daemon to apply changes:">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="tinkering">
@@ -116,7 +116,7 @@ Vulnerable to brute-force attacks Weak or reused passwords are easy to guess Oft
       
   <div class="post">
     <header class="mb-4">
-      <h1 class="text-uppercase">Securing Proxmox LXC Containers by Disabling SSH Password Login</h1>
+      <h1 class="text-uppercase">Disable SSH Password Login in Proxmox LXC Containers</h1>
       <div aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent">
 
@@ -131,7 +131,7 @@ Vulnerable to brute-force attacks Weak or reused passwords are easy to guess Oft
           
 
           <li class="breadcrumb-item tiny">
-            2 minutes
+            4 minutes
           </li>
 
         </ol>
@@ -144,37 +144,11 @@ Vulnerable to brute-force attacks Weak or reused passwords are easy to guess Oft
 
 
     <article>
-      <p>When running <strong>LXC containers on Proxmox</strong>, one of the simplest and most effective security improvements you can make is disabling <strong>SSH password authentication</strong> and enforcing <strong>SSH key–only access</strong>.</p>
-<p>This post covers a small utility script from my repository:</p>
-<ul>
-<li><a href="https://github.com/TheRealMarcusChiu/proxmox-scripts/tree/master/update-lxc-to-deny-ssh-password">GitHub Link</a></li>
-</ul>
-<h1 id="-why-disable-ssh-password-authentication">🤔 Why Disable SSH Password Authentication?</h1>
-<p>SSH password login is one of the most common attack targets:</p>
-<ul>
-<li>Vulnerable to brute-force attacks</li>
-<li>Weak or reused passwords are easy to guess</li>
-<li>Often accidentally enabled in containers</li>
-</ul>
-<p>SSH keys are:</p>
-<ul>
-<li>Stronger and harder to brute-force</li>
-<li>Easier to rotate and manage</li>
-<li>The recommended default for servers and containers</li>
-</ul>
-<p>If your LXC containers are reachable on your network, disabling password logins is a no-brainer.</p>
-<h1 id="-why-i-created-this-script">🛠 Why I Created This Script</h1>
-<p>I personally have <strong>over a dozen LXC containers</strong> on my Proxmox server. Manually disabling SSH password authentication in each container is <strong>time-consuming and repetitive</strong>.</p>
-<p>This script automates the process, saving time and ensuring <strong>consistent security</strong> across all containers.</p>
-<h1 id="-what-this-script-does">🛠 What This Script Does</h1>
-<p>The <strong>update-lxc-to-deny-ssh-password</strong> script automates SSH hardening for LXC containers on Proxmox. Specifically, it does the following:</p>
-<ol>
-<li>Opens the SSH daemon configuration file inside the container:</li>
-</ol>
+      <p>When running LXC containers on Proxmox, one of the simplest and most effective security improvements you can make is disabling SSH password authentication and enforcing SSH key–only access.</p>
+<h1 id="update-manually">Update Manually</h1>
+<p>Modify the SSH daemon configuration file inside the container:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vim /etc/ssh/sshd_config
-</span></span></code></pre></div><ol start="2">
-<li>Edits the file to include the following lines:</li>
-</ol>
+</span></span></code></pre></div><p>Add the following lines below to the end of the file and save:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Marcus Chiu Changes - START</span>
 </span></span><span style="display:flex;"><span>PasswordAuthentication no
 </span></span><span style="display:flex;"><span>ChallengeResponseAuthentication no
@@ -182,20 +156,171 @@ Vulnerable to brute-force attacks Weak or reused passwords are easy to guess Oft
 </span></span><span style="display:flex;"><span>PermitRootLogin prohibit-password
 </span></span><span style="display:flex;"><span>PubkeyAuthentication yes
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Marcus Chiu Changes - END</span>
-</span></span></code></pre></div><ol start="3">
-<li>Reloads and restarts the SSH daemon to apply changes:</li>
-</ol>
+</span></span></code></pre></div><p>Reload and restart the SSH daemon to apply changes:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl reload sshd
 </span></span><span style="display:flex;"><span>sudo systemctl restart sshd
-</span></span></code></pre></div><h1 id="-how-to-use-this-script">🛠 How to Use This Script</h1>
-<p>Clone this project into the proxmox host:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/TheRealMarcusChiu/proxmox-scripts
-</span></span></code></pre></div><p>Change directory into:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd update-lxc-to-deny-ssh-password
+</span></span></code></pre></div><p>Verify password login is denied:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ssh root@192.168.0.111
+</span></span></code></pre></div><h1 id="update-automatically-via-script">Update Automatically via Script</h1>
+<p>If you have multiple LXC containers like me, manually updating them is grunt work. Let a script handle this work.</p>
+<p>In the proxmox host create a script <code>update_ssh_config.sh</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Script to update SSH configuration in a specific Proxmox LXC container</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Usage: ./update_ssh_config.sh &lt;container_id&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Run this on your Proxmox host</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set -e
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Color codes for output</span>
+</span></span><span style="display:flex;"><span>RED<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\033[0;31m&#39;</span>
+</span></span><span style="display:flex;"><span>GREEN<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\033[0;32m&#39;</span>
+</span></span><span style="display:flex;"><span>YELLOW<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\033[1;33m&#39;</span>
+</span></span><span style="display:flex;"><span>NC<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\033[0m&#39;</span> <span style="color:#75715e"># No Color</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check if container ID is provided</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>RED<span style="color:#e6db74">}</span><span style="color:#e6db74">Error: Container ID is required</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Usage: </span>$0<span style="color:#e6db74"> &lt;container_id&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Available containers:&#34;</span>
+</span></span><span style="display:flex;"><span>    pct list
+</span></span><span style="display:flex;"><span>    exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CTID<span style="color:#f92672">=</span>$1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">=== Proxmox LXC SSH Configuration Update ===</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check if container exists</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ! pct status <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> &amp;&gt;/dev/null; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>RED<span style="color:#e6db74">}</span><span style="color:#e6db74">Error: Container </span><span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span><span style="color:#e6db74"> does not exist</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Available containers:&#34;</span>
+</span></span><span style="display:flex;"><span>    pct list
+</span></span><span style="display:flex;"><span>    exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get container name</span>
+</span></span><span style="display:flex;"><span>CT_NAME<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>pct list | grep <span style="color:#e6db74">&#34;^</span><span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> | awk <span style="color:#e6db74">&#39;{print $3}&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>YELLOW<span style="color:#e6db74">}</span><span style="color:#e6db74">Processing Container </span><span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span><span style="color:#e6db74"> (</span><span style="color:#e6db74">${</span>CT_NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">)...</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check if container is running</span>
+</span></span><span style="display:flex;"><span>STATUS<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>pct status <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> | awk <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$STATUS<span style="color:#e6db74">&#34;</span> !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;running&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>RED<span style="color:#e6db74">}</span><span style="color:#e6db74">Error: Container </span><span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span><span style="color:#e6db74"> is not running</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Please start the container first with: pct start </span><span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check if sshd_config exists</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ! pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- test -f /etc/ssh/sshd_config; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>RED<span style="color:#e6db74">}</span><span style="color:#e6db74">Error: SSH is not installed in container </span><span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Please install SSH first: pct exec </span><span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span><span style="color:#e6db74"> -- apt-get install openssh-server&#34;</span>
+</span></span><span style="display:flex;"><span>    exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">✓ Container is running and SSH is installed</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Backup original sshd_config</span>
+</span></span><span style="display:flex;"><span>BACKUP_FILE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/etc/ssh/sshd_config.backup.</span><span style="color:#66d9ef">$(</span>date +%Y%m%d_%H%M%S<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Creating backup at </span><span style="color:#e6db74">${</span>BACKUP_FILE<span style="color:#e6db74">}</span><span style="color:#e6db74">...&#34;</span>
+</span></span><span style="display:flex;"><span>pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- cp /etc/ssh/sshd_config <span style="color:#e6db74">${</span>BACKUP_FILE<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">✓ Backup created</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check if Marcus Chiu changes already exist</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- grep -q <span style="color:#e6db74">&#34;Marcus Chiu Changes&#34;</span> /etc/ssh/sshd_config; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>YELLOW<span style="color:#e6db74">}</span><span style="color:#e6db74">Warning: Marcus Chiu changes already exist in configuration</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    read -p <span style="color:#e6db74">&#34;Do you want to continue anyway? (y/N): &#34;</span> -n <span style="color:#ae81ff">1</span> -r
+</span></span><span style="display:flex;"><span>    echo
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> ! $REPLY <span style="color:#f92672">=</span>~ ^<span style="color:#f92672">[</span>Yy<span style="color:#f92672">]</span>$ <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        echo <span style="color:#e6db74">&#34;Aborted.&#34;</span>
+</span></span><span style="display:flex;"><span>        exit <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Update SSH configuration</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Updating SSH configuration...&#34;</span>
+</span></span><span style="display:flex;"><span>pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- bash -c <span style="color:#e6db74">&#34;cat &gt;&gt; /etc/ssh/sshd_config&#34;</span> <span style="color:#e6db74">&lt;&lt;&#39;EOF&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># Marcus Chiu Changes - START
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">PasswordAuthentication no
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">ChallengeResponseAuthentication no
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">UsePAM no
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">PermitRootLogin prohibit-password
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">PubkeyAuthentication yes
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># Marcus Chiu Changes - END
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">✓ Configuration updated</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Test SSH configuration</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Testing SSH configuration...&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- sshd -t 2&gt;&amp;1; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">✓ SSH configuration is valid</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>RED<span style="color:#e6db74">}</span><span style="color:#e6db74">✗ SSH configuration test failed</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Restoring backup...&#34;</span>
+</span></span><span style="display:flex;"><span>    pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- cp <span style="color:#e6db74">${</span>BACKUP_FILE<span style="color:#e6db74">}</span> /etc/ssh/sshd_config
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>YELLOW<span style="color:#e6db74">}</span><span style="color:#e6db74">Configuration restored from backup</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Reload/restart SSH service</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Reloading SSH service...&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- systemctl reload sshd 2&gt;/dev/null; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">✓ SSH service reloaded (sshd)</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">elif</span> pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- systemctl reload ssh 2&gt;/dev/null; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">✓ SSH service reloaded (ssh)</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">elif</span> pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- systemctl restart sshd 2&gt;/dev/null; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">✓ SSH service restarted (sshd)</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">elif</span> pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- systemctl restart ssh 2&gt;/dev/null; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">✓ SSH service restarted (ssh)</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">elif</span> pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- service ssh restart 2&gt;/dev/null; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">✓ SSH service restarted (service)</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>RED<span style="color:#e6db74">}</span><span style="color:#e6db74">✗ Failed to reload/restart SSH service</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check SSH service status</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Checking SSH service status...&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- systemctl is-active --quiet sshd 2&gt;/dev/null; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">✓ SSH service is running (sshd)</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">elif</span> pct exec <span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span> -- systemctl is-active --quiet ssh 2&gt;/dev/null; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">✓ SSH service is running (ssh)</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>RED<span style="color:#e6db74">}</span><span style="color:#e6db74">✗ SSH service status unclear</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Please check manually: pct exec </span><span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span><span style="color:#e6db74"> -- systemctl status sshd&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GREEN<span style="color:#e6db74">}</span><span style="color:#e6db74">=== SUCCESS ===</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>echo -e <span style="color:#e6db74">&#34;Container </span><span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span><span style="color:#e6db74"> (</span><span style="color:#e6db74">${</span>CT_NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">) has been updated successfully&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>echo -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>YELLOW<span style="color:#e6db74">}</span><span style="color:#e6db74">IMPORTANT REMINDERS:</span><span style="color:#e6db74">${</span>NC<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;1. Backup saved at: </span><span style="color:#e6db74">${</span>BACKUP_FILE<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;2. Password authentication is now DISABLED&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;3. Make sure you have SSH keys configured before logging out!&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;4. To restore backup if needed:&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;   pct exec </span><span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span><span style="color:#e6db74"> -- cp </span><span style="color:#e6db74">${</span>BACKUP_FILE<span style="color:#e6db74">}</span><span style="color:#e6db74"> /etc/ssh/sshd_config&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;   pct exec </span><span style="color:#e6db74">${</span>CTID<span style="color:#e6db74">}</span><span style="color:#e6db74"> -- systemctl restart sshd&#34;</span>
+</span></span></code></pre></div><p>Make it executable:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod +x update_ssh_config.sh
 </span></span></code></pre></div><p>Run script:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./update_ssh_config.sh &lt;container_id&gt;
 </span></span></code></pre></div><h1 id="conclusion">Conclusion</h1>
-<p>By using this script, you ensure all your LXC containers <strong>enforce key-based SSH authentication</strong>, reducing the attack surface and improving overall server security.</p>
+<p>By using this script, you ensure all your LXC containers enforce key-based SSH authentication, reducing the attack surface and improving overall server security.</p>
 
     </article>
   </div>

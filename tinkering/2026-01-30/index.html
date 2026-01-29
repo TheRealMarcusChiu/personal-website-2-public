@@ -30,8 +30,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta property="og:site_name" content="Marcus Chiu">
   <meta property="og:title" content="How to Uninstall Fedora Asahi Linux from an M1 MacBook Pro">
   <meta property="og:description" content="If you’ve experimented with Fedora Asahi Linux on Apple Silicon and want to reclaim the disk space and return to a clean macOS-only setup, this guide walks through the safe, manual removal process using the diskutil CLI.
-⚠️ Warning: These steps permanently delete Linux data. Double‑check disk identifiers before running destructive commands.
-Step 1: Boot into macOS (Set as Default OS) If your Mac still defaults to Fedora Asahi Linux:">
+⚠️ WARNING: These steps permanently delete Linux data
+Step 1: Boot into macOS (Set as Default OS) If your Mac still defaults to Fedora Asahi Linux:
+Shut down the Mac Hold Power → Loading startup options Select macOS Click Always Use Step 2: Inspect APFS Containers List all APFS containers:">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="tinkering">
@@ -143,34 +144,48 @@ Step 1: Boot into macOS (Set as Default OS) If your Mac still defaults to Fedora
 
 
     <article>
-      <p>If you’ve experimented with <strong>Fedora Asahi Linux</strong> on Apple Silicon and want to reclaim the disk space and return to a clean <strong>macOS-only</strong> setup, this guide walks through the <strong>safe, manual removal process using the <code>diskutil</code> CLI</strong>.</p>
-<blockquote>
-<p>⚠️ <strong>Warning</strong>: These steps permanently delete Linux data. Double‑check disk identifiers before running destructive commands.</p>
-</blockquote>
+      <p>If you’ve experimented with <a href="https://asahilinux.org/fedora/">Fedora Asahi Linux on Apple Silicon</a> and want to reclaim the disk space and return to a clean macOS-only setup, this guide walks through the safe, manual removal process using the <code>diskutil</code> CLI.</p>
+<p>⚠️ WARNING: These steps permanently delete Linux data</p>
 <h1 id="step-1-boot-into-macos-set-as-default-os">Step 1: Boot into macOS (Set as Default OS)</h1>
 <p>If your Mac still defaults to Fedora Asahi Linux:</p>
 <ol>
 <li>Shut down the Mac</li>
-<li>Hold <strong>Power</strong> → <em>Loading startup options</em></li>
-<li>Select <strong>macOS</strong></li>
-<li>Click <strong>Always Use</strong></li>
+<li>Hold Power → <em>Loading startup options</em></li>
+<li>Select macOS</li>
+<li>Click Always Use</li>
 </ol>
 <h1 id="step-2-inspect-apfs-containers">Step 2: Inspect APFS Containers</h1>
 <p>List all APFS containers:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>diskutil apfs list
-</span></span></code></pre></div><p>You’ll typically see:</p>
-<ul>
-<li><strong>Container 1</strong> → macOS (System + Data)</li>
-<li><strong>Container 2</strong> → Fedora Asahi Linux</li>
-</ul>
-<p>Example (simplified):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>APFS Container (disk2)
-</span></span><span style="display:flex;"><span>├─ Fedora-Root
-</span></span><span style="display:flex;"><span>├─ Fedora-Home
-</span></span><span style="display:flex;"><span>└─ Fedora-Swap
-</span></span></code></pre></div><blockquote>
-<p>📝 Take note of the <strong>APFS Container disk identifier</strong> used by Fedora (e.g. <code>disk2</code>).</p>
-</blockquote>
+</span></span></code></pre></div><p>Example output (simplified):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>APFS Containers (3 found)
+</span></span><span style="display:flex;"><span>|
+</span></span><span style="display:flex;"><span>+-- Container disk1
+</span></span><span style="display:flex;"><span>|   ===============
+</span></span><span style="display:flex;"><span>|   |
+</span></span><span style="display:flex;"><span>|   +-&gt; Volume disk4s1
+</span></span><span style="display:flex;"><span>|   |   ---------------------------------------------------
+</span></span><span style="display:flex;"><span>|   |   Name:           Macintosh HD (Case-insensitive)
+</span></span><span style="display:flex;"><span>|   +-&gt; Volume disk4s3
+</span></span><span style="display:flex;"><span>|   |   ---------------------------------------------------
+</span></span><span style="display:flex;"><span>|   |   Name:           Recovery (Case-insensitive)
+</span></span><span style="display:flex;"><span>|   +-&gt; Volume disk4s5
+</span></span><span style="display:flex;"><span>|       ---------------------------------------------------
+</span></span><span style="display:flex;"><span>|       Name:           Macintosh HD - Data (Case-insensitive)
+</span></span><span style="display:flex;"><span>|
+</span></span><span style="display:flex;"><span>+-- Container disk2
+</span></span><span style="display:flex;"><span>    ===============
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    +-&gt; Volume disk2s1
+</span></span><span style="display:flex;"><span>    |   ---------------------------------------------------
+</span></span><span style="display:flex;"><span>    |   Name:           Fedora-Root
+</span></span><span style="display:flex;"><span>    +-&gt; Volume disk2s3
+</span></span><span style="display:flex;"><span>    |   ---------------------------------------------------
+</span></span><span style="display:flex;"><span>    |   Name:           Fedora-Home
+</span></span><span style="display:flex;"><span>    +-&gt; Volume disk2s5
+</span></span><span style="display:flex;"><span>        ---------------------------------------------------
+</span></span><span style="display:flex;"><span>        Name:           Fedora-Swap
+</span></span></code></pre></div><p>Take note of the APFS Container disk ID used by Fedora (e.g. <code>disk2</code> in the example above)</p>
 <h1 id="step-3-unmount-the-fedora-apfs-container">Step 3: Unmount the Fedora APFS Container</h1>
 <p>Unmount the entire container:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo diskutil apfs unmountContainer disk2
@@ -179,20 +194,15 @@ Step 1: Boot into macOS (Set as Default OS) If your Mac still defaults to Fedora
 </span></span></code></pre></div><h1 id="step-4-delete-the-fedora-apfs-container">Step 4: Delete the Fedora APFS Container</h1>
 <p>Once unmounted, delete the container:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo diskutil apfs deleteContainer disk2
-</span></span></code></pre></div><p>This:</p>
-<ul>
-<li>Removes all Fedora volumes</li>
-<li>Frees the partition space</li>
-</ul>
-<h1 id="step-5-verify-free-space">Step 5: Verify Free Space</h1>
+</span></span></code></pre></div><h1 id="step-5-verify-free-space">Step 5: Verify Free Space</h1>
 <p>Re-run:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>diskutil list
-</span></span></code></pre></div><p>You should now see <strong>Free Space</strong> where Fedora lived.</p>
+</span></span></code></pre></div><p>You should now see Free Space where Fedora lived.</p>
 <h1 id="step-6-reclaim-the-space-for-macos">Step 6: Reclaim the Space for macOS</h1>
 <p>If the free space is adjacent to the macOS container:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo diskutil apfs resizeContainer disk1 <span style="color:#ae81ff">0</span>
-</span></span></code></pre></div><p>(<code>0</code> means “use all available space”)</p>
-<hr>
+</span></span></code></pre></div><p><code>0</code> means &ldquo;use all available space&rdquo;</p>
+<h1 id="conclusion">Conclusion</h1>
 <p>Enjoy your reclaimed SSD space!!!! 🚀</p>
 
     </article>
@@ -208,6 +218,11 @@ Step 1: Boot into macOS (Set as Default OS) If your Mac still defaults to Fedora
         
     </div>
     <div class="col-md text-md-end">
+        
+            <a href="/tinkering/2026-01-31/">
+                <span class="title">Disable SSH Password Login in Proxmox LXC Containers</span>
+                <span> →</span>
+            </a>
         
     </div>
 </div>

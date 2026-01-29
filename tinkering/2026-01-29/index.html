@@ -30,7 +30,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta property="og:site_name" content="Marcus Chiu">
   <meta property="og:title" content="Adding Firewall to Proxmox LXC Containers">
   <meta property="og:description" content="To use the Proxmox firewall at the LXC container level, it must be enabled at multiple layers of the Proxmox stack. Firewall rules are evaluated top-down, so every required scope must be active for LXC-level rules to take effect.
-Required Firewall Configuration 1. Data Center Level The Data Center firewall must be enabled. ⚠️ Before enabling it, ensure inbound traffic is ACCEPTed at this level, or you may lock yourself out of the host. You can either: Add a broad ACCEPT rule for incoming traffic, or Define more fine-grained rules if you don’t want to allow all inbound connections by default. 2. Node Level The firewall must be enabled on the Proxmox node hosting the LXC container. This activates firewall processing for workloads running on that node. 3. LXC Container Level The firewall must be enabled explicitly on the LXC container itself. Without this, container-specific rules will be ignored even if higher levels are enabled. 4. LXC Network Interface The firewall must also be enabled on the LXC network interface (e.g. net0). This is where traffic filtering actually occurs for the container’s network traffic. Reiterate Only when all four layers are enabled will firewall rules applied to an LXC container function as expected.">
+Required Firewall Configuration 1. Data Center Level The Data Center firewall must be enabled.
+⚠️ Before enabling it, ensure inbound traffic is ACCEPTed at this level, or you may lock yourself out of the host.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="tinkering">
@@ -142,36 +143,27 @@ Required Firewall Configuration 1. Data Center Level The Data Center firewall mu
 
 
     <article>
-      <p>To use the Proxmox firewall at the <strong>LXC container level</strong>, it must be enabled at multiple layers of the Proxmox stack. Firewall rules are evaluated top-down, so every required scope must be active for LXC-level rules to take effect.</p>
+      <p>To use the Proxmox firewall at the LXC container level, it must be enabled at multiple layers of the Proxmox stack. Firewall rules are evaluated top-down, so every required scope must be active for LXC-level rules to take effect.</p>
 <h1 id="required-firewall-configuration">Required Firewall Configuration</h1>
 <h2 id="1-data-center-level">1. Data Center Level</h2>
-<ul>
-<li>The Data Center firewall <strong>must be enabled</strong>.</li>
-<li>⚠️ Before enabling it, ensure <strong>inbound traffic is ACCEPTed</strong> at this level, or you may lock yourself out of the host.</li>
-<li>You can either:
+<p>The Data Center firewall must be enabled.</p>
+<p>⚠️ Before enabling it, ensure inbound traffic is ACCEPTed at this level, or you may lock yourself out of the host.</p>
+<p>You can either:</p>
 <ul>
 <li>Add a broad <code>ACCEPT</code> rule for incoming traffic, or</li>
 <li>Define more fine-grained rules if you don’t want to allow all inbound connections by default.</li>
 </ul>
-</li>
-</ul>
 <h2 id="2-node-level">2. Node Level</h2>
-<ul>
-<li>The firewall must be enabled on the Proxmox <strong>node</strong> hosting the LXC container.</li>
-<li>This activates firewall processing for workloads running on that node.</li>
-</ul>
+<p>The firewall must be enabled on the Proxmox node hosting the LXC container.
+This activates firewall processing for workloads running on that node.</p>
 <h2 id="3-lxc-container-level">3. LXC Container Level</h2>
-<ul>
-<li>The firewall must be enabled explicitly on the <strong>LXC container</strong> itself.</li>
-<li>Without this, container-specific rules will be ignored even if higher levels are enabled.</li>
-</ul>
+<p>The firewall must be enabled explicitly on the LXC container itself.
+Without this, container-specific rules will be ignored even if higher levels are enabled.</p>
 <h2 id="4-lxc-network-interface">4. LXC Network Interface</h2>
-<ul>
-<li>The firewall must also be enabled on the <strong>LXC network interface</strong> (e.g. <code>net0</code>).</li>
-<li>This is where traffic filtering actually occurs for the container’s network traffic.</li>
-</ul>
+<p>The firewall must also be enabled on the LXC network interface (e.g. <code>net0</code>).
+This is where traffic filtering actually occurs for the container’s network traffic.</p>
 <h1 id="reiterate">Reiterate</h1>
-<p>Only when <strong>all four layers</strong> are enabled will firewall rules applied to an LXC container function as expected.</p>
+<p>Only when all four layers are enabled will firewall rules applied to an LXC container function as expected.</p>
 
     </article>
   </div>
