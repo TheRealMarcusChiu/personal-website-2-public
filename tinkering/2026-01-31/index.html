@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCN2D792VE"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GCN2D792VE');
+  </script>
+
+  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5G85VDQT');</script>
+  
+
+  <link href='/favicon.ico' rel='shortcut icon'>
+  <link href='/favicon.ico' rel='apple-touch-icon'>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Securing Proxmox LXC Containers by Disabling SSH Password Login | Marcus Chiu</title>
+
+  
+  <meta property="og:url" content="http://192.168.111.152:1313/tinkering/2026-01-31/">
+  <meta property="og:site_name" content="Marcus Chiu">
+  <meta property="og:title" content="Securing Proxmox LXC Containers by Disabling SSH Password Login">
+  <meta property="og:description" content="When running LXC containers on Proxmox, one of the simplest and most effective security improvements you can make is disabling SSH password authentication and enforcing SSH key–only access.
+This post covers a small utility script from my repository:
+GitHub Link 🤔 Why Disable SSH Password Authentication? SSH password login is one of the most common attack targets:
+Vulnerable to brute-force attacks Weak or reused passwords are easy to guess Often accidentally enabled in containers SSH keys are:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="tinkering">
+    <meta property="article:published_time" content="2026-01-31T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-01-31T00:00:00+00:00">
+
+
+
+
+
+
+
+
+  
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:url' content='http://www.marcuschiu.com'>
+  <meta name='twitter:title' content='Marcus Chiu - FullStack Developer'>
+  <meta name='twitter:description' content="Marcus Chiu's Website">
+  <meta name='twitter:image' content='http://doc.marcuschiu.com/assets/images/me.png'>
+  <meta name='twitter:site' content='@TheMarcusChiu'>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/carousel.css">
+  
+      <script src="/js/main.js"></script>
+      <script src="/js/main.js"></script>
+
+<script>
+  window.MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+
+</head>
+<body class="text-light dark">
+  
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G85VDQT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  
+  <div class="container pt-5">
+    <header>
+      
+  <div class="row mt-5 pt-5">
+    <nav aria-label="breadcrumb" class="small">
+      <ol class="breadcrumb fw-bold bg-transparent" >
+    <li class="breadcrumb-item">
+      <a href="/">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a aria-current="true" class="ancestor" href="/tinkering/">Tinkering</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/music-and-arts/">Music &amp; Arts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/fitness/">Fitness</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/thoughts/">Thoughts</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/travel/">Travel</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about/">About</a>
+    </li>
+      </ol>
+    </nav>
+  </div>
+
+    </header>
+    <main>
+      
+  <div class="post">
+    <header class="mb-4">
+      <h1 class="text-uppercase">Securing Proxmox LXC Containers by Disabling SSH Password Login</h1>
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+
+          
+          
+          <li class="breadcrumb-item tiny">
+            <time datetime="2026-01-31T00:00:00&#43;00:00">January 31, 2026</time>
+          </li>
+
+          
+          
+          
+
+          <li class="breadcrumb-item tiny">
+            2 minutes
+          </li>
+
+        </ol>
+      </div>
+    </header>
+
+
+
+
+
+
+    <article>
+      <p>When running <strong>LXC containers on Proxmox</strong>, one of the simplest and most effective security improvements you can make is disabling <strong>SSH password authentication</strong> and enforcing <strong>SSH key–only access</strong>.</p>
+<p>This post covers a small utility script from my repository:</p>
+<ul>
+<li><a href="https://github.com/TheRealMarcusChiu/proxmox-scripts/tree/master/update-lxc-to-deny-ssh-password">GitHub Link</a></li>
+</ul>
+<h1 id="-why-disable-ssh-password-authentication">🤔 Why Disable SSH Password Authentication?</h1>
+<p>SSH password login is one of the most common attack targets:</p>
+<ul>
+<li>Vulnerable to brute-force attacks</li>
+<li>Weak or reused passwords are easy to guess</li>
+<li>Often accidentally enabled in containers</li>
+</ul>
+<p>SSH keys are:</p>
+<ul>
+<li>Stronger and harder to brute-force</li>
+<li>Easier to rotate and manage</li>
+<li>The recommended default for servers and containers</li>
+</ul>
+<p>If your LXC containers are reachable on your network, disabling password logins is a no-brainer.</p>
+<h1 id="-why-i-created-this-script">🛠 Why I Created This Script</h1>
+<p>I personally have <strong>over a dozen LXC containers</strong> on my Proxmox server. Manually disabling SSH password authentication in each container is <strong>time-consuming and repetitive</strong>.</p>
+<p>This script automates the process, saving time and ensuring <strong>consistent security</strong> across all containers.</p>
+<h1 id="-what-this-script-does">🛠 What This Script Does</h1>
+<p>The <strong>update-lxc-to-deny-ssh-password</strong> script automates SSH hardening for LXC containers on Proxmox. Specifically, it does the following:</p>
+<ol>
+<li>Opens the SSH daemon configuration file inside the container:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vim /etc/ssh/sshd_config
+</span></span></code></pre></div><ol start="2">
+<li>Edits the file to include the following lines:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Marcus Chiu Changes - START</span>
+</span></span><span style="display:flex;"><span>PasswordAuthentication no
+</span></span><span style="display:flex;"><span>ChallengeResponseAuthentication no
+</span></span><span style="display:flex;"><span>UsePAM no
+</span></span><span style="display:flex;"><span>PermitRootLogin prohibit-password
+</span></span><span style="display:flex;"><span>PubkeyAuthentication yes
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Marcus Chiu Changes - END</span>
+</span></span></code></pre></div><ol start="3">
+<li>Reloads and restarts the SSH daemon to apply changes:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl reload sshd
+</span></span><span style="display:flex;"><span>sudo systemctl restart sshd
+</span></span></code></pre></div><h1 id="-how-to-use-this-script">🛠 How to Use This Script</h1>
+<p>Clone this project into the proxmox host:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/TheRealMarcusChiu/proxmox-scripts
+</span></span></code></pre></div><p>Change directory into:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd update-lxc-to-deny-ssh-password
+</span></span></code></pre></div><p>Run script:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./update_ssh_config.sh &lt;container_id&gt;
+</span></span></code></pre></div><h1 id="conclusion">Conclusion</h1>
+<p>By using this script, you ensure all your LXC containers <strong>enforce key-based SSH authentication</strong>, reducing the attack surface and improving overall server security.</p>
+
+    </article>
+  </div>
+  
+<div class="row page-prev-next">
+    <div class="col-md">
+        
+            <a href="/tinkering/2026-01-30/">
+                <span>← </span>
+                <span class="title">How to Uninstall Fedora Asahi Linux from an M1 MacBook Pro</span>
+            </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+    </div>
+</div>
+
+  <div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://marcuschiu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </main>
+  </div>
+</body>
+</html>
