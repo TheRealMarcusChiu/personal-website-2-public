@@ -6,10 +6,17 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 28 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Creating a Discord AI Agen with n8n</title>
+      <title>Adding Firewall to Proxmox LXC Containers</title>
+      <link>http://www.marcu/tinkering/2026-01-29/</link>
+      <pubDate>Thu, 29 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://www.marcu/tinkering/2026-01-29/</guid>
+      <description>&lt;p&gt;To use the Proxmox firewall at the &lt;strong&gt;LXC container level&lt;/strong&gt;, it must be enabled at multiple layers of the Proxmox stack. Firewall rules are evaluated top-down, so every required scope must be active for LXC-level rules to take effect.&lt;/p&gt;&#xA;&lt;h1 id=&#34;required-firewall-configuration&#34;&gt;Required Firewall Configuration&lt;/h1&gt;&#xA;&lt;h2 id=&#34;1-data-center-level&#34;&gt;1. Data Center Level&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The Data Center firewall &lt;strong&gt;must be enabled&lt;/strong&gt;.&lt;/li&gt;&#xA;&lt;li&gt;⚠️ Before enabling it, ensure &lt;strong&gt;inbound traffic is ACCEPTed&lt;/strong&gt; at this level, or you may lock yourself out of the host.&lt;/li&gt;&#xA;&lt;li&gt;You can either:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Add a broad &lt;code&gt;ACCEPT&lt;/code&gt; rule for incoming traffic, or&lt;/li&gt;&#xA;&lt;li&gt;Define more fine-grained rules if you don’t want to allow all inbound connections by default.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;2-node-level&#34;&gt;2. Node Level&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The firewall must be enabled on the Proxmox &lt;strong&gt;node&lt;/strong&gt; hosting the LXC container.&lt;/li&gt;&#xA;&lt;li&gt;This activates firewall processing for workloads running on that node.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;3-lxc-container-level&#34;&gt;3. LXC Container Level&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The firewall must be enabled explicitly on the &lt;strong&gt;LXC container&lt;/strong&gt; itself.&lt;/li&gt;&#xA;&lt;li&gt;Without this, container-specific rules will be ignored even if higher levels are enabled.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;4-lxc-network-interface&#34;&gt;4. LXC Network Interface&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The firewall must also be enabled on the &lt;strong&gt;LXC network interface&lt;/strong&gt; (e.g. &lt;code&gt;net0&lt;/code&gt;).&lt;/li&gt;&#xA;&lt;li&gt;This is where traffic filtering actually occurs for the container’s network traffic.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;reiterate&#34;&gt;Reiterate&lt;/h1&gt;&#xA;&lt;p&gt;Only when &lt;strong&gt;all four layers&lt;/strong&gt; are enabled will firewall rules applied to an LXC container function as expected.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creating a Discord AI Agent with n8n</title>
       <link>http://www.marcu/tinkering/2026-01-28/</link>
       <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
       <guid>http://www.marcu/tinkering/2026-01-28/</guid>
