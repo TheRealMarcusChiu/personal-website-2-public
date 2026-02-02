@@ -31,8 +31,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta property="og:title" content="How to Uninstall Fedora Asahi Linux from an M1 MacBook Pro">
   <meta property="og:description" content="If you’ve experimented with Fedora Asahi Linux on Apple Silicon and want to reclaim the disk space and return to a clean macOS-only setup, this guide walks through the safe, manual removal process using the diskutil CLI.
 ⚠️ WARNING: These steps permanently delete Linux data
-Step 1: Boot into macOS (Set as Default OS) If your Mac still defaults to Fedora Asahi Linux:
-Shut down the Mac Hold Power → Loading startup options Select macOS Click Always Use Step 2: Inspect APFS Containers List all APFS containers:">
+1. Boot into macOS (Set as Default OS) If your Mac still defaults to Fedora Asahi Linux:
+Shut down the Mac Hold Power → Loading startup options Select macOS Click Always Use 2. Inspect APFS Containers List all APFS containers:">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="tinkering">
@@ -146,7 +146,7 @@ Shut down the Mac Hold Power → Loading startup options Select macOS Click Alwa
     <article>
       <p>If you’ve experimented with <a href="https://asahilinux.org/fedora/">Fedora Asahi Linux on Apple Silicon</a> and want to reclaim the disk space and return to a clean macOS-only setup, this guide walks through the safe, manual removal process using the <code>diskutil</code> CLI.</p>
 <p>⚠️ WARNING: These steps permanently delete Linux data</p>
-<h1 id="step-1-boot-into-macos-set-as-default-os">Step 1: Boot into macOS (Set as Default OS)</h1>
+<h1 id="1-boot-into-macos-set-as-default-os">1. Boot into macOS (Set as Default OS)</h1>
 <p>If your Mac still defaults to Fedora Asahi Linux:</p>
 <ol>
 <li>Shut down the Mac</li>
@@ -154,7 +154,7 @@ Shut down the Mac Hold Power → Loading startup options Select macOS Click Alwa
 <li>Select macOS</li>
 <li>Click Always Use</li>
 </ol>
-<h1 id="step-2-inspect-apfs-containers">Step 2: Inspect APFS Containers</h1>
+<h1 id="2-inspect-apfs-containers">2. Inspect APFS Containers</h1>
 <p>List all APFS containers:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>diskutil apfs list
 </span></span></code></pre></div><p>Example output (simplified):</p>
@@ -186,22 +186,22 @@ Shut down the Mac Hold Power → Loading startup options Select macOS Click Alwa
 </span></span><span style="display:flex;"><span>        ---------------------------------------------------
 </span></span><span style="display:flex;"><span>        Name:           Fedora-Swap
 </span></span></code></pre></div><p>Take note of the APFS Container disk ID used by Fedora (e.g. <code>disk2</code> in the example above)</p>
-<h1 id="step-3-unmount-the-fedora-apfs-container">Step 3: Unmount the Fedora APFS Container</h1>
+<h1 id="3-delete-the-fedora-apfs-container">3. Delete the Fedora APFS Container</h1>
 <p>Unmount the entire container:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo diskutil apfs unmountContainer disk2
 </span></span></code></pre></div><p>If it refuses:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo diskutil unmountDisk force disk2
-</span></span></code></pre></div><h1 id="step-4-delete-the-fedora-apfs-container">Step 4: Delete the Fedora APFS Container</h1>
-<p>Once unmounted, delete the container:</p>
+</span></span></code></pre></div><p>Once unmounted, delete the container:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo diskutil apfs deleteContainer disk2
-</span></span></code></pre></div><h1 id="step-5-verify-free-space">Step 5: Verify Free Space</h1>
+</span></span></code></pre></div><h1 id="4-reclaim-the-space-for-macos">4. Reclaim the Space for macOS</h1>
 <p>Re-run:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>diskutil list
-</span></span></code></pre></div><p>You should now see Free Space where Fedora lived.</p>
-<h1 id="step-6-reclaim-the-space-for-macos">Step 6: Reclaim the Space for macOS</h1>
-<p>If the free space is adjacent to the macOS container:</p>
+</span></span></code></pre></div><p>You should now see Free Space where Fedora lived.
+If the free space is adjacent to the macOS container:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo diskutil apfs resizeContainer disk1 <span style="color:#ae81ff">0</span>
-</span></span></code></pre></div><p><code>0</code> means &ldquo;use all available space&rdquo;</p>
+</span></span></code></pre></div><ul>
+<li><code>0</code> means &ldquo;use all available space&rdquo;</li>
+</ul>
 <h1 id="conclusion">Conclusion</h1>
 <p>Enjoy your reclaimed SSD space!!!! 🚀</p>
 
