@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 31 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unworthy Love</title>
+      <link>http://www.marcu/thoughts/2026-02-03/</link>
+      <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://www.marcu/thoughts/2026-02-03/</guid>
+      <description>summary</description>
+    </item>
     <item>
       <title>Disable SSH Password Login in Proxmox LXC Containers</title>
       <link>http://www.marcu/tinkering/2026-01-31/</link>
@@ -363,13 +370,6 @@
       <link>http://www.marcu/thoughts/2025-03-01/</link>
       <pubDate>Sat, 01 Mar 2025 17:36:22 -0500</pubDate>
       <guid>http://www.marcu/thoughts/2025-03-01/</guid>
-      <description>summary</description>
-    </item>
-    <item>
-      <title>Unworthy Love</title>
-      <link>http://www.marcu/thoughts/2026-02-03/</link>
-      <pubDate>Mon, 03 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://www.marcu/thoughts/2026-02-03/</guid>
       <description>summary</description>
     </item>
     <item>
