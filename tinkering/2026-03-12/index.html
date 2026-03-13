@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.154.2">
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCN2D792VE"></script>
   <script>
@@ -24,16 +23,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Marcus Chiu</title>
+  <title>OPNSense Firewal DNS Redirection | Marcus Chiu</title>
 
   
-  <meta property="og:url" content="http://www.marcu/">
+  <meta property="og:url" content="http://www.marcu/tinkering/2026-03-12/">
   <meta property="og:site_name" content="Marcus Chiu">
-  <meta property="og:title" content="👋Home">
-  <meta property="og:description" content="👋 Hi there Welcome to my corner of the internet — curated from confluence.marcuschiu.com. Thanks for stopping by :)
-— Your Friendly Internet Neighbor">
+  <meta property="og:title" content="OPNSense Firewal DNS Redirection">
+  <meta property="og:description" content="This article goes over how to redirect port 53 to local DNS.
+1. Firewall → Rules → LAN (optional) Allow DNS requests to your local DNS:
+Action : Pass Interface : LAN Protocol : TCP/UDP Source : LAN net Destination : 192.168.111.2 Destination Port : 53 Block all other DNS:
+Action : Block Interface : LAN Protocol : TCP/UDP Source : LAN net Destination : any Destination Port : 53 Rule order should look like this:">
   <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="tinkering">
+    <meta property="article:published_time" content="2026-03-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-12T00:00:00+00:00">
 
 
 
@@ -83,10 +87,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <nav aria-label="breadcrumb" class="small">
       <ol class="breadcrumb fw-bold bg-transparent" >
     <li class="breadcrumb-item">
-      <a aria-current="page" class="active text-decoration-underline" href="/">Home</a>
+      <a href="/">Home</a>
     </li>
     <li class="breadcrumb-item">
-      <a href="/tinkering/">Tinkering</a>
+      <a aria-current="true" class="ancestor" href="/tinkering/">Tinkering</a>
     </li>
     <li class="breadcrumb-item">
       <a href="/music-and-arts/">Music &amp; Arts</a>
@@ -110,480 +114,110 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </header>
     <main>
       
-  <h1 id="-hi-there">👋 Hi there</h1>
-<p>Welcome to my corner of the internet —
-curated from <a href="https://confluence.marcuschiu.com">confluence.marcuschiu.com</a>.
-Thanks for stopping by :)</p>
-<p>— <em>Your Friendly Internet Neighbor</em></p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <div class="post">
+    <header class="mb-4">
+      <h1 class="text-uppercase">OPNSense Firewal DNS Redirection</h1>
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+
+          
+          
+          <li class="breadcrumb-item tiny">
+            <time datetime="2026-03-12T00:00:00&#43;00:00">March 12, 2026</time>
+          </li>
+
+          
+          
+          
+
+          <li class="breadcrumb-item tiny">
+            1 minutes
+          </li>
+
+        </ol>
+      </div>
+    </header>
+
+
+
+
+
+
+    <article>
+      <p>This article goes over how to redirect port 53 to local DNS.</p>
+<h1 id="1-firewall--rules--lan-optional">1. Firewall → Rules → LAN (optional)</h1>
+<p>Allow DNS requests to your local DNS:</p>
+<ul>
+<li>Action           : Pass</li>
+<li>Interface        : LAN</li>
+<li>Protocol         : TCP/UDP</li>
+<li>Source           : LAN net</li>
+<li>Destination      : 192.168.111.2</li>
+<li>Destination Port : 53</li>
+</ul>
+<p>Block all other DNS:</p>
+<ul>
+<li>Action           : Block</li>
+<li>Interface        : LAN</li>
+<li>Protocol         : TCP/UDP</li>
+<li>Source           : LAN net</li>
+<li>Destination      : any</li>
+<li>Destination Port : 53</li>
+</ul>
+<p>Rule order should look like this:</p>
+<ol>
+<li>Allow LAN → 192.168.111.2 port 53</li>
+<li>Block LAN → any port 53</li>
+<li>Default allow LAN → any</li>
+</ol>
+<h1 id="2-firewall--nat--port-forward">2. Firewall → NAT → Port Forward</h1>
+<ul>
+<li>Interface          : LAN</li>
+<li>Protocol           : TCP/UDP</li>
+<li>Source             : LAN net</li>
+<li>Destination        : !LAN address</li>
+<li>Destination port   : 53</li>
+<li>Redirect target IP : 192.168.111.2</li>
+<li>Redirect port      : 53</li>
+</ul>
+<p>Now this happens:</p>
+<pre tabindex="0"><code>Device → 8.8.8.8
+        ↓
+Firewall rewrites
+        ↓
+Device → 192.168.111.2
+</code></pre>
+    </article>
+  </div>
+  
+<div class="row page-prev-next">
+    <div class="col-md">
+        
+            <a href="/tinkering/2026-01-31/">
+                <span>← </span>
+                <span class="title">Disable SSH Password Login in Proxmox LXC Containers</span>
+            </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+    </div>
+</div>
+
+  <div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://marcuschiu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
     </main>

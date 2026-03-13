@@ -6,8 +6,15 @@
     <description>Recent content in 👋Home on Marcus Chiu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 03 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://www.marcu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OPNSense Firewal DNS Redirection</title>
+      <link>http://www.marcu/tinkering/2026-03-12/</link>
+      <pubDate>Thu, 12 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://www.marcu/tinkering/2026-03-12/</guid>
+      <description>&lt;p&gt;This article goes over how to redirect port 53 to local DNS.&lt;/p&gt;&#xA;&lt;h1 id=&#34;1-firewall--rules--lan-optional&#34;&gt;1. Firewall → Rules → LAN (optional)&lt;/h1&gt;&#xA;&lt;p&gt;Allow DNS requests to your local DNS:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Action           : Pass&lt;/li&gt;&#xA;&lt;li&gt;Interface        : LAN&lt;/li&gt;&#xA;&lt;li&gt;Protocol         : TCP/UDP&lt;/li&gt;&#xA;&lt;li&gt;Source           : LAN net&lt;/li&gt;&#xA;&lt;li&gt;Destination      : 192.168.111.2&lt;/li&gt;&#xA;&lt;li&gt;Destination Port : 53&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Block all other DNS:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Action           : Block&lt;/li&gt;&#xA;&lt;li&gt;Interface        : LAN&lt;/li&gt;&#xA;&lt;li&gt;Protocol         : TCP/UDP&lt;/li&gt;&#xA;&lt;li&gt;Source           : LAN net&lt;/li&gt;&#xA;&lt;li&gt;Destination      : any&lt;/li&gt;&#xA;&lt;li&gt;Destination Port : 53&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Rule order should look like this:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Unworthy Love</title>
       <link>http://www.marcu/thoughts/2026-02-03/</link>
